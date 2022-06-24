@@ -242,10 +242,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  attackDamage: 0
-  moveSpeed: 5
-  interactRange: 1
   money: 0
+  playerMoveSpeed: 5
 --- !u!114 &11891898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,6 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0127c744918e1cf4a8f574c123c09b35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactRange: 0
 --- !u!54 &11891902
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -766,10 +765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1233175493e6d1458d4c93a404c6c54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  attackDamage: 0
-  moveSpeed: 2
-  interactRange: 1
+  zombieMoveSpeed: 1
 --- !u!195 &2125156927
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -804,6 +800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0127c744918e1cf4a8f574c123c09b35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactRange: 0
 --- !u!54 &2125156929
 Rigidbody:
   m_ObjectHideFlags: 0

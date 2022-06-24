@@ -4,17 +4,26 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerCamera))]
-public class Player : Entity
+public class Player : MonoBehaviour, IDamagable,IKillable
 {
+	[SerializeField] private int health;
 	[SerializeField] private int money;
+	[SerializeField] private int playerMoveSpeed;
 
-	protected override void die()
+	public int getPlayerMoveSpeed()
+	{
+		return playerMoveSpeed;
+	}
+
+
+	public void damage(int amount)
+	{
+		health -= amount;
+		if (health <= 0) { die(); }
+	}
+	public void die()
 	{
 		Debug.Log("Player dead");
-	}
-	protected virtual void move()
-	{
-
 	}
 
 

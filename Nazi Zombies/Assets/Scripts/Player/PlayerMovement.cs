@@ -3,25 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Player))]
 public class PlayerMovement : MonoBehaviour
 {
-
 	private CharacterController characterController;
 	private PlayerCamera playerCamera;
 	private Player player;
 
-	private Vector3 moveVector;
 
+	private Vector3 moveVector;
 	private float verticalInput;
 	private float horizontalInput;
 
-
-
 	void Awake()
 	{
-		characterController = this.GetComponent<CharacterController>();
-		playerCamera = this.GetComponent<PlayerCamera>();
-		player = this.GetComponent<Player>();
+		references();
 	}
 
 	void Update()
@@ -38,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 		Vector3 vertical = relativeVertical * verticalInput;
 		Vector3 horizontal = relativeHorizontal * horizontalInput;
 
-		moveVector = (vertical + horizontal) * player.getMoveSpeed()+Physics.gravity;
+		moveVector = (vertical + horizontal) * player.getPlayerMoveSpeed()+Physics.gravity;
 
 		
 	}
@@ -53,4 +49,10 @@ public class PlayerMovement : MonoBehaviour
 		horizontalInput = Input.GetAxisRaw("Horizontal");
 	}
 
+	private void references()
+	{
+		characterController = this.GetComponent<CharacterController>();
+		playerCamera = this.GetComponent<PlayerCamera>();
+		player = this.GetComponent<Player>();
+	}
 }

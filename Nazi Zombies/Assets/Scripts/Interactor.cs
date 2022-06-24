@@ -8,14 +8,14 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Interactor : MonoBehaviour
 {
-	private Entity entity;
+	[SerializeField] private int interactRange;
 	private SphereCollider sphereCollider;
 	private Rigidbody rigidBody;
 
 	private void Awake()
 	{
-		References();
-		Setup();
+		references();
+		setup();
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -29,19 +29,17 @@ public class Interactor : MonoBehaviour
 		if (Application.isPlaying)
 		{
 			Gizmos.color = Color.yellow;
-			Gizmos.DrawWireSphere(transform.position, entity.getInteractRange());
+			Gizmos.DrawWireSphere(transform.position, interactRange);
 		}
 	}
-	private void References()
+	private void references()
 	{
-		entity = GetComponent<Entity>();
 		sphereCollider = GetComponent<SphereCollider>();
 		rigidBody = GetComponent<Rigidbody>();
 	}
-	private void Setup()
+	private void setup()
 	{
 		sphereCollider.isTrigger = true;
-		sphereCollider.radius = entity.getInteractRange();
 		rigidBody.isKinematic = true;
 	}
 }
