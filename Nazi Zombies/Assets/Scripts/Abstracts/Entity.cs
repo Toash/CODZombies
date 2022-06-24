@@ -2,11 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Interactor))]
 public abstract class Entity : MonoBehaviour
 {
 	[SerializeField] protected int health;
 	[SerializeField] protected int attackDamage;
 	[SerializeField] protected int moveSpeed;
+	[SerializeField] protected int interactRange;
+
+	protected Interactor interactor;
+
+	public int getInteractRange()
+	{
+		return interactRange;
+	}
+
+	protected virtual void Update()
+	{
+
+	}
+
+	private void CreateInteractSphere()
+	{
+		//m,ake a sphere collider COMPONENT
+		this.gameObject.AddComponent<SphereCollider>();
+	}
+	void Awake()
+	{
+		interactor = GetComponent<Interactor>();
+	}
 
 	public int getMoveSpeed()
 	{
@@ -26,11 +50,4 @@ public abstract class Entity : MonoBehaviour
 		}
 	}
 	protected abstract void die();
-
-	public virtual void Update()
-	{
-
-	}
-
-
 }

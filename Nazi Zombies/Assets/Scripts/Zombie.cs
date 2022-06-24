@@ -23,7 +23,7 @@ public class Zombie : Entity
 	}
 
 
-	public override void Update()
+	protected override void Update()
 	{
 		goToPlayer();
 	}

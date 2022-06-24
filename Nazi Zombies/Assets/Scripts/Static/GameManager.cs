@@ -4,48 +4,22 @@ using UnityEngine;
 
 public class GameManager:MonoBehaviour
 {
-	private static GameManager instance;
-	public static GameManager Instance 
-	{ 
-		get 
-		{ 
-			return instance; 
-		} 
-	}
+	//singleton
+	//makes a public getter and a private setter under the hood! (Not in java)
+	public static GameManager Instance { get; private set; }
+
+	[SerializeField] private GameObject player;
 
 	public static int currentWave;
-
 	public static Vector3 playerPosition;
-
-
-	private static GameObject player;
-
 
 	private void Awake()
 	{
-		DoubleCheck();
-		if(GameObject.FindGameObjectWithTag("Player") != null)
-		{
-			player = GameObject.FindGameObjectWithTag("Player");
-		}
-		else
-		{
-			Debug.LogError("Player tag not found!");
-		}
-
+		Instance = this;
 	}
 
-	private static void Update()
+	private void Update()
 	{
-		playerPosition = player.gameObject.GetComponent<Transform>().position;
-	}
-
-	private void DoubleCheck()
-	{
-		if (instance == null)
-			instance = this;
-		else if (instance != this)
-			Destroy(this.gameObject);
-		DontDestroyOnLoad(this.gameObject);
+		playerPosition = player.transform.position;
 	}
 }
