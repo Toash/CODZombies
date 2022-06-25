@@ -6,8 +6,8 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Zombie : MonoBehaviour,IDamagable,IKillable
 {
-	public int health { get; set; }
-	[SerializeField] private int zombieMoveSpeed;
+	[SerializeField] private int health =100;
+	[SerializeField] private int zombieMoveSpeed=1;
 	private NavMeshAgent agent;
 
 	public void setZombieMoveSpeed(int zombieMoveSpeed)
