@@ -2,29 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerMovement))]
-[RequireComponent(typeof(PlayerCamera))]
-public class Player : MonoBehaviour, IDamagable,IKillable
+public class Player : MonoBehaviour,IDamagable
 {
-	[SerializeField] private int health=100;
-	[SerializeField] private int money;
-	[SerializeField] private int playerMoveSpeed=5;
-	[SerializeField] private int weaponSlots = 2;
+	public IntVariable maxHealth;
 
-	public int getPlayerMoveSpeed()
+	private int health;
+
+	private void Awake()
 	{
-		return playerMoveSpeed;
+		health = maxHealth.Value;
 	}
-
 	public void damage(int amount)
 	{
-		health -= amount;
 		if (health <= 0) { die(); }
 	}
-	public void die()
+	private void die()
 	{
-		Debug.Log("Player dead");
+		Debug.Log("player dead");
 	}
+
 
 
 }

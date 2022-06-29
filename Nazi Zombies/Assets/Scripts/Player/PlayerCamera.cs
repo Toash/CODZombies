@@ -5,8 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Player))]
 public class PlayerCamera : MonoBehaviour
 {
-    [SerializeField] private Camera camera;
-	[SerializeField] private float sensitivity;
+    [SerializeField] private Camera cameraRef;
+	public FloatVariable sensitivity;
 
 	private Transform playerTransform;
 
@@ -14,51 +14,31 @@ public class PlayerCamera : MonoBehaviour
 	private float verticalInput;
 
 	private float verticalRotation = 0f;
-
-	public Camera getCamera()
-	{
-		return this.camera;
-	}
-
 	void Awake()
 	{
-		playerTransform = this.gameObject.GetComponent<Transform>();
-
-		if (this.camera == null)
-		{
-			Debug.LogError("Camera isn't assigned to " + this.name);
-		}
+		playerTransform = FindObjectOfType<Player>().GetComponent<Transform>();
 	}
 
 	public void Update()
 	{
-		readInput();
 		cameraMovement();
-		if (Input.GetMouseButtonDown(0))
-		{
-			lockCursor();
-		}
+		readMouseInput();
 	}
 	private void cameraMovement()
 	{
 		//rotate transform on the y axis. (left to right)
-		playerTransform.Rotate(Vector3.up * horizontalInput * sensitivity);
-		//rotate cameras right axis (up and down)
-		//camera.transform.Rotate(Vector3.right * -vertical * sensitivity);
+		playerTransform.Rotate(Vector3.up * horizontalInput * sensitivity.Value);
 
-		verticalRotation -= (verticalInput * sensitivity);
+		verticalRotation -= (verticalInput * sensitivity.Value);
+
+		//clamp
 		verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
-		camera.transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+		//rotate cameras right axis (up and down)
+		cameraRef.transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
 	}
-
-
-	private void readInput()
+	private void readMouseInput()
 	{
 		horizontalInput = Input.GetAxis("Mouse X");
 		verticalInput = Input.GetAxis("Mouse Y");
-	}
-	private void lockCursor()
-	{
-		Cursor.lockState = CursorLockMode.Locked;
 	}
 }
