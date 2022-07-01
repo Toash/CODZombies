@@ -3,6 +3,7 @@ using UnityEngine;
 public class Health : MonoBehaviour,IDamagable
 {
 	public IntVariable maxHealth;
+	public GameEvent DeathEvent;
 
 	private int health;
 
@@ -16,7 +17,7 @@ public class Health : MonoBehaviour,IDamagable
 	}
 	private void die()
 	{
-		//send event
+		DeathEvent.Raise();
 	}
 
 
