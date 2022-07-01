@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour,IDamagable
+public class Health : MonoBehaviour,IDamagable
 {
 	public IntVariable maxHealth;
 
@@ -18,7 +16,7 @@ public class Player : MonoBehaviour,IDamagable
 	}
 	private void die()
 	{
-		Debug.Log("player dead");
+		//send event
 	}
 
 

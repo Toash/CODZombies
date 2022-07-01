@@ -1,9 +1,12 @@
 using UnityEngine;
 //gets player input, goes to NormalizedMoveVector
+//gets mouse input too
 public class PlayerInput : MonoBehaviour
 {
     public Vector3 NormalizedMoveVector { get; private set; }
 
+    public float VerticalMouseInput { get; private set; }
+    public float HorizontalMouseInput { get; private set; }
     //keyboard
     private float verticalKeyboardInput;
     private float horizontalKeyboardInput;
@@ -13,8 +16,12 @@ public class PlayerInput : MonoBehaviour
         verticalKeyboardInput = Input.GetAxisRaw("Vertical");
         horizontalKeyboardInput = Input.GetAxisRaw("Horizontal");
 
+        VerticalMouseInput = Input.GetAxis("Mouse Y");
+        HorizontalMouseInput = Input.GetAxis("Mouse X");
+
         calculateMoveVector();
 	}
+
 	private void calculateMoveVector()
     {
         Vector3 vertical = this.transform.forward * verticalKeyboardInput;
@@ -24,5 +31,4 @@ public class PlayerInput : MonoBehaviour
         // fast when moving diagonally
         NormalizedMoveVector = Vector3.Normalize(vertical + horizontal);
     }
-
 }

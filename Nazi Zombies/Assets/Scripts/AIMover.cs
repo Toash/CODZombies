@@ -2,23 +2,25 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class ZombieMovement : MonoBehaviour
+public class AIMover : MonoBehaviour
 {
-    public FloatVariable zombieMoveSpeed;
+    [SerializeField]
+    private GameObject target;
+
+    public FloatVariable moveSpeed;
 
     private NavMeshAgent agent;
 
 	void Awake()
 	{
         agent = GetComponent<NavMeshAgent>();
+        agent.speed = moveSpeed.Value;
 	}
 	void Update()
     {
-        goToPlayer();
-    }
-
-    public void goToPlayer()
-    {
-        //this.agent.SetDestination(GameManager.playerPosition);
+		if (target != null)
+		{
+            this.agent.SetDestination(target.transform.position);
+        }
     }
 }
