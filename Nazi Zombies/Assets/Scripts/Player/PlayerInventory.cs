@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace Player
 {
 	[RequireComponent(typeof(PlayerShooting))]
+	[RequireComponent(typeof(PlayerInput))]
 	public class PlayerInventory : MonoBehaviour
 	{
 		public List<Weapon> weapons = new List<Weapon>();
@@ -11,15 +12,29 @@ namespace Player
 		[SerializeField]
 		private int maxWeapons = 2;
 
+		private int currentIndex;
 		private PlayerShooting playerShooting;
 
-		public void EquipWeapon(Weapon weapon)
+		private void Awake()
+		{
+			playerShooting = this.GetComponent<PlayerShooting>();
+		}
+		private void Update()
+		{
+			GetInput();
+		}
+
+		public void EquipWeapon(int index)
 		{
 		}
 
 		public void AddWeapon(Weapon weapon)
 		{
 			int size = weapons.Count;
+		}
+		private void GetInput()
+		{
+			
 		}
 	}
 }

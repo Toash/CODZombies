@@ -15,9 +15,9 @@ namespace Player
 
 		private void Update()
 		{
-			if (Input.GetMouseButton(0))
+			if (playerInput.LeftMouseButtonHold)
 			{
-
+				//firing
 			}
 		}
 	}

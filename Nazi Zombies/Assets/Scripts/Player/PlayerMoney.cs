@@ -4,13 +4,14 @@ namespace Player
 {
 	public class PlayerMoney : MonoBehaviour
 	{
-		[SerializeField] private int money;
-
-		public void ApplyChange(int amount)
+		[Header("Variable")]
+		public IntVariable Money;
+		[Header("Start")]
+		[SerializeField] private int startingMoney;
+		private void Awake()
 		{
-			this.money += amount;
+			Money.SetValue(startingMoney);
 		}
-
 	}
 }
 

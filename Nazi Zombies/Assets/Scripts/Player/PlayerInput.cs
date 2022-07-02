@@ -1,6 +1,6 @@
 using UnityEngine;
-//gets player input, goes to NormalizedMoveVector
-//gets mouse input too
+using UnityEngine.Events;
+
 namespace Player
 {
     public class PlayerInput : MonoBehaviour
@@ -10,9 +10,23 @@ namespace Player
 
         public float VerticalMouseInput { get; private set; }
         public float HorizontalMouseInput { get; private set; }
+
+        public bool LeftMouseButtonHold { get; private set; }//continuous inputs are hidden in inspector
         //keyboard
         private float verticalKeyboardInput;
         private float horizontalKeyboardInput;
+
+        [Header("Keyboard Bindings")]
+        [SerializeField]
+        private KeyCode jumpKey;
+
+        [Header("Keyboard Events")]
+        [SerializeField]
+        private UnityEvent Alpha1Event; //when player presses 1, etc.
+        [SerializeField]
+        private UnityEvent Alpha2Event;
+        [SerializeField]
+        private UnityEvent JumpEvent;
 
         private void Update()
         {
@@ -35,11 +49,25 @@ namespace Player
         {
             verticalKeyboardInput = Input.GetAxisRaw("Vertical");
             horizontalKeyboardInput = Input.GetAxisRaw("Horizontal");
+			if (Input.GetKeyDown(KeyCode.Alpha1))
+			{
+                Alpha1Event.Invoke();
+			}
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                Alpha1Event.Invoke();
+            }
+			if (Input.GetKeyDown(jumpKey))
+			{
+                //jump
+                JumpEvent.Invoke();
+			}
         }
         private void mouseInput()
         {
             VerticalMouseInput = Input.GetAxis("Mouse Y");
             HorizontalMouseInput = Input.GetAxis("Mouse X");
+            LeftMouseButtonHold = Input.GetMouseButton(0) ? true : false;
         }
     }
 }
