@@ -11,7 +11,8 @@ namespace Player
         public float VerticalMouseInput { get; private set; }
         public float HorizontalMouseInput { get; private set; }
 
-        public bool LeftMouseButtonHold { get; private set; }//continuous inputs are hidden in inspector
+        public bool LeftMouseHold { get; private set; }//continuous inputs are hidden in inspector
+        public bool LeftMouseClick { get; private set; }//continuous inputs are hidden in inspector
         //keyboard
         private float verticalKeyboardInput;
         private float horizontalKeyboardInput;
@@ -67,7 +68,8 @@ namespace Player
         {
             VerticalMouseInput = Input.GetAxis("Mouse Y");
             HorizontalMouseInput = Input.GetAxis("Mouse X");
-            LeftMouseButtonHold = Input.GetMouseButton(0) ? true : false;
+            LeftMouseHold = Input.GetMouseButton(0) ? true : false;
+			if (Input.GetMouseButtonDown(0)) { LeftMouseClick = !LeftMouseClick; }
         }
     }
 }

@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd2c4bdcb3a5ca842bd9cd8fe9e8ad75, type: 3}
-  m_Name: GroundedBias
+  m_Script: {fileID: 11500000, guid: 16ba54ff3af755e44b2418b11b64b4ae, type: 3}
+  m_Name: ZombieDamaged
   m_EditorClassIdentifier: 
-  Value: 0.2

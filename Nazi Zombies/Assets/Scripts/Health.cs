@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class Health : MonoBehaviour,IDamagable
+[RequireComponent(typeof(Collider))]
+public abstract class Health : MonoBehaviour,IDamagable
 {
 	[Header("Stats")]
 	public IntVariable maxHealth;
@@ -16,13 +17,15 @@ public class Health : MonoBehaviour,IDamagable
 	}
 	public void damage(int amount)
 	{
+		health -= amount;
 		if(DamageEvent!=null){DamageEvent.Raise();}
-		if (health <= 0) { die(); }
+		if (health <= 0) 
+		{
+			this.die(); 
+		}
 	}
-	private void die()
-	{
-		if (DeathEvent != null){DeathEvent.Raise();}
-	}
+	protected abstract void die();
+
 
 
 

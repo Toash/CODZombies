@@ -10,5 +10,7 @@ public class Weapon : ScriptableObject
 	public bool automatic;
 	[Header("Visuals")]
 	public GameObject model;
+	[Header("Audio")]
+	public AudioSource shootSound;
 
 }

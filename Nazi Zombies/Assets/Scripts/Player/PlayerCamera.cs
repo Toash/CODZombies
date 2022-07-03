@@ -12,9 +12,16 @@ namespace Player
 
 		private float verticalRotation = 0f;
 
+		public Camera getCameraRef()
+		{
+			return cameraRef;
+		}
+
 		void Awake()
 		{
 			playerInput = this.GetComponent<PlayerInput>();
+			if (cameraRef == null) { Debug.LogError("No camera attached!!!"); }
+			Cursor.lockState = CursorLockMode.Locked;
 		}
 		public void Update()
 		{

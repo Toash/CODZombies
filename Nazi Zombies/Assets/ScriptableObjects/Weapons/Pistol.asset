@@ -9,7 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd2c4bdcb3a5ca842bd9cd8fe9e8ad75, type: 3}
-  m_Name: ZombieMoveSpeed
+  m_Script: {fileID: 11500000, guid: cc808a31f56f1074f87f5d55b742b7fc, type: 3}
+  m_Name: Pistol
   m_EditorClassIdentifier: 
-  Value: 3
+  damage: 50
+  fireRate: 0.2
+  range: 100
+  automatic: 1
+  model: {fileID: 0}

@@ -10,49 +10,50 @@ namespace Player
 		public FloatVariable moveSpeed;
 		public FloatVariable jumpHeight;
 		[Header("Misc")]
-		[Tooltip("Accuracy for ground checker")]
-		public FloatVariable groundedBias;
+		public FloatVariable playerGravityMultiplier;
+		public FloatVariable playerSlopeLimit;
 
 		private CharacterController charControl;
 		private PlayerInput playerInput;
 
-		private Vector3 playerVelocity;
-		private bool isGrounded;
+		private Vector3 playerGravityVelocity;
 
 		void Awake()
 		{
-			//this == MonoBehaviour
 			charControl = this.GetComponent<CharacterController>();
 			playerInput = this.GetComponent<PlayerInput>();
+			charControl.slopeLimit = playerSlopeLimit.Value;
 		}
-
 
 		void Update()
 		{
-			playerVelocity = ((playerInput.NormalizedMoveVector * moveSpeed.Value) + Physics.gravity) * Time.deltaTime;
-			charControl.Move(playerVelocity);
-
-			checkGround();
+			//multiplying my deltaTime means it is framerate independent
+			charControl.Move(playerInput.NormalizedMoveVector * moveSpeed.Value*Time.deltaTime);
+			SetPlayerGravity();
+			ResetPlayerGravity();
+			charControl.Move(playerGravityVelocity * Time.deltaTime);
 		}
 		public void Jump()
 		{
-			if(isGrounded)
+			if (charControl.isGrounded)
 			{
-				Debug.Log("Jumping");
-				playerVelocity.y = Mathf.Sqrt(jumpHeight.Value * -2f*Physics.gravity.y);
+				//jump
+				playerGravityVelocity.y = Mathf.Sqrt(jumpHeight.Value * -2f * Physics.gravity.y);
 				return;
 			}
-			Debug.Log("Cant jump, not grounded");
+			//not grounded
 		}
-		private void checkGround()
+		private void SetPlayerGravity()
 		{
-			if ((charControl.velocity.y >= -groundedBias.Value) && (charControl.velocity.y <= groundedBias.Value))
+			playerGravityVelocity += (Physics.gravity*playerGravityMultiplier.Value) * Time.deltaTime;
+		}
+
+		//set gravity to 0 when player is on the ground so i doesn't keep decreasing
+		private void ResetPlayerGravity()
+		{
+			if (charControl.isGrounded&&playerGravityVelocity.y<0)
 			{
-				isGrounded = true;
-			}
-			else
-			{
-				isGrounded = false;
+				playerGravityVelocity.y = 0;
 			}
 		}
 	}

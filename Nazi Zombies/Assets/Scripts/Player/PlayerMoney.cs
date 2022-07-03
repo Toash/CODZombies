@@ -12,6 +12,10 @@ namespace Player
 		{
 			Money.SetValue(startingMoney);
 		}
-	}
+        private void Start()
+        {
+            
+        }
+    }
 }
 
