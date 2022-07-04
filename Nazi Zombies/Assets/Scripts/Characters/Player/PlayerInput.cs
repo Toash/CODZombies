@@ -56,7 +56,7 @@ namespace Player
 			}
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                Alpha1Event.Invoke();
+                Alpha2Event.Invoke();
             }
 			if (Input.GetKeyDown(jumpKey))
 			{

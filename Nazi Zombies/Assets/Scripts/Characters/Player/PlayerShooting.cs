@@ -6,11 +6,16 @@ namespace Player
 	[RequireComponent(typeof(PlayerInput))]
 	[RequireComponent(typeof(PlayerCamera))]
 	[RequireComponent(typeof(PlayerInventory))]
+	[RequireComponent(typeof(AudioSource))]
 	public class PlayerShooting : MonoBehaviour
 	{
+		[SerializeField]
+		private GameObject weaponHoldPoint;
+
 		private PlayerInput playerInput;
 		private PlayerCamera playerCamera;
 		private PlayerInventory playerInventory;
+		private AudioSource gunShotAudioSource;
 
 		private float timer;
 
@@ -19,6 +24,7 @@ namespace Player
 			playerInput = this.GetComponent<PlayerInput>();
 			playerCamera = this.GetComponent<PlayerCamera>();
 			playerInventory = this.GetComponent<PlayerInventory>();
+			gunShotAudioSource = this.GetComponent<AudioSource>();
 		}
 
 		private void Update()
@@ -55,7 +61,9 @@ namespace Player
 		}
 		private void Shoot()
 		{
-			Ballistics.CreateBullet(playerInventory.equippedWeapon.damage, playerCamera.getCameraRef().transform.position, playerCamera.getCameraRef().transform.forward, playerInventory.equippedWeapon.range);
+			Weapon weapon = playerInventory.equippedWeapon;
+			Ballistics.CreateBullet(weapon.damage, playerCamera.getCameraRef().transform.position, playerCamera.getCameraRef().transform.forward, weapon.range);
+			gunShotAudioSource.PlayOneShot(weapon.shootSound);
 		}
 	}
 }

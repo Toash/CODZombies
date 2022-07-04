@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.Events;
 using System.Collections.Generic;
+
 
 namespace Player
 {
@@ -15,6 +17,10 @@ namespace Player
 
         [Header("Inventory Stats")]		
 		public IntVariable maxWeapons;
+
+		[Header("Misc")]
+		public StringVariable equippedWeaponSO;//scriptable object
+
 
 		public bool HasWeapon()
 		{
@@ -32,7 +38,11 @@ namespace Player
 		//equip to PlayerShooting
 		public void EquipWeapon(int index)
 		{
-			equippedWeapon = weapons[index];
+			if (weapons[index]!=null)
+			{
+				equippedWeapon = weapons[index];
+				equippedWeaponSO.Value = weapons[index].name;// update the scriptableobject
+			}
 		}
 
 		//Add weapon to weapons list

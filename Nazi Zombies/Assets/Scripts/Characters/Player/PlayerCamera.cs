@@ -5,8 +5,10 @@ namespace Player
 	[RequireComponent(typeof(PlayerInput))]
 	public class PlayerCamera : MonoBehaviour
 	{
-		[SerializeField] private Camera cameraRef;
 		public FloatVariable sensitivity;
+		public IntVariable playerFOV;
+
+		[SerializeField] private Camera cameraRef;
 
 		private PlayerInput playerInput;
 
@@ -20,7 +22,9 @@ namespace Player
 		void Awake()
 		{
 			playerInput = this.GetComponent<PlayerInput>();
+
 			if (cameraRef == null) { Debug.LogError("No camera attached!!!"); }
+			cameraRef.fieldOfView = playerFOV.Value;
 			Cursor.lockState = CursorLockMode.Locked;
 		}
 		public void Update()
