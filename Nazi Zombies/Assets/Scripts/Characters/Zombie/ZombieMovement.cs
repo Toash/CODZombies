@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace AI
+namespace Zombie
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class AIMovement : MonoBehaviour
+    public class ZombieMovement : MonoBehaviour
     {
         [SerializeField]
         private GameObject target;
@@ -13,12 +13,12 @@ namespace AI
 
         private NavMeshAgent agent;
 
-        void Awake()
+        private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
             agent.speed = moveSpeed.Value;
         }
-        void Update()
+        private void Update()
         {
             if (target != null)
             {

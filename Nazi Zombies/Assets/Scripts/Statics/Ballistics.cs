@@ -4,11 +4,11 @@ public static class Ballistics
 {
 	public static void CreateBullet(int damage,Vector3 origin, Vector3 dir, float range)
 	{
-		Debug.Log("shooting");
 		RaycastHit hit;
 		if (Physics.Raycast(origin, dir, out hit, range))
 		{
 			//hit something
+			//TODO: create bullet hole
 			IDamagable damageable = hit.transform.GetComponent<IDamagable>();
 			if(damageable != null)
 			{
@@ -17,5 +17,9 @@ public static class Ballistics
 			}
 		}
 		//didnt hit
+	}
+	public static void CreateExplosion(int damage, Vector3 origin, float range)
+	{
+
 	}
 }

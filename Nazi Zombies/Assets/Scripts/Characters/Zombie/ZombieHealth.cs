@@ -1,11 +1,15 @@
 using UnityEngine;
 
-[RequireComponent(typeof(CapsuleCollider))]
-public class ZombieHealth : Health
+namespace Zombie
 {
-	protected override void die()
+	[RequireComponent(typeof(CapsuleCollider))]
+	public class ZombieHealth : Health
 	{
-		if (DeathEvent != null) { DeathEvent.Raise(); }
-		Destroy(this.gameObject);
+		protected override void die()
+		{
+			if (DeathEvent != null) { DeathEvent.Raise(); }
+			Destroy(this.gameObject);
+		}
 	}
+
 }
