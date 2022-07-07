@@ -15,7 +15,7 @@ namespace Player.UI
 			pointsText = this.GetComponent<TMP_Text>();
 		}
 
-		public void UpdateText()
+		public void Update()
 		{
 			pointsText.text = points.Value.ToString();
 		}

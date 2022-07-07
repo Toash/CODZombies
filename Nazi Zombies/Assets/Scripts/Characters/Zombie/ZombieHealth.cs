@@ -7,7 +7,8 @@ namespace Zombie
     {
 		protected override void die()
 		{
-			Destroy(this.gameObject, 3);
+			Debug.Log("Zombie dead yo!!!");
+			Destroy(this.gameObject);
 		}
 	}
 }
