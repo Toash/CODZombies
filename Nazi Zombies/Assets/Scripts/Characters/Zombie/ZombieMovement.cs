@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Zombie
+namespace AI.Zombie
 {
     [RequireComponent(typeof(NavMeshAgent))]
     public class ZombieMovement : MonoBehaviour
@@ -25,6 +25,11 @@ namespace Zombie
                 this.agent.SetDestination(target.transform.position);
             }
         }
-    }
+
+        public void Stop()
+		{
+            agent.isStopped = true;
+		}
+	}
 }
 

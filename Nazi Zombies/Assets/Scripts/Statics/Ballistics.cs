@@ -5,7 +5,7 @@ public static class Ballistics
 	public static void CreateBullet(int damage,Vector3 origin, Vector3 dir, float range,LayerMask mask, QueryTriggerInteraction hitTrigger)
 	{
 		RaycastHit hit;
-		if (Physics.Raycast(origin, dir, out hit, range))
+		if (Physics.Raycast(origin, dir, out hit, range,mask,hitTrigger))
 		{
 			//hit something
 			//TODO: create bullet hole

@@ -1,13 +1,16 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Player
 {
 	//handles the player's currently equipped item
-	[RequireComponent(typeof(PlayerInput))]
 	[RequireComponent(typeof(PlayerCamera))]
 	[RequireComponent(typeof(PlayerInventory))]
+	[RequireComponent(typeof(PlayerInput))]
 	public class PlayerShooting : MonoBehaviour
 	{
+		public UnityEvent playerShoot;
+
 		[SerializeField]
 		private LayerMask layerMask;
 		[SerializeField]
@@ -17,7 +20,15 @@ namespace Player
 		private PlayerCamera playerCamera;
 		private PlayerInventory playerInventory;
 
+		private Weapon equippedWeapon;
+
+		private bool isShooting;
 		private float timer;
+
+		private bool canFire()
+		{
+			return playerInventory.equippedWeapon.fireRate <= timer ? true : false;
+		}
 
 		private void Awake()
 		{
@@ -26,24 +37,55 @@ namespace Player
 			playerInventory = this.GetComponent<PlayerInventory>();
 		}
 
+		private void OnEnable()
+		{
+			playerInput.LeftMouseDown += StartShooting;
+			playerInput.LeftMouseUp += StopShooting;
+		}
+		private void OnDisable()
+		{
+			playerInput.LeftMouseDown -= StartShooting;
+			playerInput.LeftMouseUp -= StopShooting;
+		}
+
 		private void Update()
 		{
 			IncreaseTimer();
-			if (playerInventory.equippedWeapon.automatic)
+			Shooting();
+			equippedWeapon = playerInventory.equippedWeapon;
+		}
+		public void Shooting()
+		{
+			if (isShooting)
 			{
-				if (playerInput.LeftMouseHold && canFire())
+				//auto
+				if (equippedWeapon.automatic && canFire())
 				{
-					//firing auto
 					Shoot();
-					ResetTimer();
+				}
+				//semi
+				else if (canFire())
+				{
+					Shoot();
+					isShooting = false;
 				}
 			}
-			else
-			{
-				if((playerInput.LeftMouseClick!=playerInput.LeftMouseClick)&&canFire())
-				//firing semi
-				Shoot();
-			}
+
+		}
+		private void StartShooting()
+		{
+			isShooting = true;
+		}
+		private void StopShooting()
+		{
+			isShooting = false;
+		}
+
+		private void Shoot()
+		{
+			Ballistics.CreateBullet(equippedWeapon.damage, playerCamera.getCameraRef().transform.position, playerCamera.getCameraRef().transform.forward, equippedWeapon.range, layerMask, QueryTriggerInteraction.Ignore);
+			playerShoot.Invoke();
+			ResetTimer();
 		}
 
 		private void IncreaseTimer()
@@ -54,15 +96,8 @@ namespace Player
         {
 			timer = 0;
         }
-		private bool canFire()
-		{
-			return playerInventory.equippedWeapon.fireRate <= timer ? true : false;
-		}
-		private void Shoot()
-		{
-			Weapon weapon = playerInventory.equippedWeapon;
-			Ballistics.CreateBullet(weapon.damage, playerCamera.getCameraRef().transform.position, playerCamera.getCameraRef().transform.forward, weapon.range,layerMask,QueryTriggerInteraction.Ignore);
-		}
+
+
 	}
 }
 

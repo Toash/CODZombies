@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 4129491350543625893}
   - component: {fileID: 4129491350543625894}
   - component: {fileID: 4129491350543625895}
-  - component: {fileID: 4129491350543625890}
+  - component: {fileID: 6754802990236508476}
+  - component: {fileID: 1088910928277365412}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -213,7 +214,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4129491350543625890
+--- !u!114 &6754802990236508476
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,25 +223,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4129491350543626065}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b73d610e7d557d545bf0b789e5c781aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 84ca6d0e086268f469e026308812fd2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: {fileID: 11400000, guid: 1739fcbb15c59674fb69e50521e93345, type: 2}
-  DamageEvent:
+  lowHealthPercentThreshold: {fileID: 0}
+  DamagedEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: aac02452459ae57498c061684c163c44, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   DeathEvent:
     m_PersistentCalls:
       m_Calls:
@@ -268,18 +258,57 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DestroyGameObject, Assembly-CSharp
-        m_MethodName: Destroy
+      - m_Target: {fileID: 1088910928277365412}
+        m_TargetAssemblyTypeName: Zombie.ZombieDeath, Assembly-CSharp
+        m_MethodName: KillZombie
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 1
+          m_FloatArgument: 2
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4129491350543625902}
+        m_TargetAssemblyTypeName: Zombie.ZombieMovement, Assembly-CSharp
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4129491350543625897}
+        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  LowHealthEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1088910928277365412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4129491350543626065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 115d206d76b626241bf8552ec8308a6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4129491350781049834
 GameObject:
   m_ObjectHideFlags: 0

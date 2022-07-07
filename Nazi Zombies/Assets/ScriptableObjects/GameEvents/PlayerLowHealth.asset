@@ -9,14 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc808a31f56f1074f87f5d55b742b7fc, type: 3}
-  m_Name: Pistol
+  m_Script: {fileID: 11500000, guid: 16ba54ff3af755e44b2418b11b64b4ae, type: 3}
+  m_Name: PlayerLowHealth
   m_EditorClassIdentifier: 
-  damage: 50
-  fireRate: 0.2
-  range: 100
-  automatic: 0
-  reloadTime: 1
-  model: {fileID: 0}
-  shootSound: {fileID: 8300000, guid: a6c2d0216b866344b937baf86bbc1fbf, type: 3}
-  shootSoundVolume: 0

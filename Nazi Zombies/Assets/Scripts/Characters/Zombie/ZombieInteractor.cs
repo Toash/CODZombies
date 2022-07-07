@@ -1,9 +1,15 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.Events;
 
-namespace Zombie
+
+namespace AI.Zombie
 {
+	[System.Serializable]
+	public class DamageEvent : UnityEvent<MonoBehaviour>
+	{
+	}
 	//handles zombie attacking player, and breaking barricades. 
+	//	
 	public class ZombieInteractor : Interactor
 	{
 		[Header("Zombie Stats")]
@@ -13,6 +19,7 @@ namespace Zombie
 		private FloatVariable zombieAttackSpeed;
 		[SerializeField]
 		private FloatVariable zombieBarricadeBreakSpeed;
+		[Header("UnityEvents")]
 
 		private float timer;
 
@@ -30,17 +37,20 @@ namespace Zombie
 		}
 		protected override void OnTriggerEnter(Collider other)
 		{
-			//if the collider isn't a zombie and has IDamagable
-			if (other != this&&other.GetComponent<IDamagable>()!=null&&canAttack)
+
+		}
+
+		protected override void OnTriggerStay(Collider other)
+		{
+			IDamagable damagable = other.GetComponent<IDamagable>();
+			if (other!=this&&damagable!=null&&canAttack)
 			{
-				IDamagable damagable = other.GetComponent<IDamagable>();
 				ZombieDamage(damagable);
 			}
 		}
 
 		private void ZombieDamage(IDamagable damagable)
 		{
-			Debug.Log("Zombie attacking");
 			damagable.damage(zombieDamage.Value);
 			ResetTimer();
 		}

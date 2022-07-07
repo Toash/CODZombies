@@ -13,4 +13,5 @@ public abstract class Interactor : MonoBehaviour
 	//		Zombies shouldnt check for buyable
 	// For player, check if buyable
 	protected abstract void OnTriggerEnter(Collider other);
+	protected abstract void OnTriggerStay(Collider other);
 }

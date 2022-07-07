@@ -21,7 +21,7 @@ namespace Player
 		[Header("Misc")]
 		public StringVariable equippedWeaponSO;//scriptable object
 
-
+		private PlayerInput playerInput;
 		public bool HasWeapon()
 		{
 			return equippedWeapon;
@@ -29,12 +29,24 @@ namespace Player
 
 		private void Awake()
 		{
+			playerInput = this.GetComponent<PlayerInput>();
 			IncreaseInventorySizeTo(maxWeapons.Value);
 			if (this.equippedWeapon==null)
 			{
 				EquipWeapon(0);//equip first weapon in list
 			}
 		}
+		private void OnEnable()
+		{
+			playerInput.Alpha1Clicked += EquipWeapon;
+			playerInput.Alpha2Clicked += EquipWeapon;
+		}
+		private void OnDisable()
+		{
+			playerInput.Alpha1Clicked -= EquipWeapon;
+			playerInput.Alpha2Clicked -= EquipWeapon;
+		}
+
 		//equip to PlayerShooting
 		public void EquipWeapon(int index)
 		{

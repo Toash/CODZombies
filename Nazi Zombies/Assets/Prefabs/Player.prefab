@@ -132,8 +132,8 @@ GameObject:
   - component: {fileID: 6014639378041683084}
   - component: {fileID: 6014639378041683191}
   - component: {fileID: 6014639378041683082}
-  - component: {fileID: 6014639378041683080}
   - component: {fileID: 6014639378041683188}
+  - component: {fileID: 5088116316679833184}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -221,6 +221,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f18e9e62c6bcf3b478a9ec0a7e67a847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerShoot:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6014639378041683188}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: a6c2d0216b866344b937baf86bbc1fbf, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   layerMask:
     serializedVersion: 2
     m_Bits: 2147483647
@@ -267,79 +282,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpKey: 32
-  Alpha1Event:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6014639378041683081}
-        m_TargetAssemblyTypeName: Player.PlayerInventory, Assembly-CSharp
-        m_MethodName: EquipWeapon
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  Alpha2Event:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6014639378041683081}
-        m_TargetAssemblyTypeName: Player.PlayerInventory, Assembly-CSharp
-        m_MethodName: EquipWeapon
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  JumpEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6014639378041683085}
-        m_TargetAssemblyTypeName: Player.PlayerMovement, Assembly-CSharp
-        m_MethodName: Jump
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &6014639378041683080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6014639378041683075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0b97cd9f97e7cd4c82056990daf3298, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 1881ae6b6a8e8bc429336b989e10b0cd, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 984ac75b6695a2b4f975686d728c2c7c, type: 2}
-        m_TargetAssemblyTypeName: IntVariable, Assembly-CSharp
-        m_MethodName: ApplyChange
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 100
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!82 &6014639378041683188
 AudioSource:
   m_ObjectHideFlags: 0
@@ -436,6 +378,53 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5088116316679833184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014639378041683075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84ca6d0e086268f469e026308812fd2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: {fileID: 11400000, guid: 44f1491ed864f0f42a0bc399593c3d05, type: 2}
+  lowHealthPercentThreshold: {fileID: 11400000, guid: a5c7eb506de5e0c4393b40ee16c2bb76, type: 2}
+  DamagedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  DeathEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: e20611be5beec1d4f898d938c25da133, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  LowHealthEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 31a4c7955bc1e6b40b515874e290ace6, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6014639379168873326
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,6 +33,15 @@ namespace Player
 			ResetPlayerGravity();
 			charControl.Move(playerGravityVelocity * Time.deltaTime);
 		}
+		void OnEnable()
+		{
+			playerInput.JumpClicked += Jump;
+		}
+
+		void OnDisable()
+		{
+			playerInput.JumpClicked -= Jump;
+		}
 		public void Jump()
 		{
 			if (charControl.isGrounded)

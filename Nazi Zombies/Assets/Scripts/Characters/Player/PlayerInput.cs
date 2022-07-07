@@ -3,74 +3,81 @@ using UnityEngine.Events;
 
 namespace Player
 {
-    public class PlayerInput : MonoBehaviour
-    {
+	public class PlayerInput : MonoBehaviour
+	{
+		[Header("Custom")]
+		public KeyCode jumpKey;
+		public Vector3 NormalizedMoveVector { get; private set; }
 
-        public Vector3 NormalizedMoveVector { get; private set; }
+		// mouse
+		public float VerticalMouseInput { get; private set; }
+		public float HorizontalMouseInput { get; private set; }
 
-        public float VerticalMouseInput { get; private set; }
-        public float HorizontalMouseInput { get; private set; }
+		// keyboard
+		private float verticalKeyboardInput;
+		private float horizontalKeyboardInput;
 
-        public bool LeftMouseHold { get; private set; }//continuous inputs are hidden in inspector
-        public bool LeftMouseClick { get; private set; }//continuous inputs are hidden in inspector
-        //keyboard
-        private float verticalKeyboardInput;
-        private float horizontalKeyboardInput;
+		// delegate
+		public delegate void Click();
+		public delegate void NumericalClick(int index);
 
-        [Header("Keyboard Bindings")]
-        [SerializeField]
-        private KeyCode jumpKey;
+		// C# events
+		public event Click JumpClicked;
+		public event Click LeftMouseDown;
+		public event Click LeftMouseUp;
+		public event NumericalClick Alpha1Clicked;
+		public event NumericalClick Alpha2Clicked;
 
-        [Header("Keyboard Events")]
-        [SerializeField]
-        private UnityEvent Alpha1Event; //when player presses 1, etc.
-        [SerializeField]
-        private UnityEvent Alpha2Event;
-        [SerializeField]
-        private UnityEvent JumpEvent;
+		private void Update()
+		{
+			keyboardInput();
+			mouseInput();
+			calculateMoveVector();
+		}
 
-        private void Update()
-        {
-            keyboardInput();
-            mouseInput();
-            calculateMoveVector();
-        }
+		private void calculateMoveVector()
+		{
+			Vector3 vertical = this.transform.forward * verticalKeyboardInput;
+			Vector3 horizontal = this.transform.right * horizontalKeyboardInput;
 
-        private void calculateMoveVector()
-        {
-            Vector3 vertical = this.transform.forward * verticalKeyboardInput;
-            Vector3 horizontal = this.transform.right * horizontalKeyboardInput;
+			// normalize so player cant run double as 
+			// fast when moving diagonally
+			NormalizedMoveVector = Vector3.Normalize(vertical + horizontal);
+		}
 
-            // normalize so player cant run double as 
-            // fast when moving diagonally
-            NormalizedMoveVector = Vector3.Normalize(vertical + horizontal);
-        }
-
-        private void keyboardInput()
-        {
-            verticalKeyboardInput = Input.GetAxisRaw("Vertical");
-            horizontalKeyboardInput = Input.GetAxisRaw("Horizontal");
+		private void keyboardInput()
+		{
+			verticalKeyboardInput = Input.GetAxisRaw("Vertical");
+			horizontalKeyboardInput = Input.GetAxisRaw("Horizontal");
 			if (Input.GetKeyDown(KeyCode.Alpha1))
 			{
-                Alpha1Event.Invoke();
+				if (Alpha1Clicked != null) { Alpha1Clicked(0); }
+
 			}
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                Alpha2Event.Invoke();
-            }
+			if (Input.GetKeyDown(KeyCode.Alpha2))
+			{
+				if (Alpha2Clicked != null) { Alpha2Clicked(1); }
+
+			}
 			if (Input.GetKeyDown(jumpKey))
 			{
-                //jump
-                JumpEvent.Invoke();
+				if (JumpClicked != null) { JumpClicked(); }
 			}
-        }
-        private void mouseInput()
-        {
-            VerticalMouseInput = Input.GetAxis("Mouse Y");
-            HorizontalMouseInput = Input.GetAxis("Mouse X");
-            LeftMouseHold = Input.GetMouseButton(0) ? true : false;
-			if (Input.GetMouseButtonDown(0)) { LeftMouseClick = !LeftMouseClick; }
-        }
-    }
+		}
+		private void mouseInput()
+		{
+			VerticalMouseInput = Input.GetAxis("Mouse Y");
+			HorizontalMouseInput = Input.GetAxis("Mouse X");
+			if (Input.GetMouseButtonDown(0))
+			{
+				if(LeftMouseDown!=null) LeftMouseDown();
+
+			}
+			if (Input.GetMouseButtonUp(0))
+			{
+				if (LeftMouseUp != null) LeftMouseUp();
+			}
+		}
+	}
 }
 
