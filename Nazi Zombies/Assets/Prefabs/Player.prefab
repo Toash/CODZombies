@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6014639377112993087}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.086, y: -0.022, z: 0.776}
+  m_LocalPosition: {x: 0.086, y: -0.022, z: 0.688}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -126,14 +126,14 @@ GameObject:
   m_Component:
   - component: {fileID: 6014639378041683087}
   - component: {fileID: 6014639378041683083}
-  - component: {fileID: 6014639378041683081}
+  - component: {fileID: 6014639378041683188}
+  - component: {fileID: 5088116316679833184}
   - component: {fileID: 6014639378041683085}
   - component: {fileID: 6014639378041683189}
+  - component: {fileID: 6014639378041683081}
   - component: {fileID: 6014639378041683084}
   - component: {fileID: 6014639378041683191}
   - component: {fileID: 6014639378041683082}
-  - component: {fileID: 6014639378041683188}
-  - component: {fileID: 5088116316679833184}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -176,112 +176,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &6014639378041683081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6014639378041683075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40fdc9d2165a57649b1683fd41549c72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  equippedWeapon: {fileID: 0}
-  weapons:
-  - {fileID: 11400000, guid: 3cd22dcc0927a2244aebb163f48fa7c9, type: 2}
-  maxWeapons: {fileID: 11400000, guid: 23e6a86761b390e44be0377eda55cb9f, type: 2}
-  equippedWeaponSO: {fileID: 11400000, guid: abf14f7727e598d48ac0c21649f5810f, type: 2}
---- !u!114 &6014639378041683085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6014639378041683075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c28961d695d461044b1df9aade344ac7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: {fileID: 11400000, guid: fc19999d8a2f21649b3d66cbfca0b608, type: 2}
-  jumpHeight: {fileID: 11400000, guid: 18845546e776d414da450d55c1c1721b, type: 2}
-  playerGravityMultiplier: {fileID: 11400000, guid: b4adb8e5569030541875f08cec1f8cfc, type: 2}
-  playerSlopeLimit: {fileID: 11400000, guid: 72b7463f3d6ea1c41b47f17d8745fb35, type: 2}
---- !u!114 &6014639378041683189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6014639378041683075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f18e9e62c6bcf3b478a9ec0a7e67a847, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerShoot:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6014639378041683188}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: PlayOneShot
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: a6c2d0216b866344b937baf86bbc1fbf, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 2147483647
-  weaponHoldPoint: {fileID: 6014639377112993087}
---- !u!114 &6014639378041683084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6014639378041683075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f103f349a91e66e46b8666b29b54a1a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sensitivity: {fileID: 11400000, guid: a243609724e34454bbbb84a29b0a6726, type: 2}
-  playerFOV: {fileID: 11400000, guid: 16d1b2d84bcf65d4ba331e3bb067f7d8, type: 2}
-  cameraRef: {fileID: 6014639377124975940}
---- !u!114 &6014639378041683191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6014639378041683075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93f7edf939ea56e4f940f18570899d02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PointsSO: {fileID: 11400000, guid: 984ac75b6695a2b4f975686d728c2c7c, type: 2}
-  startingMoney: 0
---- !u!114 &6014639378041683082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6014639378041683075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11aec92188877a0419c062fb22a294fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpKey: 32
 --- !u!82 &6014639378041683188
 AudioSource:
   m_ObjectHideFlags: 0
@@ -425,6 +319,101 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6014639378041683085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014639378041683075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c28961d695d461044b1df9aade344ac7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: {fileID: 11400000, guid: fc19999d8a2f21649b3d66cbfca0b608, type: 2}
+  jumpHeight: {fileID: 11400000, guid: 18845546e776d414da450d55c1c1721b, type: 2}
+  playerGravityMultiplier: {fileID: 11400000, guid: b4adb8e5569030541875f08cec1f8cfc, type: 2}
+  playerSlopeLimit: {fileID: 11400000, guid: 72b7463f3d6ea1c41b47f17d8745fb35, type: 2}
+--- !u!114 &6014639378041683189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014639378041683075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f18e9e62c6bcf3b478a9ec0a7e67a847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerShoot:
+    m_PersistentCalls:
+      m_Calls: []
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 2147483647
+  weaponHoldPoint: {fileID: 6014639377112993087}
+--- !u!114 &6014639378041683081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014639378041683075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40fdc9d2165a57649b1683fd41549c72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equippedWeapon: {fileID: 0}
+  weapons:
+  - {fileID: 11400000, guid: 3cd22dcc0927a2244aebb163f48fa7c9, type: 2}
+  - {fileID: 11400000, guid: 10e368c31fd15a14c929c6036a40da4f, type: 2}
+  maxWeapons: {fileID: 11400000, guid: 23e6a86761b390e44be0377eda55cb9f, type: 2}
+  equippedWeaponSO: {fileID: 11400000, guid: abf14f7727e598d48ac0c21649f5810f, type: 2}
+--- !u!114 &6014639378041683084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014639378041683075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f103f349a91e66e46b8666b29b54a1a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensitivity: {fileID: 11400000, guid: a243609724e34454bbbb84a29b0a6726, type: 2}
+  playerFOV: {fileID: 11400000, guid: 16d1b2d84bcf65d4ba331e3bb067f7d8, type: 2}
+  cameraRef: {fileID: 6014639377124975940}
+--- !u!114 &6014639378041683191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014639378041683075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93f7edf939ea56e4f940f18570899d02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PointsSO: {fileID: 11400000, guid: 984ac75b6695a2b4f975686d728c2c7c, type: 2}
+  startingMoney: 0
+--- !u!114 &6014639378041683082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014639378041683075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11aec92188877a0419c062fb22a294fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpKey: 32
 --- !u!1 &6014639379168873326
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,9 +4,10 @@ using UnityEngine.Events;
 namespace Player
 {
 	//handles the player's currently equipped item
-	[RequireComponent(typeof(PlayerCamera))]
-	[RequireComponent(typeof(PlayerInventory))]
-	[RequireComponent(typeof(PlayerInput))]
+	[RequireComponent(typeof(PlayerCamera))] //to create bullet in camera
+	[RequireComponent(typeof(PlayerInventory))]// to get equipped weapon
+	[RequireComponent(typeof(PlayerInput))] // to get left mouse button
+	[RequireComponent(typeof(AudioSource))] // for gun sound
 	public class PlayerShooting : MonoBehaviour
 	{
 		public UnityEvent playerShoot;
@@ -19,6 +20,7 @@ namespace Player
 		private PlayerInput playerInput;
 		private PlayerCamera playerCamera;
 		private PlayerInventory playerInventory;
+		private AudioSource audioSource;
 
 		private Weapon equippedWeapon;
 
@@ -35,17 +37,24 @@ namespace Player
 			playerInput = this.GetComponent<PlayerInput>();
 			playerCamera = this.GetComponent<PlayerCamera>();
 			playerInventory = this.GetComponent<PlayerInventory>();
+			audioSource = this.GetComponent<AudioSource>();
 		}
 
 		private void OnEnable()
 		{
+			//input
 			playerInput.LeftMouseDown += StartShooting;
 			playerInput.LeftMouseUp += StopShooting;
+
+			//inventory
+			playerInventory.weaponChanged += DisplayWeapon;
 		}
 		private void OnDisable()
 		{
 			playerInput.LeftMouseDown -= StartShooting;
 			playerInput.LeftMouseUp -= StopShooting;
+
+			playerInventory.weaponChanged -= DisplayWeapon;
 		}
 
 		private void Update()
@@ -84,6 +93,7 @@ namespace Player
 		private void Shoot()
 		{
 			Ballistics.CreateBullet(equippedWeapon.damage, playerCamera.getCameraRef().transform.position, playerCamera.getCameraRef().transform.forward, equippedWeapon.range, layerMask, QueryTriggerInteraction.Ignore);
+			audioSource.PlayOneShot(equippedWeapon.shootSound);
 			playerShoot.Invoke();
 			ResetTimer();
 		}
@@ -97,6 +107,11 @@ namespace Player
 			timer = 0;
         }
 
+		private void DisplayWeapon()
+		{
+			equippedWeapon.DeleteDisplayWeapon();
+			equippedWeapon.DisplayWeapon(weaponHoldPoint.transform);
+		}
 
 	}
 }

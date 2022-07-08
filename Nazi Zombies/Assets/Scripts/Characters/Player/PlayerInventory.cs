@@ -22,6 +22,9 @@ namespace Player
 		public StringVariable equippedWeaponSO;//scriptable object
 
 		private PlayerInput playerInput;
+
+		public delegate void Change();
+		public event Change weaponChanged;
 		public bool HasWeapon()
 		{
 			return equippedWeapon;
@@ -54,6 +57,7 @@ namespace Player
 			{
 				equippedWeapon = weapons[index];
 				equippedWeaponSO.Value = weapons[index].name;// update the scriptableobject
+				if(weaponChanged!=null) weaponChanged();
 			}
 		}
 
