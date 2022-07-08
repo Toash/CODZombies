@@ -13,18 +13,8 @@ public class Weapon : ScriptableObject
 	public GameObject model;
 	[Header("Audio")]
 	public AudioClip shootSound;
-	public float shootSoundVolume;
 
 	private GameObject weaponModel;
-
-	public void DisplayWeapon(Transform parent)
-	{
-		weaponModel = Instantiate(model, parent);
-	}
-	public void DeleteDisplayWeapon()
-	{
-		Destroy(weaponModel.gameObject);
-	}
 	
 
 }

@@ -17,6 +17,5 @@ MonoBehaviour:
   range: 100
   automatic: 1
   reloadTime: 1
-  model: {fileID: 1294118952846458, guid: e55b8ab52ced29c4aba4f29df19718ae, type: 3}
-  shootSound: {fileID: 8300000, guid: a6c2d0216b866344b937baf86bbc1fbf, type: 3}
-  shootSoundVolume: 0
+  model: {fileID: 1487774384131766, guid: ee329c3cd08e58645834d20702d7f6c6, type: 3}
+  shootSound: {fileID: 8300000, guid: 9bfac9747e8b85241a490f43b3adf263, type: 3}

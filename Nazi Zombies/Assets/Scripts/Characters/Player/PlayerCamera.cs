@@ -34,9 +34,9 @@ namespace Player
 		private void cameraMovement()
 		{
 			//rotate transform on the y axis. (left to right)
-			this.transform.Rotate(Vector3.up * playerInput.HorizontalMouseInput * sensitivity.Value);
+			this.transform.Rotate(Vector3.up * playerInput.HorizMouse * sensitivity.Value);
 
-			verticalRotation -= (playerInput.VerticalMouseInput * sensitivity.Value);
+			verticalRotation -= (playerInput.VertMouse * sensitivity.Value);
 
 			//clamp
 			verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);

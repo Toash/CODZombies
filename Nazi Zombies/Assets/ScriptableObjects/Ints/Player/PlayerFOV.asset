@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74b54f32a8456c54da8723f6f3383759, type: 3}
   m_Name: PlayerFOV
   m_EditorClassIdentifier: 
-  Value: 90
+  Value: 80

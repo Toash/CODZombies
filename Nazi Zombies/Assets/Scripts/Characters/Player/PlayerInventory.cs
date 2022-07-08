@@ -1,43 +1,36 @@
 using UnityEngine;
-using UnityEngine.Events;
 using System.Collections.Generic;
 
 
 namespace Player
 {
-	[RequireComponent(typeof(PlayerShooting))]
+	[RequireComponent(typeof(PlayerWeaponShooter))]
 	[RequireComponent(typeof(PlayerInput))]
 	public class PlayerInventory : MonoBehaviour
 	{
-		[Header("The Currently Equipped Weapon")]
-		public Weapon equippedWeapon;
+		[HideInInspector]public Weapon equippedWeapon;
 
 		[Header("Inventory")]
-		public List<Weapon> weapons;
+		public List<Weapon> weaponsList;
 
         [Header("Inventory Stats")]		
 		public IntVariable maxWeapons;
 
-		[Header("Misc")]
-		public StringVariable equippedWeaponSO;//scriptable object
+		public delegate void WeaponChange(Weapon weapon); //delegate
+		public event WeaponChange weaponChanged; //delegate instance
 
 		private PlayerInput playerInput;
-
-		public delegate void Change();
-		public event Change weaponChanged;
-		public bool HasWeapon()
-		{
-			return equippedWeapon;
-		}
 
 		private void Awake()
 		{
 			playerInput = this.GetComponent<PlayerInput>();
-			IncreaseInventorySizeTo(maxWeapons.Value);
-			if (this.equippedWeapon==null)
-			{
-				EquipWeapon(0);//equip first weapon in list
-			}
+			IncreaseInventorySize(maxWeapons.Value);
+			if (this.equippedWeapon == null) { EquipWeapon(0); }
+		}
+
+		private void Start()
+		{
+
 		}
 		private void OnEnable()
 		{
@@ -50,51 +43,49 @@ namespace Player
 			playerInput.Alpha2Clicked -= EquipWeapon;
 		}
 
-		//equip to PlayerShooting
-		public void EquipWeapon(int index)
+		public void AddWeaponToList(Weapon weapon)
 		{
-			if (weapons[index]!=null)
+			switch (weaponsList.Count)
 			{
-				equippedWeapon = weapons[index];
-				equippedWeaponSO.Value = weapons[index].name;// update the scriptableobject
-				if(weaponChanged!=null) weaponChanged();
-			}
-		}
-
-		//Add weapon to weapons list
-		public void AddWeapon(Weapon weapon)
-		{
-            //There are weapon slots left
-            switch (weapons.Count)
-            {
 				case 0:
-					AssignWeapon(0, weapon);
+					AssignWeaponToIndex(0, weapon);
 					break;
 				case 1:
-					AssignWeapon(1, weapon);
+					AssignWeaponToIndex(1, weapon);
 					break;
 				default:
 					//overwrite equipped weapon
-					int index = weapons.IndexOf(equippedWeapon);
-					AssignWeapon(index, weapon);
+					AssignWeaponToIndex(weaponsList.IndexOf(equippedWeapon), weapon);
 					break;
 			}
+		}
 
+		private void EquipWeapon(int index)
+		{
+			Weapon weapon = weaponsList[index];
+			if (weapon != null)
+			{
+				equippedWeapon = weapon;
+				if (weaponChanged != null)
+				{
+					weaponChanged.Invoke(weapon);
+				}
+			}
 		}
 
 		//assign weapon to index of weapons list
-		private void AssignWeapon(int index, Weapon weapon)
+		private void AssignWeaponToIndex(int index, Weapon weapon)
         {
-			this.weapons[index] = weapon;
+			this.weaponsList[index] = weapon;
         }
 
-		private void IncreaseInventorySizeTo(int size)
+		private void IncreaseInventorySize(int size)
         {
-            int slotsLeft = size - weapons.Count;
+            int slotsLeft = size - weaponsList.Count;
 			if (slotsLeft < 0) return;
             for (int i = 0; i < slotsLeft; i++)
             {
-				weapons.Add(null);
+				weaponsList.Add(null);
             }
 		}
 	}

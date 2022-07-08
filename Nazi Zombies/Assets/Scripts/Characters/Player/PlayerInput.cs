@@ -10,12 +10,12 @@ namespace Player
 		public Vector3 NormalizedMoveVector { get; private set; }
 
 		// mouse
-		public float VerticalMouseInput { get; private set; }
-		public float HorizontalMouseInput { get; private set; }
+		public float VertMouse { get; private set; }
+		public float HorizMouse { get; private set; }
 
 		// keyboard
-		private float verticalKeyboardInput;
-		private float horizontalKeyboardInput;
+		public float VertKeyboard { get; private set; }
+		public float HorizKeyboard { get; private set; }
 
 		// delegate
 		public delegate void Click();
@@ -37,8 +37,8 @@ namespace Player
 
 		private void calculateMoveVector()
 		{
-			Vector3 vertical = this.transform.forward * verticalKeyboardInput;
-			Vector3 horizontal = this.transform.right * horizontalKeyboardInput;
+			Vector3 vertical = this.transform.forward * VertKeyboard;
+			Vector3 horizontal = this.transform.right * HorizKeyboard;
 
 			// normalize so player cant run double as 
 			// fast when moving diagonally
@@ -47,8 +47,8 @@ namespace Player
 
 		private void keyboardInput()
 		{
-			verticalKeyboardInput = Input.GetAxisRaw("Vertical");
-			horizontalKeyboardInput = Input.GetAxisRaw("Horizontal");
+			VertKeyboard = Input.GetAxisRaw("Vertical");
+			HorizKeyboard = Input.GetAxisRaw("Horizontal");
 			if (Input.GetKeyDown(KeyCode.Alpha1))
 			{
 				if (Alpha1Clicked != null) { Alpha1Clicked(0); }
@@ -66,8 +66,8 @@ namespace Player
 		}
 		private void mouseInput()
 		{
-			VerticalMouseInput = Input.GetAxis("Mouse Y");
-			HorizontalMouseInput = Input.GetAxis("Mouse X");
+			VertMouse = Input.GetAxis("Mouse Y");
+			HorizMouse = Input.GetAxis("Mouse X");
 			if (Input.GetMouseButtonDown(0))
 			{
 				if(LeftMouseDown!=null) LeftMouseDown();

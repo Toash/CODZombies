@@ -5,14 +5,18 @@ namespace Player.UI
 {
 	public class WeaponText : MonoBehaviour
 	{
-		[SerializeField]
-		private StringVariable equippedWeaponSO; //scriptable object
+		private PlayerInventory playerInventory;
+
+		void Awake()
+		{
+			playerInventory = FindObjectOfType<PlayerInventory>();
+		}
 		[SerializeField]
 		private TMP_Text weaponText;
 
 		private void Update()
 		{
-			weaponText.text = equippedWeaponSO.Value;
+			weaponText.text = playerInventory.equippedWeapon.name;
 		}
 	}
 }
