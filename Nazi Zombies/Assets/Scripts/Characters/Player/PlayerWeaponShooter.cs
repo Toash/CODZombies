@@ -26,6 +26,9 @@ namespace Player
 
 		private Weapon equippedWeapon;
 
+		public delegate void ShootDelegate();
+		public event ShootDelegate gunShoot;
+
 
 		private bool isShooting;
 		private float timer;
@@ -46,13 +49,13 @@ namespace Player
 		private void OnEnable()
 		{
 			//input
-			playerInput.LeftMouseDown += StartShooting;
-			playerInput.LeftMouseUp += StopShooting;
+			playerInput.shootDown += StartShooting;
+			playerInput.shootUp += StopShooting;
 		}
 		private void OnDisable()
 		{
-			playerInput.LeftMouseDown -= StartShooting;
-			playerInput.LeftMouseUp -= StopShooting;
+			playerInput.shootDown -= StartShooting;
+			playerInput.shootUp -= StopShooting;
 		}
 
 		private void Update()
@@ -82,7 +85,8 @@ namespace Player
 		private void Shoot()
 		{
 			Ballistics.CreateBullet(equippedWeapon.damage, playerCamera.getCameraRef().transform.position, playerCamera.getCameraRef().transform.forward, equippedWeapon.range, layerMask, QueryTriggerInteraction.Ignore);
-			weaponFireEvent.Invoke(equippedWeapon);
+			weaponFireEvent?.Invoke(equippedWeapon);
+			gunShoot?.Invoke(); 
 			ResetTimer();
 		}
 		private void StartShooting()

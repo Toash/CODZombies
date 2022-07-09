@@ -34,13 +34,13 @@ namespace Player
 		}
 		private void OnEnable()
 		{
-			playerInput.Alpha1Clicked += EquipWeapon;
-			playerInput.Alpha2Clicked += EquipWeapon;
+			playerInput.alpha1Clicked += EquipWeapon;
+			playerInput.alpha2Clicked += EquipWeapon;
 		}
 		private void OnDisable()
 		{
-			playerInput.Alpha1Clicked -= EquipWeapon;
-			playerInput.Alpha2Clicked -= EquipWeapon;
+			playerInput.alpha1Clicked -= EquipWeapon;
+			playerInput.alpha2Clicked -= EquipWeapon;
 		}
 
 		public void AddWeaponToList(Weapon weapon)

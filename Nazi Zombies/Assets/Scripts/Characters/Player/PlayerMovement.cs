@@ -35,12 +35,12 @@ namespace Player
 		}
 		void OnEnable()
 		{
-			playerInput.JumpClicked += Jump;
+			playerInput.jumpClicked += Jump;
 		}
 
 		void OnDisable()
 		{
-			playerInput.JumpClicked -= Jump;
+			playerInput.jumpClicked -= Jump;
 		}
 		public void Jump()
 		{

@@ -5,8 +5,13 @@ namespace Player
 {
 	public class PlayerInput : MonoBehaviour
 	{
-		[Header("Custom")]
+		[Header("Bindings")]
 		public KeyCode jumpKey;
+		public KeyCode shootKey;
+		public KeyCode aimKey;
+		public KeyCode interactKey;
+		public KeyCode sprintKey;
+
 		public Vector3 NormalizedMoveVector { get; private set; }
 
 		// mouse
@@ -22,11 +27,11 @@ namespace Player
 		public delegate void NumericalClick(int index);
 
 		// C# events
-		public event Click JumpClicked;
-		public event Click LeftMouseDown;
-		public event Click LeftMouseUp;
-		public event NumericalClick Alpha1Clicked;
-		public event NumericalClick Alpha2Clicked;
+		public event Click jumpClicked;
+		public event Click shootDown;
+		public event Click shootUp;
+		public event NumericalClick alpha1Clicked;
+		public event NumericalClick alpha2Clicked;
 
 		private void Update()
 		{
@@ -51,31 +56,31 @@ namespace Player
 			HorizKeyboard = Input.GetAxisRaw("Horizontal");
 			if (Input.GetKeyDown(KeyCode.Alpha1))
 			{
-				if (Alpha1Clicked != null) { Alpha1Clicked(0); }
+				if (alpha1Clicked != null) { alpha1Clicked(0); }
 
 			}
 			if (Input.GetKeyDown(KeyCode.Alpha2))
 			{
-				if (Alpha2Clicked != null) { Alpha2Clicked(1); }
+				if (alpha2Clicked != null) { alpha2Clicked(1); }
 
 			}
 			if (Input.GetKeyDown(jumpKey))
 			{
-				if (JumpClicked != null) { JumpClicked(); }
+				if (jumpClicked != null) { jumpClicked(); }
 			}
 		}
 		private void mouseInput()
 		{
 			VertMouse = Input.GetAxis("Mouse Y");
 			HorizMouse = Input.GetAxis("Mouse X");
-			if (Input.GetMouseButtonDown(0))
+			if (Input.GetKeyDown(shootKey))
 			{
-				if(LeftMouseDown!=null) LeftMouseDown();
+				shootDown?.Invoke();
 
 			}
-			if (Input.GetMouseButtonUp(0))
+			if (Input.GetKeyUp(shootKey))
 			{
-				if (LeftMouseUp != null) LeftMouseUp();
+				shootUp?.Invoke();
 			}
 		}
 	}
