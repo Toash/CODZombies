@@ -3,16 +3,17 @@ using TMPro;
 
 namespace Player.UI
 {
-	public class WeaponText : MonoBehaviour
+	public class WeaponUI : MonoBehaviour
 	{
 		private PlayerInventory playerInventory;
+		private TMP_Text weaponText;
 
 		void Awake()
 		{
 			playerInventory = FindObjectOfType<PlayerInventory>();
+			weaponText = this.GetComponent<TMP_Text>();
 		}
-		[SerializeField]
-		private TMP_Text weaponText;
+
 
 		private void Update()
 		{

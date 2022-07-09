@@ -10,7 +10,7 @@ namespace AI.Zombie
 	}
 	//handles zombie attacking player, and breaking barricades. 
 	//	
-	public class ZombieInteractor : Interactor
+	public class ZombieInteractor : BaseInteractor
 	{
 		[Header("Zombie Stats")]
 		[SerializeField]
@@ -34,10 +34,6 @@ namespace AI.Zombie
 		private void Update()
 		{
 			UpdateTimer();
-		}
-		protected override void OnTriggerEnter(Collider other)
-		{
-
 		}
 
 		protected override void OnTriggerStay(Collider other)

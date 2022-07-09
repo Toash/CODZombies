@@ -210,7 +210,8 @@ GameObject:
   - component: {fileID: 6014639378041683087}
   - component: {fileID: 6014639378041683083}
   - component: {fileID: 6014639378041683188}
-  - component: {fileID: 5088116316679833184}
+  - component: {fileID: 3286652936851257111}
+  - component: {fileID: 3335550147081583406}
   - component: {fileID: 6014639378041683085}
   - component: {fileID: 6014639378041683081}
   - component: {fileID: 6014639378041683084}
@@ -221,6 +222,7 @@ GameObject:
   - component: {fileID: 6834319146573358908}
   - component: {fileID: 3931142641430704233}
   - component: {fileID: 3205191806898040000}
+  - component: {fileID: 2132575326075507234}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -359,7 +361,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &5088116316679833184
+--- !u!114 &3286652936851257111
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -368,40 +370,49 @@ MonoBehaviour:
   m_GameObject: {fileID: 6014639378041683075}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84ca6d0e086268f469e026308812fd2f, type: 3}
+  m_Script: {fileID: 11500000, guid: b0b97cd9f97e7cd4c82056990daf3298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: {fileID: 11400000, guid: 44f1491ed864f0f42a0bc399593c3d05, type: 2}
-  lowHealthPercentThreshold: {fileID: 11400000, guid: a5c7eb506de5e0c4393b40ee16c2bb76, type: 2}
-  DamagedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  DeathEvent:
+  Event: {fileID: 11400000, guid: aac02452459ae57498c061684c163c44, type: 2}
+  Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: e20611be5beec1d4f898d938c25da133, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
+      - m_Target: {fileID: 11400000, guid: 984ac75b6695a2b4f975686d728c2c7c, type: 2}
+        m_TargetAssemblyTypeName: IntVariable, Assembly-CSharp
+        m_MethodName: ApplyChange
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 10
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  LowHealthEvent:
+--- !u!114 &3335550147081583406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014639378041683075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0b97cd9f97e7cd4c82056990daf3298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 1881ae6b6a8e8bc429336b989e10b0cd, type: 2}
+  Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 31a4c7955bc1e6b40b515874e290ace6, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
+      - m_Target: {fileID: 11400000, guid: 984ac75b6695a2b4f975686d728c2c7c, type: 2}
+        m_TargetAssemblyTypeName: IntVariable, Assembly-CSharp
+        m_MethodName: ApplyChange
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 100
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -572,3 +583,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e6f2435d181dc747a0c5206dca5b4ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2132575326075507234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014639378041683075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 162738daf9c3ed34f96ba76d8531b0ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: {fileID: 11400000, guid: 44f1491ed864f0f42a0bc399593c3d05, type: 2}
+  DamagedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 0d8ecf6192a825e4f8a80cca9b2cf353, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  DeathEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: e20611be5beec1d4f898d938c25da133, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  healthRegeneration: {fileID: 0}
+  lowHealthPercentThreshold: {fileID: 11400000, guid: a5c7eb506de5e0c4393b40ee16c2bb76, type: 2}
+  LowHealthEvent:
+    m_PersistentCalls:
+      m_Calls: []

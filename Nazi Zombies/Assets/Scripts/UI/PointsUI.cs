@@ -3,7 +3,7 @@ using TMPro;
 
 namespace Player.UI
 {
-	public class PointsText : MonoBehaviour
+	public class PointsUI : MonoBehaviour
 	{
 		[SerializeField]
 		private IntVariable points;
