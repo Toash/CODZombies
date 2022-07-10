@@ -4,12 +4,7 @@ using UnityEngine.Events;
 
 namespace AI.Zombie
 {
-	[System.Serializable]
-	public class DamageEvent : UnityEvent<MonoBehaviour>
-	{
-	}
 	//handles zombie attacking player, and breaking barricades. 
-	//	
 	public class ZombieInteractor : BaseInteractor
 	{
 		[Header("Zombie Stats")]
@@ -19,17 +14,13 @@ namespace AI.Zombie
 		private FloatVariable zombieAttackSpeed;
 		[SerializeField]
 		private FloatVariable zombieBarricadeBreakSpeed;
-		[Header("UnityEvents")]
+		[Header("Unity Events")]
+		[SerializeField]
+		private UnityEvent zombieAttackedEvent;
 
 		private float timer;
 
-		private bool canAttack
-		{
-			get
-			{
-				return zombieAttackSpeed.Value <= timer;
-			}
-		}
+		private bool canAttack { get { return zombieAttackSpeed.Value <= timer; } }
 
 		private void Update()
 		{
@@ -41,13 +32,14 @@ namespace AI.Zombie
 			IDamagable damagable = other.GetComponent<IDamagable>();
 			if (other!=this&&damagable!=null&&canAttack)
 			{
-				ZombieDamage(damagable);
+				Attack(damagable);
 			}
 		}
 
-		private void ZombieDamage(IDamagable damagable)
+		private void Attack(IDamagable damagable)
 		{
 			damagable.damage(zombieDamage.Value);
+			zombieAttackedEvent?.Invoke();
 			ResetTimer();
 		}
 

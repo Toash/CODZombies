@@ -13,6 +13,8 @@ namespace AI.Zombie
 
         private NavMeshAgent agent;
 
+        public bool isMoving { get { return !agent.isStopped; } }
+
         private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
@@ -20,16 +22,12 @@ namespace AI.Zombie
         }
         private void Update()
         {
-            if (target != null)
+            //hasPath-This property will be true if the agent has a path calculated to the desired destination and false otherwise.
+            if (target != null&&!agent.hasPath)
             {
                 this.agent.SetDestination(target.transform.position);
             }
         }
-
-        public void Stop()
-		{
-            agent.isStopped = true;
-		}
 	}
 }
 

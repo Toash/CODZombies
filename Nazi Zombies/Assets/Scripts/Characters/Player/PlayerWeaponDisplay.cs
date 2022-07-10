@@ -25,13 +25,6 @@ namespace Player
 
 			shooter = this.GetComponent<PlayerWeaponShooter>();
 		}
-		private void Update()
-		{
-			if (input.NormalizedMoveVector != Vector3.zero)
-			{
-				Debug.Log("moving");
-			}
-		}
 
 		public void OnEnable()
 		{

@@ -2,17 +2,16 @@ using UnityEngine;
 
 namespace Player
 {
-	[RequireComponent(typeof(Animator))]
 	[RequireComponent(typeof(PlayerWeaponShooter))]
 	[RequireComponent(typeof(PlayerMovement))]
-	public class PlayerAnimator : MonoBehaviour
+	public class PlayerAnimator : BaseAnimator
 	{
-		private Animator anim;
+
 		private PlayerWeaponShooter shooter;
 
-		void Awake()
+		protected override void Awake()
 		{
-			anim = this.GetComponent<Animator>();
+			base.Awake();
 			shooter = this.GetComponent<PlayerWeaponShooter>();
 		}
 		public void OnEnable()
