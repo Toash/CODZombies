@@ -222,7 +222,9 @@ GameObject:
   - component: {fileID: 6834319146573358908}
   - component: {fileID: 2132575326075507234}
   - component: {fileID: 3497969716232365063}
+  - component: {fileID: 399746504163388054}
   - component: {fileID: 4530849217547451371}
+  - component: {fileID: 9115704429244700017}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -521,21 +523,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ca9042441f68f74284ced2240b011af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponFireEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6834319146573358908}
-        m_TargetAssemblyTypeName: Player.PlayerAudio, Assembly-CSharp
-        m_MethodName: PlayWeaponSound
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   layerMask:
     serializedVersion: 2
     m_Bits: 2147483647
@@ -612,6 +599,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 4530849217547451371}
+--- !u!114 &399746504163388054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014639378041683075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1aaba1a72d4dca4684c06af645a8e15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactRadius: {fileID: 11400000, guid: 53a2881e768e63740a579268e62a33fc, type: 2}
+  enterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 0500a80336d649c4cb74cba6fac166b5, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  exitEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: ba1bc38946fbf8b4683d9e7b926b8431, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &4530849217547451371
 Animator:
   serializedVersion: 4
@@ -632,3 +662,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!135 &9115704429244700017
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014639378041683075}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}

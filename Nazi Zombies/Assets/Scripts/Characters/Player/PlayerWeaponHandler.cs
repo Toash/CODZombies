@@ -8,14 +8,8 @@ namespace Player
 	[RequireComponent(typeof(PlayerInventory))]// to get equipped weapon
 	[RequireComponent(typeof(PlayerInput))] // to get left mouse button
 	[RequireComponent(typeof(AudioSource))] // for gun sound
-	[System.Serializable]
-	public class WeaponFireEvent : UnityEvent<Weapon>
+	public class PlayerWeaponHandler : MonoBehaviour
 	{
-	}
-	public class PlayerWeaponShooter : MonoBehaviour
-	{
-		public WeaponFireEvent weaponFireEvent;
-
 		[SerializeField]
 		private LayerMask layerMask;
 
@@ -27,10 +21,14 @@ namespace Player
 		private Weapon equippedWeapon;
 
 		public delegate void ShootDelegate();
-		public event ShootDelegate gunShoot;
+		public delegate void AimDelegate(bool a);
+		//delegate instances
+		public event ShootDelegate gunShootEvent;
+		public event AimDelegate isAimingEvent;
 
 
 		private bool isShooting;
+		private bool isAiming;
 		private float timer;
 
 		private bool canFire()
@@ -48,23 +46,31 @@ namespace Player
 
 		private void OnEnable()
 		{
-			//input
+			//shoot
 			playerInput.shootDown += StartShooting;
 			playerInput.shootUp += StopShooting;
+			//aiming
+			playerInput.aimDown += StartAiming;
+			playerInput.aimUp += StopAiming;
 		}
 		private void OnDisable()
 		{
+			//shoot
 			playerInput.shootDown -= StartShooting;
 			playerInput.shootUp -= StopShooting;
+			//aiming
+			playerInput.aimDown -= StartAiming;
+			playerInput.aimUp -= StopAiming;
 		}
 
 		private void Update()
 		{
 			IncreaseTimer();
 			Shooting();
+			Aiming();
 			equippedWeapon = playerInventory.equippedWeapon;
 		}
-		public void Shooting()
+		private void Shooting()
 		{
 			if (isShooting)
 			{
@@ -81,22 +87,19 @@ namespace Player
 				}
 			}
 		}
+		private void Aiming()
+		{
+			
+		}
+
 
 		private void Shoot()
 		{
 			Ballistics.CreateBullet(equippedWeapon.damage, playerCamera.getCameraRef().transform.position, playerCamera.getCameraRef().transform.forward, equippedWeapon.range, layerMask, QueryTriggerInteraction.Ignore);
-			weaponFireEvent?.Invoke(equippedWeapon);
-			gunShoot?.Invoke(); 
+			gunShootEvent?.Invoke(); 
 			ResetTimer();
 		}
-		private void StartShooting()
-		{
-			isShooting = true;
-		}
-		private void StopShooting()
-		{
-			isShooting = false;
-		}
+
 		private void IncreaseTimer()
 		{
 			timer += Time.deltaTime;
@@ -105,6 +108,25 @@ namespace Player
         {
 			timer = 0;
         }
+
+		private void StartShooting()
+		{
+			isShooting = true;
+		}
+		private void StopShooting()
+		{
+			isShooting = false;
+		}
+		private void StartAiming()
+		{
+			isAiming = true;
+			isAimingEvent?.Invoke(true);
+		}
+		private void StopAiming()
+		{
+			isAiming = false;
+			isAimingEvent?.Invoke(false);
+		}
 	}
 }
 

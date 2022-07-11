@@ -6,24 +6,24 @@ namespace AI.Zombie
 	public class ZombieAnimator : BaseAnimator
 	{
 		private ZombieMovement movement;
-		private delegate void SetAnimBoolDelegate(bool a);
-		SetAnimBoolDelegate animSetisMoving;
+		
+		SetAnimBoolDelegate moving;
 
 		protected override void Awake()
 		{
 			base.Awake();
 			movement = this.GetComponent<ZombieMovement>();
-			animSetisMoving = SetMovingBool;
+			moving = SetMovingBool;
 		}
 		private void Update()
 		{
 			if (movement.isMoving)
 			{
-				animSetisMoving(true);
+				moving(true);
 			}
 			else
 			{
-				animSetisMoving(false);
+				moving(false);
 			}
 
 		}

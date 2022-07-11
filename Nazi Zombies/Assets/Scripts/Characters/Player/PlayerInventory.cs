@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Player
 {
-	[RequireComponent(typeof(PlayerWeaponShooter))]
+	[RequireComponent(typeof(PlayerWeaponHandler))]
 	[RequireComponent(typeof(PlayerInput))]
 	public class PlayerInventory : MonoBehaviour
 	{
@@ -76,6 +76,7 @@ namespace Player
 		//assign weapon to index of weapons list
 		private void AssignWeaponToIndex(int index, Weapon weapon)
         {
+			if (this.weaponsList[index] == null) return;
 			this.weaponsList[index] = weapon;
         }
 

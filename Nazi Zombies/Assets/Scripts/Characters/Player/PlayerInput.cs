@@ -27,11 +27,19 @@ namespace Player
 		public delegate void NumericalClick(int index);
 
 		// C# events
+		//keyboard 
 		public event Click jumpClicked;
-		public event Click shootDown;
-		public event Click shootUp;
 		public event NumericalClick alpha1Clicked;
 		public event NumericalClick alpha2Clicked;
+		public event Click interactClicked;
+
+		//mouse
+		public event Click shootDown;
+		public event Click shootUp;
+		public event Click aimDown;
+		public event Click aimUp;
+
+
 
 		private void Update()
 		{
@@ -56,17 +64,21 @@ namespace Player
 			HorizKeyboard = Input.GetAxisRaw("Horizontal");
 			if (Input.GetKeyDown(KeyCode.Alpha1))
 			{
-				if (alpha1Clicked != null) { alpha1Clicked(0); }
+				alpha1Clicked?.Invoke(0);
 
 			}
 			if (Input.GetKeyDown(KeyCode.Alpha2))
 			{
-				if (alpha2Clicked != null) { alpha2Clicked(1); }
+				alpha2Clicked?.Invoke(1);
 
 			}
 			if (Input.GetKeyDown(jumpKey))
 			{
-				if (jumpClicked != null) { jumpClicked(); }
+				jumpClicked?.Invoke();
+			}
+			if (Input.GetKeyDown(interactKey))
+			{
+				interactClicked?.Invoke();
 			}
 		}
 		private void mouseInput()
@@ -81,6 +93,14 @@ namespace Player
 			if (Input.GetKeyUp(shootKey))
 			{
 				shootUp?.Invoke();
+			}
+			if (Input.GetKeyDown(aimKey))
+			{
+				aimDown?.Invoke();
+			}
+			if (Input.GetKeyUp(aimKey))
+			{
+				aimUp?.Invoke();
 			}
 		}
 	}

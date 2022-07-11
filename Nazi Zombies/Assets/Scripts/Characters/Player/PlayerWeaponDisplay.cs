@@ -4,7 +4,7 @@ namespace Player
 {
 	[RequireComponent(typeof(PlayerInput))]
 
-	[RequireComponent(typeof(PlayerWeaponShooter))]
+	[RequireComponent(typeof(PlayerWeaponHandler))]
 	public class PlayerWeaponDisplay : MonoBehaviour
 	{
 		[SerializeField]
@@ -15,7 +15,7 @@ namespace Player
 		private PlayerInput input;
 		private PlayerInventory inv;
 
-		private PlayerWeaponShooter shooter;
+		private PlayerWeaponHandler shooter;
 
 
 		private void Awake()
@@ -23,7 +23,7 @@ namespace Player
 			input = this.GetComponent<PlayerInput>();
 			inv = this.GetComponent<PlayerInventory>();
 
-			shooter = this.GetComponent<PlayerWeaponShooter>();
+			shooter = this.GetComponent<PlayerWeaponHandler>();
 		}
 
 		public void OnEnable()
