@@ -4,13 +4,16 @@ public class Doorbuy : MonoBehaviour,IPlayerInteractable
 {
 	[SerializeField]
 	private IntVariable cost;
+	[SerializeField]
+	private string textToDisplay;
 
 	public string InteractText { get; set; }
 	public int Cost { get { return this.cost.Value; } }
 
 	private void Awake()
 	{
-		InteractText = "Press E to buy door: cost " + cost.Value.ToString();
+		textToDisplay=textToDisplay.Replace("<cost>", this.cost.Value.ToString());
+		InteractText = textToDisplay;
 	}
 
 	public void Interact()

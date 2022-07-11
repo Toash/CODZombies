@@ -11,6 +11,8 @@ namespace Player
 		// The current interactable
 		private IPlayerInteractable currentInteractable;
 
+		private Collider currentCollider;
+
 		public delegate void InteractDelegate();
 		public event InteractDelegate EnteredInteractable;
 		public event InteractDelegate ExitInteractable;
