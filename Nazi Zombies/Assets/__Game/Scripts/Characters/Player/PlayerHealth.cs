@@ -5,10 +5,8 @@ namespace Player
 {
     public class PlayerHealth : BaseHealth,IDamagable
     {
-        [Header("Player")]
-        [Header("Stats")]
         [SerializeField]
-        private FloatVariable healthRegeneration;
+        private PlayerInfo info;
         [Header("Thresholds")]
         public IntVariable lowHealthPercentThreshold;
         public UnityEvent LowHealthEvent;

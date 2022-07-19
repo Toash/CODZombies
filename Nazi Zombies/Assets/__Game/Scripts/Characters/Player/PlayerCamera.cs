@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace Player
 {
-	[RequireComponent(typeof(PlayerInput))]
 	public class PlayerCamera : MonoBehaviour
 	{
 		public FloatVariable sensitivity;
@@ -21,7 +20,7 @@ namespace Player
 
 		void Awake()
 		{
-			playerInput = this.GetComponent<PlayerInput>();
+			playerInput = FindObjectOfType<PlayerInput>().GetComponent<PlayerInput>();
 
 			if (cameraRef == null) { Debug.LogError("No camera attached!!!"); }
 			cameraRef.fieldOfView = playerFOV.Value;

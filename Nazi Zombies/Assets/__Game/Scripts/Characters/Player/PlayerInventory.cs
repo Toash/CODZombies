@@ -4,17 +4,15 @@ using System.Collections.Generic;
 
 namespace Player
 {
-	[RequireComponent(typeof(PlayerWeaponHandler))]
-	[RequireComponent(typeof(PlayerInput))]
 	public class PlayerInventory : MonoBehaviour
 	{
 		[HideInInspector]public Weapon equippedWeapon;
+		[SerializeField]
+		private PlayerInfo info;
 
 		[Header("Inventory")]
 		public List<Weapon> weaponsList;
 
-        [Header("Inventory Stats")]		
-		public IntVariable maxWeapons;
 
 		public delegate void WeaponChange(Weapon weapon); //delegate
 		public event WeaponChange weaponChanged; //delegate instance
@@ -23,8 +21,8 @@ namespace Player
 
 		private void Awake()
 		{
-			playerInput = this.GetComponent<PlayerInput>();
-			IncreaseInventorySize(maxWeapons.Value);
+			playerInput = FindObjectOfType<PlayerInput>().GetComponent<PlayerInput>();
+			IncreaseInventorySize(info.MaxInventorySlots);
 			if (this.equippedWeapon == null) { EquipWeapon(0); }
 		}
 

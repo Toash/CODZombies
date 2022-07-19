@@ -2,8 +2,6 @@ using UnityEngine;
 
 namespace Player
 {
-	[RequireComponent(typeof(PlayerInput))]
-
 	[RequireComponent(typeof(PlayerWeaponHandler))]
 	public class PlayerWeaponDisplay : MonoBehaviour
 	{

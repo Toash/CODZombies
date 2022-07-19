@@ -4,9 +4,6 @@ using UnityEngine.Events;
 namespace Player
 {
 	//handles the player's currently equipped item
-	[RequireComponent(typeof(PlayerCamera))] //to create bullet in camera
-	[RequireComponent(typeof(PlayerInventory))]// to get equipped weapon
-	[RequireComponent(typeof(PlayerInput))] // to get left mouse button
 	[RequireComponent(typeof(AudioSource))] // for gun sound
 	public class PlayerWeaponHandler : MonoBehaviour
 	{
