@@ -17,11 +17,9 @@ namespace Player
 		public delegate void WeaponChange(Weapon weapon); //delegate
 		public event WeaponChange weaponChanged; //delegate instance
 
-		private PlayerInput playerInput;
 
 		private void Awake()
 		{
-			playerInput = FindObjectOfType<PlayerInput>().GetComponent<PlayerInput>();
 			IncreaseInventorySize(info.MaxInventorySlots);
 			if (this.equippedWeapon == null) { EquipWeapon(0); }
 		}
@@ -29,16 +27,6 @@ namespace Player
 		private void Start()
 		{
 
-		}
-		private void OnEnable()
-		{
-			playerInput.alpha1Clicked += EquipWeapon;
-			playerInput.alpha2Clicked += EquipWeapon;
-		}
-		private void OnDisable()
-		{
-			playerInput.alpha1Clicked -= EquipWeapon;
-			playerInput.alpha2Clicked -= EquipWeapon;
 		}
 
 		public void AddWeaponToList(Weapon weapon)

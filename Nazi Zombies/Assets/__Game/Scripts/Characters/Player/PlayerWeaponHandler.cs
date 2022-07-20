@@ -3,14 +3,11 @@ using UnityEngine.Events;
 
 namespace Player
 {
-	//handles the player's currently equipped item
-	[RequireComponent(typeof(AudioSource))] // for gun sound
 	public class PlayerWeaponHandler : MonoBehaviour
 	{
 		[SerializeField]
 		private LayerMask layerMask;
 
-		private PlayerInput playerInput;
 		private PlayerCamera playerCamera;
 		private PlayerInventory playerInventory;
 		private AudioSource audioSource;
@@ -35,29 +32,9 @@ namespace Player
 
 		private void Awake()
 		{
-			playerInput = this.GetComponent<PlayerInput>();
 			playerCamera = this.GetComponent<PlayerCamera>();
 			playerInventory = this.GetComponent<PlayerInventory>();
 			audioSource = this.GetComponent<AudioSource>();
-		}
-
-		private void OnEnable()
-		{
-			//shoot
-			playerInput.shootDown += StartShooting;
-			playerInput.shootUp += StopShooting;
-			//aiming
-			playerInput.aimDown += StartAiming;
-			playerInput.aimUp += StopAiming;
-		}
-		private void OnDisable()
-		{
-			//shoot
-			playerInput.shootDown -= StartShooting;
-			playerInput.shootUp -= StopShooting;
-			//aiming
-			playerInput.aimDown -= StartAiming;
-			playerInput.aimUp -= StopAiming;
 		}
 
 		private void Update()

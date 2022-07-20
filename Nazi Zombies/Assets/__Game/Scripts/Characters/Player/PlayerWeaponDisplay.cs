@@ -10,7 +10,6 @@ namespace Player
 
 
 		private GameObject model;//weapon model
-		private PlayerInput input;
 		private PlayerInventory inv;
 
 		private PlayerWeaponHandler shooter;
@@ -18,7 +17,6 @@ namespace Player
 
 		private void Awake()
 		{
-			input = this.GetComponent<PlayerInput>();
 			inv = this.GetComponent<PlayerInventory>();
 
 			shooter = this.GetComponent<PlayerWeaponHandler>();

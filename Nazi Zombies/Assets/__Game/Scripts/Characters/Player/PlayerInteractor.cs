@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.Events;
 namespace Player
 {
-	[RequireComponent(typeof(PlayerInput))]
     public class PlayerInteractor : BaseInteractor
     {
 		public UnityEvent enterEvent;
@@ -17,24 +16,13 @@ namespace Player
 		public event InteractDelegate EnteredInteractable;
 		public event InteractDelegate ExitInteractable;
 
-		private PlayerInput input;
 		private bool canInteract;
 
 		public IPlayerInteractable CurrentInteractable { get { return currentInteractable; } }
 
-		private void OnEnable()
-		{
-			input.interactClicked += Interact;
-		}
-		private void OnDisable()
-		{
-			input.interactClicked -= Interact;
-		}
-
 		protected override void Awake()
 		{
 			base.Awake();
-			input = this.GetComponent<PlayerInput>();
 		}
 		private void OnTriggerEnter(Collider other)
 		{
