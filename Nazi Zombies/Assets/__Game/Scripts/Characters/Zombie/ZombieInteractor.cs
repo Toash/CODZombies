@@ -5,29 +5,27 @@ using UnityEngine.Events;
 namespace AI.Zombie
 {
 	//handles zombie attacking player, and breaking barricades. 
-	public class ZombieInteractor : BaseInteractor
+	public class ZombieInteractor : MonoBehaviour
 	{
-		[Header("Zombie Stats")]
 		[SerializeField]
-		private IntVariable zombieDamage;
+		private ZombieStats stats;
 		[SerializeField]
-		private FloatVariable zombieAttackSpeed;
-		[SerializeField]
-		private FloatVariable zombieBarricadeBreakSpeed;
+		private SphereCollider interactCollider;
+
 		[Header("Unity Events")]
 		[SerializeField]
 		private UnityEvent zombieAttackedEvent;
 
 		private float timer;
 
-		private bool canAttack { get { return zombieAttackSpeed.Value <= timer; } }
+		private bool canAttack { get { return stats.AttackSpeed <= timer; } }
 
 		private void Update()
 		{
 			UpdateTimer();
 		}
 
-		protected override void OnTriggerStay(Collider other)
+		private void OnTriggerStay(Collider other)
 		{
 			IDamagable damagable = other.GetComponent<IDamagable>();
 			if (other!=this&&damagable!=null&&canAttack)
@@ -38,7 +36,7 @@ namespace AI.Zombie
 
 		private void Attack(IDamagable damagable)
 		{
-			damagable.damage(zombieDamage.Value);
+			damagable.damage(stats.Damage);
 			zombieAttackedEvent?.Invoke();
 			ResetTimer();
 		}

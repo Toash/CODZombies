@@ -2,10 +2,16 @@ using UnityEngine;
 using UnityEngine.Events;
 namespace Player
 {
-    public class PlayerInteractor : BaseInteractor
+    public class PlayerInteractor : MonoBehaviour
     {
-		public UnityEvent enterEvent;
-		public UnityEvent exitEvent;
+		[SerializeField]
+		private PlayerStats stats;
+		[SerializeField]
+		private SphereCollider interactCollider;
+		[SerializeField]
+		private UnityEvent enterEvent;
+		[SerializeField]
+		private UnityEvent exitEvent;
 
 		// The current interactable
 		private IPlayerInteractable currentInteractable;
@@ -20,9 +26,9 @@ namespace Player
 
 		public IPlayerInteractable CurrentInteractable { get { return currentInteractable; } }
 
-		protected override void Awake()
+		private void Awake()
 		{
-			base.Awake();
+			interactCollider.radius = stats.InteractRange;
 		}
 		private void OnTriggerEnter(Collider other)
 		{
@@ -33,7 +39,7 @@ namespace Player
 			}
 		}
 
-		protected override void OnTriggerStay(Collider other)
+		private void OnTriggerStay(Collider other)
 		{
 			if(currentInteractable != null) canInteract = true;
 		}

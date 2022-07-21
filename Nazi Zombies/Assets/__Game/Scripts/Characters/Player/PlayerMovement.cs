@@ -5,10 +5,15 @@ namespace Player
 	[RequireComponent(typeof(CharacterController))]
 	public class PlayerMovement : MonoBehaviour
 	{
-		public PlayerInfo info;
+		public PlayerStats info;
+
+		public enum State
+		{
+			GROUNDED,
+			AIR,
+		}
 
 		private CharacterController charControl;
-
 		private Vector3 playerGravityVelocity;
 
 		void Awake()
@@ -19,44 +24,39 @@ namespace Player
 
 		void Update()
 		{
-			//multiplying my deltaTime means it is framerate independent
 			charControl.Move(NormalizedMoveVector() * info.Speed*Time.deltaTime);
-			SetPlayerGravity();
-			ResetPlayerGravity();
-			charControl.Move(playerGravityVelocity * Time.deltaTime);
+			HandleGravity();
+
+			if (charControl.isGrounded)
+			{
+				if (ServiceLocator.Instance.InputManager.GetButtonDown(InputManager.eInput.INPUT_JUMP))
+				{
+					Jump();
+				}
+			}
 		}
 		public void Jump()
 		{
-			if (charControl.isGrounded)
-			{
-				//jump
-				playerGravityVelocity.y = Mathf.Sqrt(info.JumpHeight * -2f * Physics.gravity.y);
-				return;
-			}
-			//not grounded
+			playerGravityVelocity.y = Mathf.Sqrt(info.JumpHeight * -2f * Physics.gravity.y);
 		}
 
 		private Vector3 NormalizedMoveVector()
 		{
-			Vector3 vertical = this.transform.forward * ServiceLocator.Instance.InputManager.GetAxis(InputManager.eInput.INPUT_VERTICAL);
-			Vector3 horizontal = this.transform.right * ServiceLocator.Instance.InputManager.GetAxis(InputManager.eInput.INPUT_HORIZONTAL);
-
-			// normalize so player cant run double as 
-			// fast when moving diagonally
+			Vector3 vertical = transform.forward * ServiceLocator.Instance.InputManager.GetAxis(InputManager.eInput.INPUT_VERTICAL_RAW);
+			Vector3 horizontal = transform.right * ServiceLocator.Instance.InputManager.GetAxis(InputManager.eInput.INPUT_HORIZONTAL_RAW);
 			return Vector3.Normalize(vertical + horizontal);
 		}
-		private void SetPlayerGravity()
+		private void HandleGravity()
 		{
 			playerGravityVelocity += (Physics.gravity*info.GravityMultiplier) * Time.deltaTime;
-		}
 
-		//set gravity to 0 when player is on the ground so i doesn't keep decreasing
-		private void ResetPlayerGravity()
-		{
-			if (charControl.isGrounded&&playerGravityVelocity.y<0)
+			//set gravity to 0 when player is on the ground so i doesn't keep decreasing
+			if (charControl.isGrounded && playerGravityVelocity.y < 0)
 			{
 				playerGravityVelocity.y = 0;
 			}
+			//Apply gravity to charactercontroller
+			charControl.Move(playerGravityVelocity * Time.deltaTime);
 		}
 	}
 }

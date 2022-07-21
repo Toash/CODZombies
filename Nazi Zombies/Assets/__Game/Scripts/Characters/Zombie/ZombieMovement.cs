@@ -7,9 +7,7 @@ namespace AI.Zombie
     public class ZombieMovement : MonoBehaviour
     {
         [SerializeField]
-        private GameObject target;
-
-        public FloatVariable moveSpeed;
+        private ZombieStats stats;
 
         private NavMeshAgent agent;
 
@@ -18,15 +16,11 @@ namespace AI.Zombie
         private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
-            agent.speed = moveSpeed.Value;
+            agent.speed = stats.Speed;
         }
         private void Update()
         {
-            //hasPath-This property will be true if the agent has a path calculated to the desired destination and false otherwise.
-            if (target != null&&!agent.hasPath)
-            {
-                this.agent.SetDestination(target.transform.position);
-            }
+            this.agent.SetDestination(PlayerRef.Instance.PlayerPosition());
         }
 	}
 }

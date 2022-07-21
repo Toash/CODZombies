@@ -1,16 +1,20 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 
 
 namespace Player
 {
 	public class PlayerInventory : MonoBehaviour
 	{
-		[HideInInspector]public Weapon equippedWeapon;
-		[SerializeField]
-		private PlayerInfo info;
+		// The currently equipped weapon
+		[ShowInInspector,PropertyOrder(-1)]
+		public Weapon equippedWeapon { get; private set; }
 
-		[Header("Inventory")]
+		[SerializeField]
+		private PlayerStats stats;
+
+		[Header("Inventory"),InfoBox("The maximum size of inventory is 2")]
 		public List<Weapon> weaponsList;
 
 
@@ -20,13 +24,9 @@ namespace Player
 
 		private void Awake()
 		{
-			IncreaseInventorySize(info.MaxInventorySlots);
+			if (weaponsList.Count > stats.MaxInventorySlots) Debug.LogError("Too much weapons");
+			IncreaseInventorySize(stats.MaxInventorySlots);
 			if (this.equippedWeapon == null) { EquipWeapon(0); }
-		}
-
-		private void Start()
-		{
-
 		}
 
 		public void AddWeaponToList(Weapon weapon)

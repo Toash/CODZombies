@@ -4,7 +4,7 @@ namespace Player
 {
 	public class PlayerCamera : MonoBehaviour
 	{
-		public PlayerInfo info;
+		public PlayerStats info;
 
 		[SerializeField] private Camera cameraRef;
 		[SerializeField] private Transform playerTransform;

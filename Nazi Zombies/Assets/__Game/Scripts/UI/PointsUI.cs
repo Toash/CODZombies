@@ -6,7 +6,7 @@ namespace Player.UI
 	public class PointsUI : MonoBehaviour
 	{
 		[SerializeField]
-		private IntVariable points;
+		private PlayerStats stats;
 
 		private TMP_Text pointsText;
 
@@ -17,7 +17,7 @@ namespace Player.UI
 
 		public void Update()
 		{
-			pointsText.text = points.Value.ToString();
+			pointsText.text = stats.Points.ToString();
 		}
 	}
 }

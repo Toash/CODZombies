@@ -3,10 +3,32 @@ using UnityEngine.Events;
 
 namespace Player
 {
-    public class PlayerHealth : BaseHealth,IDamagable
+    public class PlayerHealth : MonoBehaviour,IDamagable
     {
+        public PlayerStats stats;
+        [Header("Unity Events")]
+        public UnityEvent DamagedEvent;
+        public UnityEvent DeathEvent;
+
+        protected int currentHealth;
+
+        protected bool noHealth
+        {
+            get
+            {
+                return currentHealth <= 0;
+            }
+        }
+
+        public void damage(int amount)
+        {
+            currentHealth -= amount;
+            DamagedEvent?.Invoke();
+            if (this.lowHealth) LowHealthEvent?.Invoke();
+            if (this.noHealth) DeathEvent?.Invoke();
+        }
         [SerializeField]
-        private PlayerInfo info;
+        private PlayerStats info;
         [Header("Thresholds")]
         public IntVariable lowHealthPercentThreshold;
         public UnityEvent LowHealthEvent;
@@ -16,18 +38,9 @@ namespace Player
             {
                 if (lowHealthPercentThreshold != null)
                 {
-                    return ((currentHealth / startingHealth.Value) * 100) >= lowHealthPercentThreshold.Value;
+                    return ((currentHealth / stats.Health) * 100) >= lowHealthPercentThreshold.Value;
                 }
                 return false;
-            }
-        }
-
-        public override void damage(int amount)
-		{
-            base.damage(amount);
-            if (this.lowHealth)
-            {
-                LowHealthEvent?.Invoke();
             }
         }
     }

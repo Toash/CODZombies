@@ -1,15 +1,19 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Sirenix.OdinInspector;
 
 namespace Player
 {
 	public class PlayerWeaponHandler : MonoBehaviour
 	{
-		[SerializeField]
+		[SerializeField,InfoBox("What to hit")]
 		private LayerMask layerMask;
 
+		[SerializeField]
 		private PlayerCamera playerCamera;
+		[SerializeField]
 		private PlayerInventory playerInventory;
+		[SerializeField,InfoBox("Where the Gun Sound will play")]
 		private AudioSource audioSource;
 
 		private Weapon equippedWeapon;
@@ -30,42 +34,16 @@ namespace Player
 			return playerInventory.equippedWeapon.fireRate <= timer ? true : false;
 		}
 
-		private void Awake()
-		{
-			playerCamera = this.GetComponent<PlayerCamera>();
-			playerInventory = this.GetComponent<PlayerInventory>();
-			audioSource = this.GetComponent<AudioSource>();
-		}
-
 		private void Update()
 		{
 			IncreaseTimer();
 			Shooting();
-			Aiming();
 			equippedWeapon = playerInventory.equippedWeapon;
 		}
 		private void Shooting()
 		{
-			if (isShooting)
-			{
-				//auto
-				if (equippedWeapon.automatic && canFire())
-				{
-					Shoot();
-				}
-				//semi
-				else if (canFire())
-				{
-					Shoot();
-					isShooting = false;
-				}
-			}
-		}
-		private void Aiming()
-		{
 			
 		}
-
 
 		private void Shoot()
 		{
@@ -82,25 +60,6 @@ namespace Player
         {
 			timer = 0;
         }
-
-		private void StartShooting()
-		{
-			isShooting = true;
-		}
-		private void StopShooting()
-		{
-			isShooting = false;
-		}
-		private void StartAiming()
-		{
-			isAiming = true;
-			isAimingEvent?.Invoke(true);
-		}
-		private void StopAiming()
-		{
-			isAiming = false;
-			isAimingEvent?.Invoke(false);
-		}
 	}
 }
 
