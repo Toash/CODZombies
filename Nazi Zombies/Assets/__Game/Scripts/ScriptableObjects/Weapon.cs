@@ -1,14 +1,18 @@
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 [CreateAssetMenu]
 public class Weapon : ScriptableObject
 {
-	[Header("Stats")]
-	public int damage;
-	public float fireRate;
-	public float range;
-	public bool automatic;
-	public float reloadTime;
+	public int Damage;
+	public float Range;
+	public LayerMask WhatToHit;
+	public QueryTriggerInteraction ShouldHitTriggers;
+	public GameObject BulletHole;
+
+	public float FireRate;
+	public bool Automatic;
+	public float ReloadTime;
 	[Header("Visuals")]
 	public GameObject model;
 	[Header("Audio")]

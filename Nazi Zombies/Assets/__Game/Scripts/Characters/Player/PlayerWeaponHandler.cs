@@ -6,9 +6,6 @@ namespace Player
 {
 	public class PlayerWeaponHandler : MonoBehaviour
 	{
-		[SerializeField,InfoBox("What to hit")]
-		private LayerMask layerMask;
-
 		[SerializeField]
 		private PlayerCamera playerCamera;
 		[SerializeField]
@@ -31,7 +28,7 @@ namespace Player
 
 		private bool canFire()
 		{
-			return playerInventory.equippedWeapon.fireRate <= timer ? true : false;
+			return playerInventory.equippedWeapon.FireRate <= timer ? true : false;
 		}
 
 		private void Update()
@@ -42,12 +39,17 @@ namespace Player
 		}
 		private void Shooting()
 		{
-			
+			if (Input.GetMouseButtonDown(0))
+			{
+				Debug.Log("Shooting!");
+				Shoot();
+			}
 		}
 
 		private void Shoot()
 		{
-			Ballistics.CreateBullet(equippedWeapon.damage, playerCamera.getCameraRef().transform.position, playerCamera.getCameraRef().transform.forward, equippedWeapon.range, layerMask, QueryTriggerInteraction.Ignore);
+			//Ballistics.CreateBullet(playerCamera.getCameraRef().transform,equippedWeapon);
+			ServiceLocator.Instance.Ballistics.CastBullet(playerCamera.getCameraRef().transform, equippedWeapon);
 			gunShootEvent?.Invoke(); 
 			ResetTimer();
 		}

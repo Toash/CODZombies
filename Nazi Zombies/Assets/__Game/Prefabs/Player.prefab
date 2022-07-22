@@ -180,7 +180,6 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: de09e2e838d38674385a51003cf9fbc9, type: 2}
   weaponsList:
   - {fileID: 11400000, guid: 3cd22dcc0927a2244aebb163f48fa7c9, type: 2}
-  - {fileID: 11400000, guid: 10e368c31fd15a14c929c6036a40da4f, type: 2}
 --- !u!1 &6014639377112993087
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,7 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f103f349a91e66e46b8666b29b54a1a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  info: {fileID: 11400000, guid: de09e2e838d38674385a51003cf9fbc9, type: 2}
+  settings: {fileID: 11400000, guid: 48c2dd4474cfbdc478af0d793c534507, type: 2}
   cameraRef: {fileID: 6014639377124975940}
   playerTransform: {fileID: 6014639378041683087}
 --- !u!20 &6014639377124975940
@@ -493,7 +492,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c28961d695d461044b1df9aade344ac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  info: {fileID: 11400000, guid: de09e2e838d38674385a51003cf9fbc9, type: 2}
+  stats: {fileID: 11400000, guid: de09e2e838d38674385a51003cf9fbc9, type: 2}
+  settings: {fileID: 11400000, guid: 48c2dd4474cfbdc478af0d793c534507, type: 2}
 --- !u!114 &9038557918074140843
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using Sirenix.OdinInspector;
 
 
 namespace AI.Zombie
@@ -10,6 +11,7 @@ namespace AI.Zombie
 		[SerializeField]
 		private ZombieStats stats;
 		[SerializeField]
+		[InfoBox("Radius of the collider is handled in the ZombieStats ScriptableObject")]
 		private SphereCollider interactCollider;
 
 		[Header("Unity Events")]

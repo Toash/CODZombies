@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc808a31f56f1074f87f5d55b742b7fc, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  damage: 50
-  fireRate: 0.2
-  range: 100
-  automatic: 0
-  reloadTime: 1
+  Damage: 10
+  Range: 100
+  WhatToHit:
+    serializedVersion: 2
+    m_Bits: 55
+  ShouldHitTriggers: 1
+  BulletHole: {fileID: 1496569750137959856, guid: 35518a76453c61343a1f6459286dcee8, type: 3}
+  FireRate: 0.2
+  Automatic: 0
+  ReloadTime: 1
   model: {fileID: 1694449805434718, guid: 6f1a7354265853f44b0ed5e2e43676ad, type: 3}
-  shootSound: {fileID: 8300000, guid: a6c2d0216b866344b937baf86bbc1fbf, type: 3}
-  shootSoundVolume: 0
+  shootSound: {fileID: 8300000, guid: 5316f03efdbb59b49a5c01cf39d525f6, type: 3}

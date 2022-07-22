@@ -4,7 +4,7 @@ namespace Player
 {
 	public class PlayerCamera : MonoBehaviour
 	{
-		public PlayerStats info;
+		public PlayerSettings settings;
 
 		[SerializeField] private Camera cameraRef;
 		[SerializeField] private Transform playerTransform;
@@ -20,7 +20,7 @@ namespace Player
 		void Awake()
 		{
 			if (cameraRef == null) { Debug.LogError("No camera attached!!!"); }
-			cameraRef.fieldOfView = info.FOV;
+			cameraRef.fieldOfView = settings.FOV;
 			Cursor.lockState = CursorLockMode.Locked;
 		}
 		public void Update()
@@ -30,9 +30,9 @@ namespace Player
 		private void cameraMovement()
 		{
 			//rotate transform on the y axis. (left to right)
-			playerTransform.Rotate(Vector3.up * ServiceLocator.Instance.InputManager.GetAxis(InputManager.eInput.INPUT_MOUSEX) * info.Sensitivity);
+			playerTransform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * settings.Sensitivity);
 
-			verticalRotation -= (ServiceLocator.Instance.InputManager.GetAxis(InputManager.eInput.INPUT_MOUSEY) * info.Sensitivity);
+			verticalRotation -= (Input.GetAxis("Mouse Y") * settings.Sensitivity);
 
 			//clamp
 			verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
