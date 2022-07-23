@@ -7,35 +7,32 @@ namespace AI.Zombie
 	{
 		[SerializeField]
 		private ZombieStats stats;
+
 		[Header("Unity Events")]
 		[SerializeField]
 		private UnityEvent DamagedEvent;
 		[SerializeField]
 		private UnityEvent DeathEvent;
 
+		private ZombieStateManager stateMachine;
 		private int currentHealth;
 
-		private bool noHealth
-		{
-			get
-			{
-				return currentHealth <= 0;
-			}
-		}
+		private bool noHealth { get { return currentHealth <= 0; } }
 
 		private void Awake()
 		{
+			stateMachine.GetComponent<ZombieStateManager>();
 			currentHealth = stats.Health;
 		}
 		public virtual void damage(int amount)
 		{
 			currentHealth -= amount;
 			DamagedEvent?.Invoke();
-			if (this.noHealth) DeathEvent?.Invoke();
+			if (noHealth) DeathEvent?.Invoke();
 		}
 		public void KillZombie(float time)
 		{
-			Destroy(this.gameObject, time);
+			Destroy(gameObject, time);
 		}
 	}
 
