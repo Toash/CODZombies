@@ -14,14 +14,12 @@ namespace AI.Zombie
 		[SerializeField]
 		private UnityEvent DeathEvent;
 
-		private ZombieStateManager stateMachine;
 		private int currentHealth;
 
 		private bool noHealth { get { return currentHealth <= 0; } }
 
 		private void Awake()
 		{
-			stateMachine.GetComponent<ZombieStateManager>();
 			currentHealth = stats.Health;
 		}
 		public virtual void damage(int amount)
