@@ -24,7 +24,7 @@ namespace AI.Zombie
 		}
 		public override void UpdateState(ZombieStateManager manager)
 		{
-			
+
 		}
 
 		public override void TriggerEnter(ZombieStateManager zombie, Collider other)
@@ -36,18 +36,19 @@ namespace AI.Zombie
 			//damageable is favoriablre over player so this can also damage barricades
 			if (isDamageable(other))
 			{
-				Attack(manager,other);
+				Attack(manager, other);
 			}
 		}
 
 		public override void TriggerExit(ZombieStateManager manager, Collider other)
 		{
+			//when barricade exit?
 			if (isPlayer(other))
 			{
 				manager.SwitchState(manager.ChasingState);
 			}
 		}
-		private void Attack(ZombieStateManager manager,Collider other)
+		private void Attack(ZombieStateManager manager, Collider other)
 		{
 			if (canAttack(manager))
 			{
