@@ -16,11 +16,19 @@ namespace AI.Zombie
 
 		protected bool isPlayer(Collider other)
 		{
-			return other.gameObject.GetComponent<PlayerRef>() != null;
+			return other.transform.GetComponent<PlayerRef>() != null;
+		}
+		protected bool isBarricade(Collider other)
+		{
+			return other.transform.GetComponent<Barricade>() != null;
+		}
+		protected bool isDamageable(Collider other)
+		{
+			return other.transform.GetComponent<IDamagable>() != null;
 		}
 		protected IDamagable getDamageable(Collider other)
 		{
-			return other.gameObject.GetComponent<IDamagable>();
+			return other.transform.GetComponent<IDamagable>();
 		}
 		protected void StopZombie(ZombieStateManager manager)
 		{

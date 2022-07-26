@@ -7,7 +7,7 @@ namespace Player
 	{
 		//health
 		public int MaxHealth;
-		public float HealthRegenRate;
+		public int HealthRegenRate;
 
 		//movement
 		public float Speed;

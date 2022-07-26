@@ -24,7 +24,6 @@ public class Ballistics:MonoBehaviour
 			IDamagable damageable = hit.transform.GetComponent<IDamagable>();
 			if (damageable != null)
 			{
-
 				damageable.damage(weapon.Damage);
 			}
 			Debug.DrawRay(shooter.position, hit.point-shooter.position,Color.green,10,false);

@@ -33,7 +33,8 @@ namespace AI.Zombie
 		}
 		public override void TriggerStay(ZombieStateManager manager, Collider other)
 		{
-			if (isPlayer(other))
+			//damageable is favoriablre over player so this can also damage barricades
+			if (isDamageable(other))
 			{
 				Attack(manager,other);
 			}
@@ -52,7 +53,6 @@ namespace AI.Zombie
 			{
 				Debug.Log("Attack");
 				var damagable = other.transform.GetComponent<IDamagable>();
-				if (damagable == null) Debug.LogError("NO PLAYER DAMAGEABLE!!!!");
 				damagable?.damage(manager.stats.Damage);
 				timer = 0;
 			}
