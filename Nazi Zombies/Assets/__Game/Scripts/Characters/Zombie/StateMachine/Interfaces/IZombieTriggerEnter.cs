@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
-public interface IZombieTriggerEnter
+
+namespace AI.Zombie
 {
-	public void OnTriggerEnter(ZombieStateManager zombie, Collision other);
+	public interface IZombieTriggerEnter
+	{
+		public void TriggerEnter(ZombieStateManager zombie, Collider other);
 
+	}
 }
-

@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public interface IZombieTriggerStay
+namespace AI.Zombie
 {
-	public void OnTriggerStay(ZombieStateManager zombie, Collision other);
+	public interface IZombieTriggerStay
+	{
+		public void TriggerStay(ZombieStateManager zombie, Collider other);
+	}
 }

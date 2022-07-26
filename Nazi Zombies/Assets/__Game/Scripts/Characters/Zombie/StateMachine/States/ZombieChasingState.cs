@@ -1,35 +1,41 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class ZombieChasingState : ZombieBaseState,IZombieUpdatable,IZombieTriggerEnter,IZombieTriggerStay
+namespace AI.Zombie
 {
-	private bool isPlayer(Collision other)
+	public class ZombieChasingState : ZombieBaseState
 	{
-		return other.gameObject.GetComponent<PlayerRef>()!=null;
-	}
-	private bool isDamageable(Collision other)
-	{
-		return other.gameObject.GetComponent<IDamagable>()!=null;
-	}
 
-	public void UpdateState(ZombieStateManager zombie)
-	{
-		zombie.agent.SetDestination(PlayerRef.Instance.PlayerPosition());
-	}
-
-	public void OnTriggerEnter(ZombieStateManager zombie, Collision other)
-	{
-		if (isPlayer(other)&&isDamageable(other))
+		public override void EnterState(ZombieStateManager manager)
 		{
-			zombie.SwitchState(zombie.AttackingState);
+			UnstopZombie(manager);
+			Debug.Log("Entering Chase state");
 		}
-	}
-	public void OnTriggerStay(ZombieStateManager zombie, Collision other)
-	{
-		//if Breakable, break
-		//if Damageable, damage
-		
-	}
+		public override void UpdateState(ZombieStateManager manager)
+		{
+			manager.Agent.SetDestination(PlayerRef.Instance.PlayerPosition());
+			Debug.Log("Chasing");
+		}
+
+		public override void TriggerEnter(ZombieStateManager manager, Collider other)
+		{
+			if (isPlayer(other))
+			{
+				StopZombie(manager);
+				manager.SwitchState(manager.AttackingState);
+			}
+		}
+
+		public override void TriggerStay(ZombieStateManager manager, Collider other)
+		{
+
+		}
 
 
+		public override void TriggerExit(ZombieStateManager manager, Collider other)
+		{
+
+		}
+
+	}
 }

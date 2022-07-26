@@ -1,66 +1,68 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 using Sirenix.OdinInspector;
 
-[RequireComponent(typeof(NavMeshAgent))]
-public class ZombieStateManager : MonoBehaviour
+namespace AI.Zombie
 {
-	[ShowInInspector, ReadOnly]
-	private ZombieBaseState currentState;
-
-	[Title("Dependencies")]
-	public NavMeshAgent agent;
-	public GameObject interactor;//interactor should be in this class
-
-	[ShowIf("interactor")]
-	public Rigidbody rb;
-
-	public ZombieStats stats;
-
-	[Title("States that the StateManager Uses")]
-	public ZombieChasingState ChasingState;
-	public ZombieAttackingState AttackingState;
-
-	IZombieUpdatable currentUpdateable;
-
-	private void Start()
+	[RequireComponent(typeof(NavMeshAgent))]
+	public class ZombieStateManager : MonoBehaviour
 	{
-		SwitchState(ChasingState);
-	}
-	//what trigger is being used? 
-	private void OnTriggerEnter(Collision other)
-	{
-		IZombieTriggerEnter triggerEnter = currentState.GetComponent<IZombieTriggerEnter>();
-		if (triggerEnter != null)
+		[ShowInInspector, ReadOnly]
+		private ZombieBaseState currentState;
+
+		[Title("Dependencies")]
+		public NavMeshAgent Agent { get; private set; }
+
+
+		//----------TRIGGER--------------
+		public GameObject interactor;
+		[ShowIf("interactor")]
+		public Rigidbody rb;
+
+		public ZombieStats stats;
+
+		//-----------STATES--------------
+		public ZombieChasingState ChasingState;
+		public ZombieAttackingState AttackingState;
+
+		private void Awake()
 		{
-			triggerEnter.OnTriggerEnter(this, other);
+			Agent = GetComponent<NavMeshAgent>();
 		}
-		
-	}
-	private void OnTriggerStay(Collision other)
-	{
-		IZombieTriggerStay stay = currentState.GetComponent<IZombieTriggerStay>();
-		if (stay != null)
+
+		private void Start()
 		{
-			stay.OnTriggerStay(this, other);
+			SwitchState(ChasingState);
 		}
-		
-	}
-	private void Update()
-	{
-		currentUpdateable?.UpdateState(this);
-	}
-	public void SwitchState(ZombieBaseState state)
-	{
-		currentState = state;
-		IZombieEnterable enter = currentState.GetComponent<IZombieEnterable>();
-		if (enter != null)
+		private void Update()
 		{
-			enter.EnterState(this);
+			currentState.UpdateState(this);
 		}
-		if (currentState.GetComponent<IZombieUpdatable>() != null)
+
+		//--------------PUBLIC METHODS---------------
+
+		public void SwitchState(ZombieBaseState state)
 		{
-			currentUpdateable = currentState.GetComponent<IZombieUpdatable>();
+			currentState = state;
+			currentState.EnterState(this);
 		}
+
+		//--------------PHYSICS---------------
+
+		private void OnTriggerEnter(Collider other)
+		{
+			currentState.TriggerEnter(this, other);
+		}
+		private void OnTriggerStay(Collider other)
+		{
+			currentState.TriggerStay(this, other);
+		}
+		private void OnTriggerExit(Collider other)
+		{
+			currentState.TriggerExit(this, other);
+		}
+
+
 	}
 }

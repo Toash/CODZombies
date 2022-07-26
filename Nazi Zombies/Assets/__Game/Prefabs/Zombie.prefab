@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8393942347108062812}
-  - component: {fileID: 7372694433137666809}
   - component: {fileID: 4291101325718882158}
   m_Layer: 0
   m_Name: Interactor
@@ -33,23 +32,6 @@ Transform:
   m_Father: {fileID: 4129491350543626064}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7372694433137666809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 285105692772051883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14e3770172ba9f9419c4af9fa7146465, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: f84324dada9471443920e238f5da6704, type: 2}
-  interactCollider: {fileID: 4291101325718882158}
-  zombieAttackedEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!135 &4291101325718882158
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -61,7 +43,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 1.49
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &4037123587577458493
 GameObject:
@@ -200,7 +182,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 724d97689be62d547812d8dc74d56701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 4129491350543625901}
   interactor: {fileID: 285105692772051883}
   rb: {fileID: 7119999612839944414}
   stats: {fileID: 11400000, guid: f84324dada9471443920e238f5da6704, type: 2}
@@ -304,6 +285,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 6452752414508596804}
+        m_TargetAssemblyTypeName: ZombieStateManager, Assembly-CSharp
+        m_MethodName: SwitchState
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: ZombieBaseState, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
