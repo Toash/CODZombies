@@ -5,16 +5,15 @@ namespace AI.Zombie
 {
 	public class ZombieChasingState : ZombieBaseState
 	{
-
 		public override void EnterState(ZombieStateManager manager)
 		{
 			UnstopZombie(manager);
-			Debug.Log("Entering Chase state");
+			//Debug.Log("Entering Chase state");
 		}
 		public override void UpdateState(ZombieStateManager manager)
 		{
 			manager.Agent.SetDestination(PlayerRef.Instance.PlayerPosition());
-			Debug.Log("Chasing");
+			//Debug.Log("Chasing");
 		}
 
 		public override void TriggerEnter(ZombieStateManager manager, Collider other)

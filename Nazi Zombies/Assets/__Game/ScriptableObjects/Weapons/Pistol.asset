@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc808a31f56f1074f87f5d55b742b7fc, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  Damage: 10
+  Damage: 50
   Range: 100
   WhatToHit:
     serializedVersion: 2

@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 namespace AI.Zombie
 {
 	[RequireComponent(typeof(NavMeshAgent))]
+	[RequireComponent(typeof(Rigidbody))]
 	public class ZombieStateManager : MonoBehaviour
 	{
 		[ShowInInspector, ReadOnly]
@@ -29,6 +30,7 @@ namespace AI.Zombie
 		private void Awake()
 		{
 			Agent = GetComponent<NavMeshAgent>();
+			Agent.speed = stats.Speed;
 		}
 
 		private void Start()

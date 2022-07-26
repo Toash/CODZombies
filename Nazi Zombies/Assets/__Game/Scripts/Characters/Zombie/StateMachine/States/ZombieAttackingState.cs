@@ -20,11 +20,11 @@ namespace AI.Zombie
 
 		public override void EnterState(ZombieStateManager manager)
 		{
-			Debug.Log("Entering attack state");
+			//Debug.Log("Entering attack state");
 		}
 		public override void UpdateState(ZombieStateManager manager)
 		{
-			//Debug.Log("Attacking");
+			
 		}
 
 		public override void TriggerEnter(ZombieStateManager zombie, Collider other)
@@ -33,12 +33,9 @@ namespace AI.Zombie
 		}
 		public override void TriggerStay(ZombieStateManager manager, Collider other)
 		{
-			//attack player
-
 			if (isPlayer(other))
 			{
-				Debug.Log("BRUHHHHH");
-				Attack(other);
+				Attack(manager,other);
 			}
 		}
 
@@ -49,11 +46,16 @@ namespace AI.Zombie
 				manager.SwitchState(manager.ChasingState);
 			}
 		}
-		private void Attack(Collider other)
+		private void Attack(ZombieStateManager manager,Collider other)
 		{
-			Debug.Log("Attack");
-			var damagable = other.transform.GetComponent<IDamagable>();
-			timer = 0;
+			if (canAttack(manager))
+			{
+				Debug.Log("Attack");
+				var damagable = other.transform.GetComponent<IDamagable>();
+				if (damagable == null) Debug.LogError("NO PLAYER DAMAGEABLE!!!!");
+				damagable?.damage(manager.stats.Damage);
+				timer = 0;
+			}
 		}
 
 

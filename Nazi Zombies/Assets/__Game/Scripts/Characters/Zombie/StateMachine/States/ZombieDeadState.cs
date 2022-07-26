@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace AI.Zombie
 {
@@ -7,27 +8,23 @@ namespace AI.Zombie
 	{
 		public override void EnterState(ZombieStateManager manager)
 		{
-			throw new System.NotImplementedException();
+			Debug.Log("Zombie is dead");
 		}
-
-		public override void TriggerEnter(ZombieStateManager zombie, Collider other)
-		{
-			throw new System.NotImplementedException();
-		}
-
-		public override void TriggerExit(ZombieStateManager zombie, Collider other)
-		{
-			throw new System.NotImplementedException();
-		}
-
-		public override void TriggerStay(ZombieStateManager zombie, Collider other)
-		{
-			throw new System.NotImplementedException();
-		}
-
 		public override void UpdateState(ZombieStateManager manager)
 		{
-			throw new System.NotImplementedException();
+			
+		}
+		public override void TriggerEnter(ZombieStateManager zombie, Collider other)
+		{
+			
+		}
+		public override void TriggerStay(ZombieStateManager zombie, Collider other)
+		{
+			
+		}
+		public override void TriggerExit(ZombieStateManager zombie, Collider other)
+		{
+			
 		}
 	}
 }

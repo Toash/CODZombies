@@ -420,6 +420,7 @@ GameObject:
   - component: {fileID: 6014639378041683085}
   - component: {fileID: 9038557918074140843}
   - component: {fileID: 3300596764835736057}
+  - component: {fileID: 7826772024797301509}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -519,3 +520,51 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7826772024797301509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014639378041683075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 162738daf9c3ed34f96ba76d8531b0ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: de09e2e838d38674385a51003cf9fbc9, type: 2}
+  DamagedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 0d8ecf6192a825e4f8a80cca9b2cf353, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  DeathEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: e20611be5beec1d4f898d938c25da133, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  info: {fileID: 11400000, guid: de09e2e838d38674385a51003cf9fbc9, type: 2}
+  lowHealthPercentThreshold: {fileID: 0}
+  LowHealthEvent:
+    m_PersistentCalls:
+      m_Calls: []

@@ -12,13 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d703660629f0cf49a49d41147ea50cd, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  Health: 100
+  MaxHealth: 100
   HealthRegenRate: 10
-  Speed: 5
+  Speed: 3.5
   JumpHeight: 5
-  Sensitivity: 1
-  FOV: 90
+  GravityMultiplier: 2
+  Points: 0
   MaxInventorySlots: 2
   InteractRange: 5
-  GravityMultiplier: 2
-  SlopeLimit: 90

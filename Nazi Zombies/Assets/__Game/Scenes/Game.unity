@@ -479,6 +479,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1558163529152430863, guid: 72d64e4dffbfe6745a712a7eb39130f5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558163529152430863, guid: 72d64e4dffbfe6745a712a7eb39130f5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2607285692907174597, guid: 72d64e4dffbfe6745a712a7eb39130f5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2607285692907174597, guid: 72d64e4dffbfe6745a712a7eb39130f5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2607285692907174597, guid: 72d64e4dffbfe6745a712a7eb39130f5, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5814904937847636446, guid: 72d64e4dffbfe6745a712a7eb39130f5, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1291,7 +1311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16b2f2d0a5cb39146b7a63e7bd2d2217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: {fileID: 11400000, guid: 5cccca4d10620304b87f3c2d9bac2a52, type: 2}
+  cost: 0
   textToDisplay: <cost> points to remove door
 --- !u!850595691 &1321204352
 LightingSettings:
@@ -1361,7 +1381,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh23952
+  m_Name: pb_Mesh24086
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

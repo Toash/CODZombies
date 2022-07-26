@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 namespace Player
 {
-    public class PlayerInteractor : MonoBehaviour
+	public class PlayerInteractor : MonoBehaviour
     {
 		[SerializeField]
 		private PlayerStats stats;
