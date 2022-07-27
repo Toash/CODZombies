@@ -1,18 +1,19 @@
-using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine;
 using Sirenix.OdinInspector;
 namespace Player
 {
-	public class PlayerBaseInteractor : MonoBehaviour
+	public class PlayerInteractionManager : MonoBehaviour
     {
 		
 		[SerializeField]
 		private PlayerStats stats;
 
-		[SerializeField]
-		private UnityEvent enterEvent;
-		[SerializeField]
-		private UnityEvent exitEvent;
+
+		public delegate void VoidDelegate();
+
+		public static event VoidDelegate InteractEnterEvent;
+		public static event VoidDelegate InteractExitEvent;
 
 		// The current interactable
 		protected IPlayerInteractable currentInteractable;

@@ -14,6 +14,7 @@ public class Barricade : MonoBehaviour,IDamagable,IRepairable
 	{
 		CurrentWood = stats.MaxWood;
 	}
+	//Can barricades be damaged by the player????
 	public void damage(int amount)
 	{
 		//Debug.Log("Barricade being damaged!");
