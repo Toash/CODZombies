@@ -8,11 +8,11 @@ namespace Player.UI
 		[SerializeField]
 		private TMP_Text interactText;
 
-		private PlayerInteractor interactor;
+		private PlayerBaseInteractor interactor;
 
 		private void Start()
 		{
-			interactor = FindObjectOfType<PlayerInteractor>();
+			interactor = FindObjectOfType<PlayerBaseInteractor>();
 		}
 
 		public void SetText()

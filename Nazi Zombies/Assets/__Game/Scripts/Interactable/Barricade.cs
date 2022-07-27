@@ -2,15 +2,14 @@ using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
-public class Barricade : MonoBehaviour,IDamagable
+public class Barricade : MonoBehaviour,IDamagable,IRepairable
 { 
 	[SerializeField]
 	private BarricadeStats stats;
 	public int CurrentWood { get; private set; }
-	[InfoBox("When there is atleast 1 barricade/wood")]
-	public UnityEvent HaveBarricades;
-	[InfoBox("When there are no more barricades/wood left")]
-	public UnityEvent DontHaveBarricades;
+
+	public UnityEvent AtLeastOneBarricade;
+	public UnityEvent NoBarricades;
 	private void Awake()
 	{
 		CurrentWood = stats.MaxWood;
@@ -19,6 +18,11 @@ public class Barricade : MonoBehaviour,IDamagable
 	{
 		//Debug.Log("Barricade being damaged!");
 		CurrentWood -= 1;
-		if (CurrentWood <= 0) DontHaveBarricades?.Invoke();
+		if (CurrentWood <= 0) NoBarricades?.Invoke();
 	}
+	public void Repair()
+	{
+		CurrentWood += 1;
+	}
+	
 }

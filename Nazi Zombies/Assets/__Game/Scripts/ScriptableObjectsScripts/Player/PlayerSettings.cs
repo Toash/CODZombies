@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Player
 {
+	//these fields should be exposed to the player in a menu
 	[CreateAssetMenu]
 	public class PlayerSettings : ScriptableObject
 	{
