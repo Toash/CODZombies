@@ -13,7 +13,7 @@ namespace AI.Zombie
 		public override void UpdateState(ZombieStateManager manager)
 		{
 			manager.Agent.SetDestination(PlayerRef.Instance.PlayerPosition());
-			//Debug.Log("Chasing");
+			Debug.Log("In Chase State");
 		}
 
 		public override void TriggerEnter(ZombieStateManager manager, Collider other)

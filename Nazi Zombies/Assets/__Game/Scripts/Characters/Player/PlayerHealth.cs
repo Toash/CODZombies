@@ -10,7 +10,7 @@ namespace Player
         public UnityEvent DamagedEvent;
         public UnityEvent DeathEvent;
 
-        public int CurrentHealth { get; private set; }
+        public static int CurrentPlayerHealth;
         //-----------HEALTH STATES---------------
         private bool lowHealth
         {
@@ -18,7 +18,7 @@ namespace Player
             {
                 if (lowHealthPercentThreshold != null)
                 {
-                    return ((CurrentHealth / stats.MaxHealth) * 100) >= lowHealthPercentThreshold.Value;
+                    return ((CurrentPlayerHealth / stats.MaxHealth) * 100) >= lowHealthPercentThreshold.Value;
                 }
                 return false;
             }
@@ -27,12 +27,12 @@ namespace Player
         {
             get
             {
-                return CurrentHealth <= 0;
+                return CurrentPlayerHealth <= 0;
             }
         }
 		private void Awake()
 		{
-            CurrentHealth = stats.MaxHealth;
+            CurrentPlayerHealth = stats.MaxHealth;
 		}
 		private void Update()
 		{
@@ -41,7 +41,7 @@ namespace Player
 
 		public void damage(int amount)
         {
-            CurrentHealth -= amount;
+            CurrentPlayerHealth -= amount;
             DamagedEvent?.Invoke();
             if (this.lowHealth) LowHealthEvent?.Invoke();
             if (this.noHealth) DeathEvent?.Invoke();
@@ -52,7 +52,7 @@ namespace Player
 
         private void RegenHealth()
 		{
-            CurrentHealth = Mathf.Clamp((int)(CurrentHealth + stats.HealthRegenRate * Time.deltaTime), 0, stats.MaxHealth);
+            CurrentPlayerHealth = Mathf.Clamp((int)(CurrentPlayerHealth + stats.HealthRegenRate * Time.deltaTime), 0, stats.MaxHealth);
         }
 
     }

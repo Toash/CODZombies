@@ -14,16 +14,7 @@ namespace Player.UI
 		}
 		public void UpdateHealthBar()
 		{
-			PlayerHealth playerHealth = PlayerRef.Instance.GetComponent<PlayerHealth>();
-			int currenthealth = playerHealth.CurrentHealth;
-			if (playerHealth != null)
-			{
-				bar.value = Mathf.InverseLerp(0,stats.MaxHealth,currenthealth);
-			}
-			else
-			{
-				Debug.LogError("Player does not have a PlayerHealth Component");
-			}
+			bar.value = Mathf.InverseLerp(0,stats.MaxHealth,PlayerHealth.CurrentPlayerHealth);
 		}
 	}
 }

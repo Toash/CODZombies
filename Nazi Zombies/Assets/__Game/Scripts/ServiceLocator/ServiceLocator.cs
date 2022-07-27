@@ -7,6 +7,7 @@ public class ServiceLocator : MonoBehaviour
 {
 	public static ServiceLocator Instance { get; private set; }
 	public Ballistics Ballistics { get; private set; }
+	public GameManager GameManager { get; private set; }
 
 	private void Awake()
 	{
@@ -24,6 +25,7 @@ public class ServiceLocator : MonoBehaviour
 	private void References()
 	{
 		Ballistics = GetComponentInChildren<Ballistics>();
+		GameManager = GetComponentInChildren<GameManager>();
 	}
 
 }

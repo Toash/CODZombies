@@ -15,12 +15,6 @@ namespace AI.Zombie
 		[Title("Dependencies")]
 		public NavMeshAgent Agent { get; private set; }
 
-
-		//----------TRIGGER--------------
-		public GameObject interactor;
-		[ShowIf("interactor")]
-		public Rigidbody rb;
-
 		public ZombieStats stats;
 
 		//-----------STATES--------------
