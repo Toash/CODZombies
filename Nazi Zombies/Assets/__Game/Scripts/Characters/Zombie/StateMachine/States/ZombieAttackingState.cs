@@ -4,13 +4,14 @@ namespace AI.Zombie
 {
 
 	//this is self contained?
+	//not really :/
 	public class ZombieAttackingState : ZombieBaseState
 	{
-		IDamagable thingWeAreAttacking;
+		private IDamagable thingWeAreAttacking;
 
-		private bool canAttack(ZombieStateManager zombie)
+		private bool canAttack(ZombieStateManager manager)
 		{
-			return zombie.stats.AttackSpeed <= timer;
+			return manager.stats.AttackSpeed <= timer;
 		}
 
 		private float timer;
@@ -22,15 +23,21 @@ namespace AI.Zombie
 
 		public override void EnterState(ZombieStateManager manager)
 		{
+			StopZombie(manager);
 			//Debug.Log("Entering attack state");
 		}
 		public override void UpdateState(ZombieStateManager manager)
 		{
-			if (thingWeAreAttacking == null)
+			if (thingWeAreAttacking != null)
 			{
+				Attack(manager);
+			}
+			else
+			{
+				//Thing we are attacking is no longer there :O
 				manager.SwitchState(manager.ChasingState);
 			}
-			Debug.Log("In attack state");
+			//Debug.Log("In attack state");
 		}
 
 		public override void TriggerEnter(ZombieStateManager zombie, Collider other)
@@ -40,21 +47,16 @@ namespace AI.Zombie
 		public override void TriggerStay(ZombieStateManager manager, Collider other)
 		{
 			thingWeAreAttacking = other.GetComponent<IDamagable>();
-			//damageable is favoriablre over player so this can also damage barricades
-			if (thingWeAreAttacking!=null)
-			{
-				Attack(manager, other);
-			}
 		}
 
 		public override void TriggerExit(ZombieStateManager manager, Collider other)
 		{
 		}
-		private void Attack(ZombieStateManager manager, Collider other)
+		private void Attack(ZombieStateManager manager)
 		{
 			if (canAttack(manager))
 			{
-				Debug.Log("Attack");
+				//Debug.Log("Attack");
 				thingWeAreAttacking?.damage(manager.stats.Damage);
 				timer = 0;
 			}

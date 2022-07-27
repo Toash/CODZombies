@@ -38,7 +38,7 @@ public class Ballistics:MonoBehaviour
 	private void bulletHole(RaycastHit hitPoint, GameObject bulletHole)
 	{
 		//GameObject bullet = Instantiate
-		GameObject bullet = Instantiate(bulletHole, hitPoint.point+(hitPoint.normal*.01f), Quaternion.LookRotation(-hitPoint.normal, Vector3.up));
+		GameObject bullet = Instantiate(bulletHole, hitPoint.point+(hitPoint.normal*.01f), Quaternion.LookRotation(-hitPoint.normal, Vector3.up),hitPoint.transform);
 		decals.Enqueue(bullet);
 	}
 }

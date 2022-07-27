@@ -18,9 +18,9 @@ namespace AI.Zombie
 
 		public override void TriggerEnter(ZombieStateManager manager, Collider other)
 		{
+			//other cannot be this gameobject
 			if (isDamageable(other))
 			{
-				StopZombie(manager);
 				manager.SwitchState(manager.AttackingState);
 			}
 		}
