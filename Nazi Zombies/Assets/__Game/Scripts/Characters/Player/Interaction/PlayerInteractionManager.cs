@@ -3,27 +3,26 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 namespace Player
 {
+	//takes care of interacting, listening to interaction events
 	public class PlayerInteractionManager : MonoBehaviour
     {
-		
-		[SerializeField]
-		private PlayerStats stats;
+		//testing
+		[SerializeField] private PlayerStats stats;
+		//[SerializeField] private PlayerColliderInteractor colInteract;
+		//[SerializeField] private PlayerRaycastInteractor rayInteract;
+
+		public static IPlayerInteractable CurrentInteractable;
 
 
-		public delegate void VoidDelegate();
-
-		public static event VoidDelegate InteractEnterEvent;
-		public static event VoidDelegate InteractExitEvent;
-
-		// The current interactable
-		protected IPlayerInteractable currentInteractable;
-
-
-		public IPlayerInteractable CurrentInteractable { get { return currentInteractable; } }
-
-		protected bool canInteract { get; private set; }
-
-		private void Update()
+        private void OnEnable()
+        {
+            
+        }
+        private void OnDisable()
+        {
+            
+        }
+        private void Update()
 		{
 
 		}
@@ -31,8 +30,8 @@ namespace Player
 
 		private void Interact()
 		{
-			if (!canInteract||currentInteractable==null) return;
-			currentInteractable.Interact();
+			if (CurrentInteractable==null) return;
+			CurrentInteractable.PlayerInteract();
 		}
 	}
 }

@@ -15,7 +15,7 @@ public class Doorbuy : MonoBehaviour,IPlayerInteractable
 		InteractText = textToDisplay;
 	}
 
-	public void Interact()
+	public void PlayerInteract()
 	{
 		Destroy(this.gameObject);
 	}

@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Player
 {
+	//Not exposable to the player
 	[CreateAssetMenu]
 	public class PlayerStats : ScriptableObject
 	{
@@ -21,7 +22,8 @@ namespace Player
 		public int MaxInventorySlots;
 
 		//interact
-		public float InteractRange;
+		public float RaycastInteractRange;
+		public float InteractSpeed;
 
 	}
 }

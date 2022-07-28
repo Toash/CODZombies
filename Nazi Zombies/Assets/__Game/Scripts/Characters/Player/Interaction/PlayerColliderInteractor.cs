@@ -3,41 +3,41 @@ using UnityEngine;
 
 namespace Player
 {
-	//for repairing
-	public class PlayerRepairableColliderInteractor : MonoBehaviour
+	//for everything except gun wallbuys 
+	public class PlayerColliderInteractor : MonoBehaviour
 	{
 		[SerializeField]
 		private PlayerSettings settings;
 		public delegate void VoidDelegate();
 
-		public static event VoidDelegate InteractColliderEnterEvent;
-		public static event VoidDelegate InteractColliderExitEvent;
+		public static event VoidDelegate Enter;
+		public static event VoidDelegate Exit;
+
+		//------------DEPENDENCIES---------------
 		[SerializeField]
 		private Rigidbody rb;
 		[SerializeField]
 		private Collider col;
-		private void OnTriggerEnter(Collider other)
+
+        #region PHYSICS
+        private void OnTriggerEnter(Collider other)
 		{
-			PlayerInteractionManager.currentInteractable = other.GetComponent<IPlayerInteractable>();
-			if (PlayerInteractionManager.currentInteractable != null)
+			PlayerInteractionManager.CurrentInteractable = other.GetComponent<IPlayerInteractable>();
+			
+			if (PlayerInteractionManager.CurrentInteractable != null)
 			{
-				InteractColliderEnterEvent?.Invoke();
+				PlayerColliderInteractor.Enter?.Invoke();
 			}
 		}
 
-		private void OnTriggerStay(Collider other)
-		{
-			if (PlayerInteractionManager.currentInteractable != null) PlayerInteractionManager.CanInteract = true;
-		}
 		private void OnTriggerExit(Collider other)
-		{
-			//if exiting, not in range of interact trigger. 
-			if (PlayerInteractionManager.currentInteractable != null)
+		{ 
+			if (PlayerInteractionManager.CurrentInteractable != null)
 			{
-				InteractColliderExitEvent?.Invoke();
-				PlayerInteractionManager.currentInteractable = null;
-				PlayerInteractionManager.CanInteract = false;
+				PlayerColliderInteractor.Exit?.Invoke();
+				PlayerInteractionManager.CurrentInteractable = null;
 			}
 		}
-	}
+        #endregion
+    }
 }
