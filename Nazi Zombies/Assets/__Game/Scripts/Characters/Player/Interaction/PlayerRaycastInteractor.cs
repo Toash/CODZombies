@@ -10,32 +10,34 @@ namespace Player
 	public class PlayerRaycastInteractor : MonoBehaviour
 	{
         [SerializeField] private PlayerStats stats;
-
-
         [SerializeField] private Camera cam;
+        [SerializeField] private LayerMask mask;
 
-        public delegate void Interact(IPlayerInteractable interact);
+        public delegate void Interact(Interactable interact);
 
-        public event Interact Enter;
-        public event Interact Exit;
+        public event Interact LookingAtInteractor;
+        public event Interact LookingAwayFromInteractor;
 
-        private LayerMask everything;
+        private bool RaycastInteractableExists(Interactable interactable)
+        {
+            return (interactable != null) && interactable.detectionType == Interactable.DetectionType.Raycast;
+        }
+
         private void Update()
         {
             RaycastHit hit;
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit,stats.RaycastInteractRange, everything=~0, QueryTriggerInteraction.Collide))
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit,stats.RaycastInteractRange, mask, QueryTriggerInteraction.Collide))
 			{
-                IPlayerInteractable interactable = hit.transform.GetComponent<IPlayerInteractable>();
+                Interactable interactable = hit.transform.GetComponent<Interactable>();
 
-                if (interactable != null)
+                if (RaycastInteractableExists(interactable))
 				{
-                    Enter(interactable);
+                    LookingAtInteractor(interactable);
 				}
-				else
+				else if(!RaycastInteractableExists(interactable))
 				{
-                    Exit(interactable);
+                    LookingAwayFromInteractor(interactable);
 				}
-                Exit(interactable);
 			}
         }
     }

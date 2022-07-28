@@ -1085,7 +1085,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1286637760}
   - {fileID: 1500982971}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -1185,8 +1184,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1068233056}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1286637761
 MonoBehaviour:
@@ -1200,8 +1199,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16b2f2d0a5cb39146b7a63e7bd2d2217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 0
-  textToDisplay: <cost> points to remove door
+  interactType: 0
+  detectionType: 0
+  cost: 750
+  textToDisplay: 750 points to remove door
 --- !u!850595691 &1321204352
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -1458,7 +1459,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1068233056}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 33.603, y: 0, z: 0}
 --- !u!108 &1500982972
 Light:
@@ -1818,7 +1819,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh23896
+  m_Name: pb_Mesh24020
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

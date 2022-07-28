@@ -57,7 +57,7 @@ namespace AI.Zombie
 			if (canAttack(manager))
 			{
 				//Debug.Log("Attack");
-				thingWeAreAttacking?.damage(manager.stats.Damage);
+				thingWeAreAttacking?.Damage(manager.stats.Damage);
 				timer = 0;
 			}
 		}

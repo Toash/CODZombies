@@ -39,7 +39,7 @@ namespace Player
             RegenHealth();
 		}
 
-		public void damage(int amount)
+		public void Damage(int amount)
         {
             CurrentPlayerHealth -= amount;
             DamagedEvent?.Invoke();

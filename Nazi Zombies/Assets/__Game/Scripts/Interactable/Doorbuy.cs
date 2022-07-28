@@ -1,27 +1,24 @@
 using UnityEngine;
 
-public class Doorbuy : MonoBehaviour,IPlayerInteractable
+public class Doorbuy : Interactable
 {
 	[SerializeField]
 	private int cost;
 	[SerializeField]
 	private string textToDisplay;
 
-	public string InteractText { get; set; }
-
 	private void Awake()
-	{
-		textToDisplay=textToDisplay.Replace("<cost>", this.cost.ToString());
-		InteractText = textToDisplay;
+	{ 
+
 	}
 
-	public void PlayerInteract()
+	public override string GetInteractString()
 	{
-		Destroy(this.gameObject);
+		return textToDisplay;
 	}
 
-	public string GetInteractText()
+	public override void Interact()
 	{
-		throw new System.NotImplementedException();
+		Destroy(gameObject);
 	}
 }

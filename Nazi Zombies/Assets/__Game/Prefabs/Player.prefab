@@ -130,8 +130,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: de09e2e838d38674385a51003cf9fbc9, type: 2}
-  colInteract: {fileID: 0}
-  rayInteract: {fileID: 0}
+  settings: {fileID: 11400000, guid: 48c2dd4474cfbdc478af0d793c534507, type: 2}
+  colInteracter: {fileID: 6593030507840682409}
+  rayInteracter: {fileID: 2126818241324630150}
 --- !u!1 &4026829056013698879
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,8 +177,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.83
-  m_Center: {x: 0, y: 0.59, z: 0}
+  m_Radius: 1.17
+  m_Center: {x: 0, y: 0.95, z: 0}
 --- !u!114 &6593030507840682409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,7 +191,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b631b9ab620c83449cc5aea9aaabea1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 48c2dd4474cfbdc478af0d793c534507, type: 2}
   rb: {fileID: 3300596764835736057}
   col: {fileID: 3847955640319757204}
 --- !u!1 &4095966097450672837
@@ -722,9 +722,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cbda8fdc523e424487606f2d9090e30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 48c2dd4474cfbdc478af0d793c534507, type: 2}
   stats: {fileID: 11400000, guid: de09e2e838d38674385a51003cf9fbc9, type: 2}
-  interactMask:
-    serializedVersion: 2
-    m_Bits: 0
   cam: {fileID: 6014639377124975940}
+  mask:
+    serializedVersion: 2
+    m_Bits: 119

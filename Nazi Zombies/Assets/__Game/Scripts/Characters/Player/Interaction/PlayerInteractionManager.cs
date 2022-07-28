@@ -6,31 +6,30 @@ namespace Player
 	//takes care of interacting, listening to interaction events
 	public class PlayerInteractionManager : MonoBehaviour
     {
-		//testing
 		[SerializeField] private PlayerStats stats;
 		[SerializeField] private PlayerSettings settings;
-		[SerializeField] private PlayerColliderInteractor colInteract;
-		[SerializeField] private PlayerRaycastInteractor rayInteract;
 
-		public IPlayerInteractable CurrentInteractable { get; private set; }
+		[SerializeField] private PlayerColliderInteractor colInteracter;
+		[SerializeField] private PlayerRaycastInteractor rayInteracter;
+
+		public Interactable CurrentInteractable { get; private set; }
 		public static string CurrentInteractText;
-
 
         private void OnEnable()
         {
-			colInteract.Enter += SetInteractable;
-			colInteract.Exit += ClearInteractable;
+			colInteracter.InsideInteractor += SetInteractable;
+			colInteracter.OutsideInteractor += ClearInteractable;
 
-			rayInteract.Enter += SetInteractable;
-			rayInteract.Exit += ClearInteractable;
+			rayInteracter.LookingAtInteractor += SetInteractable;
+			rayInteracter.LookingAwayFromInteractor += ClearInteractable;
         }
         private void OnDisable()
         {
-			colInteract.Enter -= SetInteractable;
-			colInteract.Exit -= ClearInteractable;
+			colInteracter.InsideInteractor -= SetInteractable;
+			colInteracter.OutsideInteractor -= ClearInteractable;
 
-			rayInteract.Enter -= SetInteractable;
-			rayInteract.Exit -= ClearInteractable;
+			rayInteracter.LookingAtInteractor -= SetInteractable;
+			rayInteracter.LookingAwayFromInteractor -= ClearInteractable;
 		}
         private void Update()
 		{
@@ -38,16 +37,16 @@ namespace Player
 			{
 				if (Input.GetKeyDown(settings.Interact))
 				{
-					CurrentInteractable.PlayerInteract();
+					CurrentInteractable.Interact();
 				}
 			}
 		}
-		private void SetInteractable(IPlayerInteractable interact)
+		private void SetInteractable(Interactable interact)
 		{
 			this.CurrentInteractable = interact;
-			CurrentInteractText = interact.GetInteractText();
+			CurrentInteractText = interact.GetInteractString();
 		}
-		private void ClearInteractable(IPlayerInteractable interact)
+		private void ClearInteractable(Interactable interact)
 		{
 			this.CurrentInteractable = null;
 			CurrentInteractText = "";

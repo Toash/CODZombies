@@ -22,7 +22,7 @@ namespace AI.Zombie
 		{
 			currentHealth = stats.Health;
 		}
-		public virtual void damage(int amount)
+		public virtual void Damage(int amount)
 		{
 			currentHealth -= amount;
 			DamagedEvent?.Invoke();

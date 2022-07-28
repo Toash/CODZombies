@@ -8,10 +8,14 @@ namespace Player.UI
 		[SerializeField]
 		private TMP_Text interactText;
 
+		private void Update()
+		{
+			interactText.text = PlayerInteractionManager.CurrentInteractText;
+		}
 
 		public void SetText()
 		{
-			//interactText.text = PlayerInteractionManager.CurrentInteractable.InteractText;
+			
 		}
 		public void DeleteText()
 		{

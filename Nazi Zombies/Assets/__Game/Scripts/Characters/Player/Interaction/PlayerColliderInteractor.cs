@@ -11,26 +11,32 @@ namespace Player
 		[SerializeField] private Collider col;
 
 
-		public delegate void Interact(IPlayerInteractable interact);
+		public delegate void Interact(Interactable interact);
 
-		public event Interact Enter;
-		public event Interact Exit;
+		public event Interact InsideInteractor;
+		public event Interact OutsideInteractor;
 
-		private void OnTriggerEnter(Collider other)
+		private bool ColliderInteractableExists(Interactable interactable)
 		{
-			IPlayerInteractable interactable = other.transform.GetComponent<IPlayerInteractable>();
-			if (interactable != null)
+			return (interactable!=null)&&interactable.detectionType==Interactable.DetectionType.Collider;
+		}
+
+		private void OnTriggerStay(Collider other)
+		{
+			Interactable interactable = other.transform.GetComponent<Interactable>();
+			if (ColliderInteractableExists(interactable))
 			{
-				Enter.Invoke(interactable);
+				Debug.Log("Collide");
+				InsideInteractor.Invoke(interactable);
 			}
 		}
 
 		private void OnTriggerExit(Collider other)
 		{
-			IPlayerInteractable interactable = other.transform.GetComponent<IPlayerInteractable>();
-			if (interactable != null)
+			Interactable interactable = other.transform.GetComponent<Interactable>();
+			if (ColliderInteractableExists(interactable))
 			{
-				Exit.Invoke(interactable);
+				OutsideInteractor.Invoke(interactable);
 			}
 		}
 
