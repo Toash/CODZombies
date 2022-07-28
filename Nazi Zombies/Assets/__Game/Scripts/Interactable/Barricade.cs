@@ -13,7 +13,6 @@ public class Barricade : MonoBehaviour, IDamagable, IPlayerInteractable
     [SerializeField]
     private BarricadeStats stats;
     public int CurrentWood { get; private set; }
-    public string InteractText { get; set; }
 
     public UnityEvent AtLeastOneBarricade;
     public UnityEvent NoBarricades;
@@ -34,4 +33,8 @@ public class Barricade : MonoBehaviour, IDamagable, IPlayerInteractable
         CurrentWood += 1;
     }
 
+	public string GetInteractText()
+	{
+		throw new System.NotImplementedException();
+	}
 }

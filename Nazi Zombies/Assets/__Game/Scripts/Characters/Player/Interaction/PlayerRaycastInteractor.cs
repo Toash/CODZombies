@@ -6,30 +6,37 @@ namespace Player
 {
 
 	//ONLY FOR WALLBUYS
+    //this shoudl take precendent
 	public class PlayerRaycastInteractor : MonoBehaviour
 	{
-        [InfoBox("This is for Wallbuys")]
-        [InfoBox("Setup: Interactable Layermask, set the interactable to " +
-            "isTrigger, make sure IInteractable is somewhere on the gameobject ")]
-
-        [SerializeField] private PlayerSettings settings;
         [SerializeField] private PlayerStats stats;
 
-        [SerializeField] private LayerMask interactMask;
 
         [SerializeField] private Camera cam;
 
-        public delegate void VoidDelegate();
+        public delegate void Interact(IPlayerInteractable interact);
 
-        public static event VoidDelegate Enter;
-        public static event VoidDelegate Exit;
+        public event Interact Enter;
+        public event Interact Exit;
 
+        private LayerMask everything;
         private void Update()
         {
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, stats.RaycastInteractRange, interactMask, QueryTriggerInteraction.Collide))
-            {
-                
-            }
+            RaycastHit hit;
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit,stats.RaycastInteractRange, everything=~0, QueryTriggerInteraction.Collide))
+			{
+                IPlayerInteractable interactable = hit.transform.GetComponent<IPlayerInteractable>();
+
+                if (interactable != null)
+				{
+                    Enter(interactable);
+				}
+				else
+				{
+                    Exit(interactable);
+				}
+                Exit(interactable);
+			}
         }
     }
 }

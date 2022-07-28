@@ -11,7 +11,7 @@ namespace Player.UI
 
 		public void SetText()
 		{
-			interactText.text = PlayerInteractionManager.CurrentInteractable.InteractText;
+			//interactText.text = PlayerInteractionManager.CurrentInteractable.InteractText;
 		}
 		public void DeleteText()
 		{

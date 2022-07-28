@@ -8,30 +8,49 @@ namespace Player
     {
 		//testing
 		[SerializeField] private PlayerStats stats;
-		//[SerializeField] private PlayerColliderInteractor colInteract;
-		//[SerializeField] private PlayerRaycastInteractor rayInteract;
+		[SerializeField] private PlayerSettings settings;
+		[SerializeField] private PlayerColliderInteractor colInteract;
+		[SerializeField] private PlayerRaycastInteractor rayInteract;
 
-		public static IPlayerInteractable CurrentInteractable;
+		public IPlayerInteractable CurrentInteractable { get; private set; }
+		public static string CurrentInteractText;
 
 
         private void OnEnable()
         {
-            
+			colInteract.Enter += SetInteractable;
+			colInteract.Exit += ClearInteractable;
+
+			rayInteract.Enter += SetInteractable;
+			rayInteract.Exit += ClearInteractable;
         }
         private void OnDisable()
         {
-            
-        }
+			colInteract.Enter -= SetInteractable;
+			colInteract.Exit -= ClearInteractable;
+
+			rayInteract.Enter -= SetInteractable;
+			rayInteract.Exit -= ClearInteractable;
+		}
         private void Update()
 		{
-
+			if (CurrentInteractable != null)
+			{
+				if (Input.GetKeyDown(settings.Interact))
+				{
+					CurrentInteractable.PlayerInteract();
+				}
+			}
 		}
-
-
-		private void Interact()
+		private void SetInteractable(IPlayerInteractable interact)
 		{
-			if (CurrentInteractable==null) return;
-			CurrentInteractable.PlayerInteract();
+			this.CurrentInteractable = interact;
+			CurrentInteractText = interact.GetInteractText();
+		}
+		private void ClearInteractable(IPlayerInteractable interact)
+		{
+			this.CurrentInteractable = null;
+			CurrentInteractText = "";
 		}
 	}
 }

@@ -6,38 +6,33 @@ namespace Player
 	//for everything except gun wallbuys 
 	public class PlayerColliderInteractor : MonoBehaviour
 	{
-		[SerializeField]
-		private PlayerSettings settings;
-		public delegate void VoidDelegate();
-
-		public static event VoidDelegate Enter;
-		public static event VoidDelegate Exit;
-
 		//------------DEPENDENCIES---------------
-		[SerializeField]
-		private Rigidbody rb;
-		[SerializeField]
-		private Collider col;
+		[SerializeField] private Rigidbody rb;
+		[SerializeField] private Collider col;
 
-        #region PHYSICS
-        private void OnTriggerEnter(Collider other)
+
+		public delegate void Interact(IPlayerInteractable interact);
+
+		public event Interact Enter;
+		public event Interact Exit;
+
+		private void OnTriggerEnter(Collider other)
 		{
-			PlayerInteractionManager.CurrentInteractable = other.GetComponent<IPlayerInteractable>();
-			
-			if (PlayerInteractionManager.CurrentInteractable != null)
+			IPlayerInteractable interactable = other.transform.GetComponent<IPlayerInteractable>();
+			if (interactable != null)
 			{
-				PlayerColliderInteractor.Enter?.Invoke();
+				Enter.Invoke(interactable);
 			}
 		}
 
 		private void OnTriggerExit(Collider other)
-		{ 
-			if (PlayerInteractionManager.CurrentInteractable != null)
+		{
+			IPlayerInteractable interactable = other.transform.GetComponent<IPlayerInteractable>();
+			if (interactable != null)
 			{
-				PlayerColliderInteractor.Exit?.Invoke();
-				PlayerInteractionManager.CurrentInteractable = null;
+				Exit.Invoke(interactable);
 			}
 		}
-        #endregion
-    }
+
+	}
 }

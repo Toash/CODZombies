@@ -4,6 +4,6 @@
 /// </summary>
 public interface IPlayerInteractable
 {
-	public string InteractText { get; set; }
+	public string GetInteractText();
 	public void PlayerInteract();
 }

@@ -20,4 +20,8 @@ public class Doorbuy : MonoBehaviour,IPlayerInteractable
 		Destroy(this.gameObject);
 	}
 
+	public string GetInteractText()
+	{
+		throw new System.NotImplementedException();
+	}
 }
