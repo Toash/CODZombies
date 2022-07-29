@@ -1,12 +1,17 @@
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace AI.Zombie
 {
 
 	//this is self contained?
 	//not really :/
+	/// <summary>
+	/// Damaging player
+	/// </summary>
 	public class ZombieAttackingState : ZombieBaseState
 	{
+		[ShowInInspector,ReadOnly]
 		private IDamagable thingWeAreAttacking;
 
 		private bool canAttack(ZombieStateManager manager)
@@ -18,31 +23,37 @@ namespace AI.Zombie
 
 		private void Update()
 		{
-			timer += Time.deltaTime;
+			IncreaseTimer();
 		}
 
 		public override void EnterState(ZombieStateManager manager)
 		{
 			StopZombie(manager);
-			//Debug.Log("Entering attack state");
 		}
 		public override void UpdateState(ZombieStateManager manager)
 		{
+			//if it has IZombieBreakable?
 			if (thingWeAreAttacking != null)
 			{
+				
 				Attack(manager);
 			}
-			else
+			if (thingWeAreAttacking == null)
 			{
-				//Thing we are attacking is no longer there :O
 				manager.SwitchState(manager.ChasingState);
 			}
-			//Debug.Log("In attack state");
 		}
-
-		public override void TriggerEnter(ZombieStateManager zombie, Collider other)
+		public override void FixedUpdateState(ZombieStateManager manager)
 		{
 
+		}
+
+		public override void LateUpdateState(ZombieStateManager manager)
+		{
+
+		}
+		public override void TriggerEnter(ZombieStateManager zombie, Collider other)
+		{
 		}
 		public override void TriggerStay(ZombieStateManager manager, Collider other)
 		{
@@ -56,10 +67,18 @@ namespace AI.Zombie
 		{
 			if (canAttack(manager))
 			{
-				//Debug.Log("Attack");
-				thingWeAreAttacking?.Damage(manager.stats.Damage);
-				timer = 0;
+				thingWeAreAttacking.Damage(manager.stats.Damage);
+				ResetTimer();
 			}
+		}
+
+		private void IncreaseTimer()
+		{
+			timer += Time.deltaTime;
+		}
+		private void ResetTimer()
+		{
+			timer = 0;
 		}
 
 

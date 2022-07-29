@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Doorbuy : Interactable
+public class Doorbuy : PlayerInteractable
 {
 	[SerializeField]
 	private int cost;

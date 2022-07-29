@@ -11,19 +11,19 @@ namespace Player
 		[SerializeField] private Collider col;
 
 
-		public delegate void Interact(Interactable interact);
+		public delegate void Interact(PlayerInteractable interact);
 
 		public event Interact InsideInteractor;
 		public event Interact OutsideInteractor;
 
-		private bool ColliderInteractableExists(Interactable interactable)
+		private bool ColliderInteractableExists(PlayerInteractable interactable)
 		{
-			return (interactable!=null)&&interactable.detectionType==Interactable.DetectionType.Collider;
+			return (interactable!=null)&&interactable.detectionType==PlayerInteractable.DetectionType.Collider;
 		}
 
 		private void OnTriggerStay(Collider other)
 		{
-			Interactable interactable = other.transform.GetComponent<Interactable>();
+			PlayerInteractable interactable = other.transform.GetComponent<PlayerInteractable>();
 			if (ColliderInteractableExists(interactable))
 			{
 				Debug.Log("Collide");
@@ -33,7 +33,7 @@ namespace Player
 
 		private void OnTriggerExit(Collider other)
 		{
-			Interactable interactable = other.transform.GetComponent<Interactable>();
+			PlayerInteractable interactable = other.transform.GetComponent<PlayerInteractable>();
 			if (ColliderInteractableExists(interactable))
 			{
 				OutsideInteractor.Invoke(interactable);

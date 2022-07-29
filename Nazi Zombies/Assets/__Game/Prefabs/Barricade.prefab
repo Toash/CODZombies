@@ -308,37 +308,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fe9a84a632a1c24589b1cca81520877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactType: 0
+  detectionType: 0
   stats: {fileID: 11400000, guid: ee95c2c376c6358458ec8f29700e3284, type: 2}
   AtLeastOneBarricade:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5347014650838590883}
-        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
   NoBarricades:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5347014650838590883}
-        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!54 &2187766212089430493
 Rigidbody:
   m_ObjectHideFlags: 0

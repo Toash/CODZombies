@@ -214,8 +214,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 724d97689be62d547812d8dc74d56701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactor: {fileID: 285105692772051883}
-  rb: {fileID: 7119999612839944414}
   stats: {fileID: 11400000, guid: f84324dada9471443920e238f5da6704, type: 2}
   ChasingState: {fileID: 4109610200724364216}
   AttackingState: {fileID: 3241098464510266129}

@@ -531,6 +531,7 @@ GameObject:
   - component: {fileID: 9038557918074140843}
   - component: {fileID: 3300596764835736057}
   - component: {fileID: 7826772024797301509}
+  - component: {fileID: 8311062947413974684}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -674,10 +675,34 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8311062947413974684}
+        m_TargetAssemblyTypeName: PlayerDeath, Assembly-CSharp
+        m_MethodName: Death
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   lowHealthPercentThreshold: {fileID: 0}
   LowHealthEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8311062947413974684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014639378041683075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec2491fb5e828045a2de971ccb58d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7267342879669296958
 GameObject:
   m_ObjectHideFlags: 0

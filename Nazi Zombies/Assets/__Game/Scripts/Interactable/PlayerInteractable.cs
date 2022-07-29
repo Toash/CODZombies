@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-
-public abstract class Interactable : MonoBehaviour
+/// <summary>
+/// Can be interacted by player
+/// </summary>
+public abstract class PlayerInteractable : MonoBehaviour
 {
 
 	public enum InteractionType

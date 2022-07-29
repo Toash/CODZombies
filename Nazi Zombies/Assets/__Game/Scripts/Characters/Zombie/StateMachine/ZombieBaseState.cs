@@ -8,7 +8,10 @@ namespace AI.Zombie
 	public abstract class ZombieBaseState : MonoBehaviour
 	{
 		public abstract void EnterState(ZombieStateManager manager);
+		public abstract void FixedUpdateState(ZombieStateManager manager);
+
 		public abstract void UpdateState(ZombieStateManager manager);
+		public abstract void LateUpdateState(ZombieStateManager manager);
 		public abstract void TriggerEnter(ZombieStateManager manager, Collider other);
 		public abstract void TriggerStay(ZombieStateManager manager, Collider other); //Called every Fixed Update
 		public abstract void TriggerExit(ZombieStateManager manager, Collider other);
@@ -22,14 +25,11 @@ namespace AI.Zombie
 		{
 			return other.transform.GetComponent<Barricade>() != null;
 		}
-		protected bool isDamageable(Collider other)
+		protected bool isDamageableAndNotZombie(Collider other)
 		{
-			return other.transform.GetComponent<IDamagable>() != null;
+			return other.transform.GetComponent<IDamagable>() != null&&other!=this;
 		}
-		protected IDamagable getDamageable(Collider other)
-		{
-			return other.transform.GetComponent<IDamagable>();
-		}
+
 		protected void StopZombie(ZombieStateManager manager)
 		{
 			manager.Agent.isStopped = true;

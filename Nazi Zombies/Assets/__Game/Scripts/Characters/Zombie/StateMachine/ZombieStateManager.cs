@@ -35,6 +35,14 @@ namespace AI.Zombie
 		{
 			currentState.UpdateState(this);
 		}
+		private void FixedUpdate()
+		{
+			currentState.FixedUpdateState(this);
+		}
+		private void LateUpdate()
+		{
+			currentState.LateUpdateState(this);
+		}
 
 		//--------------PUBLIC METHODS---------------
 

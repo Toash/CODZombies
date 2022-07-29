@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 0b2efb663db62cf498156520dad0dc51, type: 2}
---- !u!1 &11891892 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6014639378041683075, guid: 85b8f78b7bcdd474f8f8d1091783d6a2, type: 3}
-  m_PrefabInstance: {fileID: 6014639378053548087}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &215410061
 GameObject:
   m_ObjectHideFlags: 0
@@ -1819,7 +1814,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24020
+  m_Name: pb_Mesh26786
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2041,25 +2036,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4129491350543625902, guid: ec3d24cbe0291463a84d8ab0fdc0d133, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 11891892}
     - target: {fileID: 4129491350543626064, guid: ec3d24cbe0291463a84d8ab0fdc0d133, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4129491350543626064, guid: ec3d24cbe0291463a84d8ab0fdc0d133, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.8494215
+      value: 2.6885667
       objectReference: {fileID: 0}
     - target: {fileID: 4129491350543626064, guid: ec3d24cbe0291463a84d8ab0fdc0d133, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0001001358
+      value: 0.00009942055
       objectReference: {fileID: 0}
     - target: {fileID: 4129491350543626064, guid: ec3d24cbe0291463a84d8ab0fdc0d133, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.3738823
+      value: 0.47009754
       objectReference: {fileID: 0}
     - target: {fileID: 4129491350543626064, guid: ec3d24cbe0291463a84d8ab0fdc0d133, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2092,10 +2083,6 @@ PrefabInstance:
     - target: {fileID: 4129491350543626065, guid: ec3d24cbe0291463a84d8ab0fdc0d133, type: 3}
       propertyPath: m_Name
       value: Zombie
-      objectReference: {fileID: 0}
-    - target: {fileID: 4129491350543626065, guid: ec3d24cbe0291463a84d8ab0fdc0d133, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec3d24cbe0291463a84d8ab0fdc0d133, type: 3}

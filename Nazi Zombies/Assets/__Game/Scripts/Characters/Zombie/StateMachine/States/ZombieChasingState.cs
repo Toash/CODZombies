@@ -8,26 +8,25 @@ namespace AI.Zombie
 		public override void EnterState(ZombieStateManager manager)
 		{
 			UnstopZombie(manager);
-			//Debug.Log("Entering Chase state");
+			Debug.Log("Entering Chase state");
 		}
 		public override void UpdateState(ZombieStateManager manager)
 		{
 			manager.Agent.SetDestination(PlayerRef.Instance.PlayerPosition());
-			Debug.Log("In Chase State");
 		}
 
 		public override void TriggerEnter(ZombieStateManager manager, Collider other)
 		{
-			//other cannot be this gameobject
-			if (isDamageable(other))
-			{
-				manager.SwitchState(manager.AttackingState);
-			}
+
 		}
 
 		public override void TriggerStay(ZombieStateManager manager, Collider other)
 		{
-
+			//other cannot be this gameobject
+			if (isDamageableAndNotZombie(other))
+			{
+				manager.SwitchState(manager.AttackingState);
+			}
 		}
 
 
@@ -36,5 +35,14 @@ namespace AI.Zombie
 
 		}
 
+		public override void FixedUpdateState(ZombieStateManager manager)
+		{
+			
+		}
+
+		public override void LateUpdateState(ZombieStateManager manager)
+		{
+			
+		}
 	}
 }

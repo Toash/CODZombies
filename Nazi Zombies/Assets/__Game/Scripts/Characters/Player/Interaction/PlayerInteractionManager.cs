@@ -12,7 +12,7 @@ namespace Player
 		[SerializeField] private PlayerColliderInteractor colInteracter;
 		[SerializeField] private PlayerRaycastInteractor rayInteracter;
 
-		public Interactable CurrentInteractable { get; private set; }
+		public PlayerInteractable CurrentInteractable { get; private set; }
 		public static string CurrentInteractText;
 
         private void OnEnable()
@@ -41,12 +41,12 @@ namespace Player
 				}
 			}
 		}
-		private void SetInteractable(Interactable interact)
+		private void SetInteractable(PlayerInteractable interact)
 		{
 			this.CurrentInteractable = interact;
 			CurrentInteractText = interact.GetInteractString();
 		}
-		private void ClearInteractable(Interactable interact)
+		private void ClearInteractable(PlayerInteractable interact)
 		{
 			this.CurrentInteractable = null;
 			CurrentInteractText = "";

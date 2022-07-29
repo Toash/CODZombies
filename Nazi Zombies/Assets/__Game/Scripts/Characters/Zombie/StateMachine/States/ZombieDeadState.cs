@@ -26,5 +26,15 @@ namespace AI.Zombie
 		{
 			
 		}
+
+		public override void FixedUpdateState(ZombieStateManager manager)
+		{
+			
+		}
+
+		public override void LateUpdateState(ZombieStateManager manager)
+		{
+			
+		}
 	}
 }

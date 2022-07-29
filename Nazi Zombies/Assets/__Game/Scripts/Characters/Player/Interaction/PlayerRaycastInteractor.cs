@@ -13,14 +13,14 @@ namespace Player
         [SerializeField] private Camera cam;
         [SerializeField] private LayerMask mask;
 
-        public delegate void Interact(Interactable interact);
+        public delegate void Interact(PlayerInteractable interact);
 
         public event Interact LookingAtInteractor;
         public event Interact LookingAwayFromInteractor;
 
-        private bool RaycastInteractableExists(Interactable interactable)
+        private bool RaycastInteractableExists(PlayerInteractable interactable)
         {
-            return (interactable != null) && interactable.detectionType == Interactable.DetectionType.Raycast;
+            return (interactable != null) && interactable.detectionType == PlayerInteractable.DetectionType.Raycast;
         }
 
         private void Update()
@@ -28,7 +28,7 @@ namespace Player
             RaycastHit hit;
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit,stats.RaycastInteractRange, mask, QueryTriggerInteraction.Collide))
 			{
-                Interactable interactable = hit.transform.GetComponent<Interactable>();
+                PlayerInteractable interactable = hit.transform.GetComponent<PlayerInteractable>();
 
                 if (RaycastInteractableExists(interactable))
 				{
