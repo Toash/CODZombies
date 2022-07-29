@@ -13,8 +13,10 @@ public class Weapon : ScriptableObject
 	public float FireRate;
 	public bool Automatic;
 	public float ReloadTime;
-	[Header("Visuals")]
+	[Title("DISPLAY")]
 	public GameObject model;
+	public float VisualRecoil;
+
 	[Header("Audio")]
 	public AudioClip shootSound;
 

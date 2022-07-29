@@ -22,5 +22,5 @@ MonoBehaviour:
   FireRate: 0.2
   Automatic: 0
   ReloadTime: 1
-  model: {fileID: 1694449805434718, guid: 6f1a7354265853f44b0ed5e2e43676ad, type: 3}
+  model: {fileID: 4821245378892133357, guid: 12d36c6822778ec4d97a60f829ea1bd4, type: 3}
   shootSound: {fileID: 8300000, guid: 5316f03efdbb59b49a5c01cf39d525f6, type: 3}

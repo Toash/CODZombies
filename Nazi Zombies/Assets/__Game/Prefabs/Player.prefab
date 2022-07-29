@@ -239,6 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 2767509881824788975}
   playerInventory: {fileID: 6400288312307306092}
+  dynamicWeaponHoldPoint: {fileID: 6014639377112993086}
   audioSource: {fileID: 3238842498895130583}
 --- !u!1 &5969916476812881196
 GameObject:

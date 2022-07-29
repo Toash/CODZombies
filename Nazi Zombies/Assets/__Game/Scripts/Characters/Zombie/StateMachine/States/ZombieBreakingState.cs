@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace AI.Zombie
 {
@@ -8,13 +9,10 @@ namespace AI.Zombie
 	/// </summary>
 	public class ZombieBreakingState : ZombieBaseState
 	{
+		[ShowInInspector, ReadOnly]
 		private IZombieBreakable currentBreakable;
 
 		private float timer;
-		private void Update()
-		{
-			timer += Time.deltaTime;
-		}
 		private bool canBreak(ZombieStateManager manager)
 		{
 			return manager.stats.BarricadeBreakSpeed <= timer;
@@ -64,6 +62,7 @@ namespace AI.Zombie
 
 		public override void UpdateState(ZombieStateManager manager)
 		{
+			timer += Time.deltaTime;
 			Debug.Log("In breaking state");
 			if (!barricadeBroken(currentBreakable) && canBreak(manager))
 			{

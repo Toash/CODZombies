@@ -11,7 +11,7 @@ namespace AI.Zombie
 	/// </summary>
 	public class ZombieAttackingState : ZombieBaseState
 	{
-		[ShowInInspector,ReadOnly]
+		[ShowInInspector, ReadOnly]
 		private IDamagable thingWeAreAttacking;
 
 		private bool canAttack(ZombieStateManager manager)
@@ -33,7 +33,7 @@ namespace AI.Zombie
 
 			foreach (Collider col in colliders)
 			{
-				if (col.GetComponent<IDamagable>() != null&&col!=this)
+				if (isPlayer(col))
 				{
 					thingWeAreAttacking = col.GetComponent<IDamagable>();
 				}
@@ -41,10 +41,8 @@ namespace AI.Zombie
 		}
 		public override void UpdateState(ZombieStateManager manager)
 		{
-			//if it has IZombieBreakable?
-			if (thingWeAreAttacking != null)
+			if (canAttack(manager))
 			{
-				
 				Attack(manager);
 			}
 			if (thingWeAreAttacking == null)
@@ -66,19 +64,20 @@ namespace AI.Zombie
 		}
 		public override void TriggerStay(ZombieStateManager manager, Collider other)
 		{
-			thingWeAreAttacking = other.GetComponent<IDamagable>();
+
 		}
 
 		public override void TriggerExit(ZombieStateManager manager, Collider other)
 		{
+			if (isPlayer(other))
+			{
+				manager.SwitchState(manager.ChasingState);
+			}
 		}
 		private void Attack(ZombieStateManager manager)
 		{
-			if (canAttack(manager))
-			{
-				thingWeAreAttacking.Damage(manager.stats.Damage);
-				ResetTimer();
-			}
+			thingWeAreAttacking.Damage(manager.stats.Damage);
+			ResetTimer();
 		}
 
 		private void IncreaseTimer()

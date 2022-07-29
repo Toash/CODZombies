@@ -16,10 +16,9 @@ namespace AI.Zombie
 		public abstract void TriggerStay(ZombieStateManager manager, Collider other); //Called every Fixed Update
 		public abstract void TriggerExit(ZombieStateManager manager, Collider other);
 
-
 		protected bool isPlayer(Collider other)
 		{
-			return other.transform.GetComponent<PlayerRef>() != null;
+			return other.transform.GetComponent<IDamagable>() != null && other.GetComponent<PlayerRef>() != null;
 		}
 		protected bool isBarricade(Collider other)
 		{

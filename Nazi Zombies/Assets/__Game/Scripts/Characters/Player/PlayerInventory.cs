@@ -7,9 +7,8 @@ namespace Player
 {
 	public class PlayerInventory : MonoBehaviour
 	{
-		// The currently equipped weapon
-		[ShowInInspector,PropertyOrder(-1)]
-		public Weapon equippedWeapon { get; private set; }
+		[ShowInInspector,ReadOnly,PropertyOrder(-1)]
+		public Weapon EquippedWeapon { get; private set; }
 
 		[SerializeField]
 		private PlayerStats stats;
@@ -26,7 +25,26 @@ namespace Player
 		{
 			if (weaponsList.Count > stats.MaxInventorySlots) Debug.LogError("Too much weapons");
 			IncreaseInventorySize(stats.MaxInventorySlots);
-			if (this.equippedWeapon == null) { EquipWeapon(0); }
+
+		}
+		private void Start()
+		{
+			if (this.EquippedWeapon == null) { EquipWeapon(0); }
+		}
+		private void Update()
+		{
+			GetInput();
+		}
+		private void GetInput()
+		{
+			if (Input.GetKeyDown(KeyCode.Alpha1))
+			{
+				EquipWeapon(0);
+			}
+			if (Input.GetKeyDown(KeyCode.Alpha2))
+			{
+				EquipWeapon(1);
+			}
 		}
 
 		public void AddWeaponToList(Weapon weapon)
@@ -41,7 +59,7 @@ namespace Player
 					break;
 				default:
 					//overwrite equipped weapon
-					AssignWeaponToIndex(weaponsList.IndexOf(equippedWeapon), weapon);
+					AssignWeaponToIndex(weaponsList.IndexOf(EquippedWeapon), weapon);
 					break;
 			}
 		}
@@ -51,11 +69,10 @@ namespace Player
 			Weapon weapon = weaponsList[index];
 			if (weapon != null)
 			{
-				equippedWeapon = weapon;
-				if (weaponChanged != null)
-				{
-					weaponChanged.Invoke(weapon);
-				}
+				EquippedWeapon = weapon;
+				Debug.Log("Changed weapon");
+				weaponChanged?.Invoke(weapon);
+
 			}
 		}
 

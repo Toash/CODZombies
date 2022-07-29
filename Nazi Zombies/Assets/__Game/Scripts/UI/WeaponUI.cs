@@ -17,7 +17,7 @@ namespace Player.UI
 
 		private void Update()
 		{
-			weaponText.text = playerInventory.equippedWeapon.name;
+			weaponText.text = playerInventory.EquippedWeapon.name;
 		}
 	}
 }
