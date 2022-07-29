@@ -29,6 +29,15 @@ namespace AI.Zombie
 		public override void EnterState(ZombieStateManager manager)
 		{
 			StopZombie(manager);
+			Collider[] colliders = Physics.OverlapSphere(transform.position, 1.5f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
+
+			foreach (Collider col in colliders)
+			{
+				if (col.GetComponent<IDamagable>() != null&&col!=this)
+				{
+					thingWeAreAttacking = col.GetComponent<IDamagable>();
+				}
+			}
 		}
 		public override void UpdateState(ZombieStateManager manager)
 		{

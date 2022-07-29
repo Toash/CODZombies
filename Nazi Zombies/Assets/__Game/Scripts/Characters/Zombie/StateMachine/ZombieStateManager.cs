@@ -20,6 +20,7 @@ namespace AI.Zombie
 		//-----------STATES--------------
 		public ZombieChasingState ChasingState;
 		public ZombieAttackingState AttackingState;
+		public ZombieBreakingState BreakingState;
 
 		private void Awake()
 		{

@@ -5,6 +5,14 @@ namespace AI.Zombie
 {
 	public class ZombieChasingState : ZombieBaseState
 	{
+		private bool isDamageableAndNotZombie(Collider other)
+		{
+			return other.transform.GetComponent<IDamagable>() != null && other != this;
+		}
+		private bool isBreakable(Collider other)
+		{
+			return other.transform.GetComponent<IZombieBreakable>() != null;
+		}
 		public override void EnterState(ZombieStateManager manager)
 		{
 			UnstopZombie(manager);
@@ -22,10 +30,13 @@ namespace AI.Zombie
 
 		public override void TriggerStay(ZombieStateManager manager, Collider other)
 		{
-			//other cannot be this gameobject
 			if (isDamageableAndNotZombie(other))
 			{
 				manager.SwitchState(manager.AttackingState);
+			}
+			if (isBreakable(other))
+			{
+				manager.SwitchState(manager.BreakingState);
 			}
 		}
 

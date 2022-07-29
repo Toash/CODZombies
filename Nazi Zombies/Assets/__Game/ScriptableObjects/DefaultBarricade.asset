@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 613d1c5671753ef47b8801de85bb666e, type: 3}
   m_Name: DefaultBarricade
   m_EditorClassIdentifier: 
-  MaxWood: 7
+  MaxWood: 3

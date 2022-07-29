@@ -25,10 +25,7 @@ namespace AI.Zombie
 		{
 			return other.transform.GetComponent<Barricade>() != null;
 		}
-		protected bool isDamageableAndNotZombie(Collider other)
-		{
-			return other.transform.GetComponent<IDamagable>() != null&&other!=this;
-		}
+
 
 		protected void StopZombie(ZombieStateManager manager)
 		{

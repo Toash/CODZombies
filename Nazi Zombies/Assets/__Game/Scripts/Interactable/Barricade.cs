@@ -8,7 +8,7 @@ using Sirenix.OdinInspector;
 //- The player can hold down e to repair, other interactables are only one time events.
 //- Barricades differ specifically in selecting them and "interacting" with them.
 //
-public class Barricade : PlayerInteractable, IDamagable,IZombieBreakable
+public class Barricade : PlayerInteractable, IZombieBreakable
 {
     [SerializeField]
     private BarricadeStats stats;
@@ -30,15 +30,6 @@ public class Barricade : PlayerInteractable, IDamagable,IZombieBreakable
             Broken = false;
 		}
 	}
-	public void Damage(int amount)
-    {
-        CurrentWood -= 1;
-        if (CurrentWood <= 0)
-		{
-            Broken = true;
-            NoBarricades?.Invoke();
-        }
-    }
 
 	public override string GetInteractString()
 	{
@@ -49,5 +40,15 @@ public class Barricade : PlayerInteractable, IDamagable,IZombieBreakable
 	{
         Debug.Log("Repairing");
         CurrentWood += 1;
+	}
+
+	public void Break()
+	{
+		CurrentWood -= 1;
+		if (CurrentWood <= 0)
+		{
+			Broken = true;
+			NoBarricades?.Invoke();
+		}
 	}
 }
