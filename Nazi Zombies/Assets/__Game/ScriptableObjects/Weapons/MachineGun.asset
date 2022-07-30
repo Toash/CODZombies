@@ -12,10 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc808a31f56f1074f87f5d55b742b7fc, type: 3}
   m_Name: MachineGun
   m_EditorClassIdentifier: 
-  damage: 50
-  fireRate: 0.07
-  range: 100
-  automatic: 1
-  reloadTime: 1
-  model: {fileID: 1487774384131766, guid: ee329c3cd08e58645834d20702d7f6c6, type: 3}
-  shootSound: {fileID: 8300000, guid: 9bfac9747e8b85241a490f43b3adf263, type: 3}
+  Damage: 50
+  Range: 100
+  WhatToHit:
+    serializedVersion: 2
+    m_Bits: 119
+  ShouldHitTriggers: 0
+  BulletHole: {fileID: 1496569750137959856, guid: 35518a76453c61343a1f6459286dcee8, type: 3}
+  FireRate: 0.2
+  Automatic: 1
+  ReloadTime: 1
+  model: {fileID: 4821245378892133357, guid: 739f569f05425435f98d2a02e48f2baa, type: 3}
+  VisualRecoil: 5
+  shootSound: {fileID: 8300000, guid: 5316f03efdbb59b49a5c01cf39d525f6, type: 3}

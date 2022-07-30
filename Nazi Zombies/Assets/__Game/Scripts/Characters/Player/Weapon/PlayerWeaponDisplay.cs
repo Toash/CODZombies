@@ -2,42 +2,57 @@ using UnityEngine;
 
 namespace Player
 {
+	/// <summary>
+    /// Handles all the visuls of the weapon. Recoil, Model etc
+    /// </summary>
 	public class PlayerWeaponDisplay : MonoBehaviour
 	{
 		[SerializeField] private PlayerInventory playerInventory;
-		[SerializeField] private PlayerWeapon playerWeapon;
+		[SerializeField] private PlayerWeaponShooter playerWeapon;
 		[SerializeField] private Transform dynamicWeaponHoldPoint;
+
+		private GameObject currentWeaponDisplay;
 
 		private Vector3 cachedWeaponHoldPoint;
 
-		private Vector3 recoil = new Vector3(0, 0, -10);
+		private Vector3 recoil;
 
 		private readonly float INTERPOLATION_SPEED = 5;
+
 		private void OnEnable()
 		{
 			playerInventory.weaponChanged += DisplayWeapon;
-			playerWeapon.GunFire += DisplayRecoil;
+			playerWeapon.GunFireEvent += DisplayRecoil;
 		}
 		private void OnDisable()
 		{
 			playerInventory.weaponChanged -= DisplayWeapon;
-			playerWeapon.GunFire -= DisplayRecoil;
+			playerWeapon.GunFireEvent -= DisplayRecoil;
 		}
-		private void Start()
+        private void Start()
 		{
 			cachedWeaponHoldPoint = dynamicWeaponHoldPoint.localPosition;
+			
 		}
         private void Update()
         {
 			ReturnWeaponToNeutralPosition();
 		}
+
         //---------DISPLAY-----------
+
         private void DisplayWeapon(Weapon weapon)
 		{
-			Debug.Log("Displaying weapon");
-			Instantiate(weapon.model, dynamicWeaponHoldPoint.position, dynamicWeaponHoldPoint.rotation, dynamicWeaponHoldPoint);
+			ClearDisplayWeapon();
+			currentWeaponDisplay = Instantiate(weapon.model, dynamicWeaponHoldPoint.position, dynamicWeaponHoldPoint.rotation, dynamicWeaponHoldPoint);
+			recoil = new Vector3(0, 0, -playerInventory.EquippedWeapon.VisualRecoil);
+			
 		}
-		private void DisplayRecoil()
+		private void ClearDisplayWeapon()
+        {
+			Destroy(currentWeaponDisplay);
+        }
+		private void DisplayRecoil(Weapon weapon)
 		{
 			dynamicWeaponHoldPoint.localPosition = Vector3.Lerp(dynamicWeaponHoldPoint.localPosition, dynamicWeaponHoldPoint.localPosition + recoil, Time.deltaTime * INTERPOLATION_SPEED);
 		}

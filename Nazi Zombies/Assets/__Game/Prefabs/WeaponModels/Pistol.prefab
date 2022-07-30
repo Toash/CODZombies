@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5003466468511397349}
   - component: {fileID: 3422263610383430244}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4821245378892133357}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.9483566, y: 0.84354496, z: 0.60183716}
-  m_LocalScale: {x: 0.14356928, y: 0.14356928, z: 0.14356928}
+  m_LocalScale: {x: 0.06410079, y: 0.035680875, z: 0.12707317}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
