@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Bits: 119
   ShouldHitTriggers: 0
   BulletHole: {fileID: 1496569750137959856, guid: 35518a76453c61343a1f6459286dcee8, type: 3}
-  FireRate: 0.2
+  FireRate: 0.09
   Automatic: 1
   ReloadTime: 1
   model: {fileID: 4821245378892133357, guid: 739f569f05425435f98d2a02e48f2baa, type: 3}
