@@ -13,7 +13,8 @@ namespace Player
 		[SerializeField]
 		private PlayerStats stats;
 
-		[Header("Inventory"),InfoBox("The maximum size of inventory is 2")]
+		[ValidateInput("ValidSize","Inventory must be valid size")]
+		[Header("Inventory")]
 		public List<Weapon> weaponsList;
 
 
@@ -70,7 +71,6 @@ namespace Player
 			if (weapon != null)
 			{
 				EquippedWeapon = weapon;
-				Debug.Log("Changed weapon");
 				weaponChanged?.Invoke(weapon);
 
 			}
@@ -92,6 +92,10 @@ namespace Player
 				weaponsList.Add(null);
             }
 		}
+		private bool ValidSize()
+        {
+			return weaponsList.Count <= stats.MaxInventorySlots;
+        }
 	}
 }
 

@@ -8,6 +8,7 @@ public class ServiceLocator : MonoBehaviour
 	public static ServiceLocator Instance { get; private set; }
 	public Ballistics Ballistics { get; private set; }
 	public GameManager GameManager { get; private set; }
+	public GameAssets GameAssets { get; private set; }
 
 	private void Awake()
 	{
@@ -18,7 +19,7 @@ public class ServiceLocator : MonoBehaviour
 		else
 		{
 			Debug.LogError("Multiple Service Locators!");
-			Destroy(this);
+			Destroy(this.gameObject);
 		}
 		References();
 	}
@@ -26,6 +27,7 @@ public class ServiceLocator : MonoBehaviour
 	{
 		Ballistics = GetComponentInChildren<Ballistics>();
 		GameManager = GetComponentInChildren<GameManager>();
+		GameAssets = GetComponentInChildren<GameAssets>();
 	}
 
 }
