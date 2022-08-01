@@ -4,7 +4,6 @@ using Sirenix.OdinInspector;
 /// <summary>
 /// Zones activate certain spawn points
 /// </summary>
-[TypeInfoBox("When the player steps in this zone, the corresponding Zombie Spawn Point will activate.")]
 [RequireComponent(typeof(BoxCollider))]
 public class Zone : MonoBehaviour
 {

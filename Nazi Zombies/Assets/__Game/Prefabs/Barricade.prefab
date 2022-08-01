@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactType: 0
-  detectionType: 0
+  detectionType: 1
   stats: {fileID: 11400000, guid: ee95c2c376c6358458ec8f29700e3284, type: 2}
   AtLeastOneBarricade:
     m_PersistentCalls:

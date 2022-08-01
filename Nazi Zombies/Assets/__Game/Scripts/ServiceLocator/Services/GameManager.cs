@@ -1,24 +1,33 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 /// <summary>
-/// Handles rounds, spawning, and zones. 
+/// Handles rounds, spawning zombies, difficulty. 
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-	//rounds
-	public static int CurrentRound;
-	private int maxZombies;
-	private static int currentZombies;
-	public delegate void Action();
-	public static Action roundChanged;
 
-	//spawners 
+	[SerializeField]
+	private int maxZombies;
+	[SerializeField]
+	private float zombieSpawnFrequency;
+
+	public int CurrentRound { get; private set; }
+	public int CurrentZombies { get; private set; }
+
+	public delegate void Action();
+	public Action roundChanged;
+
 	private ZombieSpawnPoint[] spawnPoints;
 
+	private bool roundChanging;
+	private bool noZombies { get { return CurrentZombies<=0; } }
+	private bool underMaxZombies { get { return CurrentZombies <= maxZombies; } }
 
-	//zones
-	
+	private float timer;
+
+
 
 	private void Start()
     {
@@ -26,26 +35,50 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        
+		IncreaseTimer();
+        if(!roundChanging)
+        {
+            if (underMaxZombies&&GetValidSpawnPoints().Length>0)
+            {
+                if (timer >= zombieSpawnFrequency)
+                {
+					SpawnZombie();
+					ResetTimer();
+                }
+            }
+        }
+
+    }
+	public void AddZombieCount()
+    {
+		CurrentZombies += 1;
+    }
+	public void RemoveZombieCount()
+    {
+		CurrentZombies -= 1;
     }
 
-    //rounds
-    private static void IncreaseRound()
+
+    private void IncreaseRound()
     {
 		CurrentRound += 1;
 		roundChanged?.Invoke();
     }
-	//spawners
+
 	private void SpawnZombie()
     {
+		if (GetValidSpawnPoints().Length==0)
+        {
+			Debug.Log("Spawning zombie with no active spawnpoints");
+        }
 		var zombie = ServiceLocator.Instance.GameAssets.zombie;
-
 		//Find spawn point
-		ZombieSpawnPoint[] valid = GetValidSpawnPoints();
-		int index = Random.Range(0, valid.Length);
+		ZombieSpawnPoint[] validSpawnPoints = GetValidSpawnPoints();
+		
+		int index = UnityEngine.Random.Range(0, validSpawnPoints.Length);
 
 		//spawn zombie
-		Instantiate(zombie, valid[index].transform.position, Quaternion.identity);
+		Instantiate(zombie, validSpawnPoints[index].transform.position, Quaternion.identity);
     }
 	private ZombieSpawnPoint[] GetValidSpawnPoints()
     {
@@ -59,7 +92,25 @@ public class GameManager : MonoBehaviour
         }
 		return validSpawnPoints.ToArray();
     }
+	private bool AtLeastOneSpawnPointActivate(ZombieSpawnPoint[] spawnPoints)
+    {
+		foreach(ZombieSpawnPoint spawnPoint in spawnPoints)
+        {
+            if (spawnPoint.Active == true)
+            {
+				return true;
+            }
+        }
+		return false;
 
-	//zones
+    }
+	private void IncreaseTimer()
+	{
+		timer += Time.deltaTime;
+	}
+	private void ResetTimer()
+	{
+		timer = 0;
+	}
 
 }

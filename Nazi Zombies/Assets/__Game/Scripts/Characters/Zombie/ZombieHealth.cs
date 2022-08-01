@@ -18,7 +18,12 @@ namespace AI.Zombie
 
 		private bool noHealth { get { return currentHealth <= 0; } }
 
-		private void Awake()
+        private void OnEnable()
+        {
+			ServiceLocator.Instance.GameManager.AddZombieCount();
+        }
+
+        private void Awake()
 		{
 			currentHealth = stats.Health;
 		}
