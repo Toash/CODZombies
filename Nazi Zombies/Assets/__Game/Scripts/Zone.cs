@@ -12,7 +12,14 @@ public class Zone : MonoBehaviour
     private bool isPlayer(Collider other)
     {
         return other.transform.GetComponent<PlayerRef>();
-    } 
+    }
+    private void Update()
+    {
+        if (PlayerInZone == true)
+        {
+            Debug.Log("Player in Zone!!!");
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {

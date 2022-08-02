@@ -22,7 +22,10 @@ namespace AI.Zombie
         {
 			ServiceLocator.Instance.GameManager.AddZombieCount();
         }
-
+        private void OnDisable()
+        {
+			ServiceLocator.Instance.GameManager.RemoveZombieCount();
+        }
         private void Awake()
 		{
 			currentHealth = stats.Health;

@@ -180,3 +180,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf7e63855724ae74ca898b6e5d4c408f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxZombies: 26
+  zombieSpawnFrequency: 1

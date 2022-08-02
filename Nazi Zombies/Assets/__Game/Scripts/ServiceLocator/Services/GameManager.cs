@@ -38,11 +38,11 @@ public class GameManager : MonoBehaviour
 		IncreaseTimer();
         if(!roundChanging)
         {
-            if (underMaxZombies&&GetValidSpawnPoints().Length>0)
+            if (underMaxZombies)
             {
-                if (timer >= zombieSpawnFrequency)
+                if (timer > zombieSpawnFrequency)
                 {
-					SpawnZombie();
+					SpawnZombieAtActiveSpawnPoint();
 					ResetTimer();
                 }
             }
@@ -65,44 +65,31 @@ public class GameManager : MonoBehaviour
 		roundChanged?.Invoke();
     }
 
-	private void SpawnZombie()
+	private void SpawnZombieAtActiveSpawnPoint()
     {
-		if (GetValidSpawnPoints().Length==0)
-        {
-			Debug.Log("Spawning zombie with no active spawnpoints");
-        }
 		var zombie = ServiceLocator.Instance.GameAssets.zombie;
-		//Find spawn point
-		ZombieSpawnPoint[] validSpawnPoints = GetValidSpawnPoints();
-		
+		ZombieSpawnPoint[] validSpawnPoints = GetActiveSpawnPoints();
+		if (validSpawnPoints.Length==0)
+        {
+			Debug.LogError("Spawning zombie with no active spawnpoints");
+			return;
+        }
+
 		int index = UnityEngine.Random.Range(0, validSpawnPoints.Length);
 
-		//spawn zombie
 		Instantiate(zombie, validSpawnPoints[index].transform.position, Quaternion.identity);
     }
-	private ZombieSpawnPoint[] GetValidSpawnPoints()
+	private ZombieSpawnPoint[] GetActiveSpawnPoints()
     {
-		List<ZombieSpawnPoint> validSpawnPoints = new List<ZombieSpawnPoint>();
+		List<ZombieSpawnPoint> activeSpawnPoints = new List<ZombieSpawnPoint>();
 		foreach(ZombieSpawnPoint spawn in spawnPoints)
         {
             if (spawn.Active == true)
             {
-				validSpawnPoints.Add(spawn);
+				activeSpawnPoints.Add(spawn);
             }
         }
-		return validSpawnPoints.ToArray();
-    }
-	private bool AtLeastOneSpawnPointActivate(ZombieSpawnPoint[] spawnPoints)
-    {
-		foreach(ZombieSpawnPoint spawnPoint in spawnPoints)
-        {
-            if (spawnPoint.Active == true)
-            {
-				return true;
-            }
-        }
-		return false;
-
+		return activeSpawnPoints.ToArray();
     }
 	private void IncreaseTimer()
 	{

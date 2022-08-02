@@ -5,7 +5,7 @@ public class Ballistics:MonoBehaviour
 {
 	private Queue<GameObject> decals = new Queue<GameObject>();
 
-	private readonly int MAX_DECALS = 5;
+	private readonly int MAX_DECALS = 15;
 
 	private void Update()
 	{
@@ -19,7 +19,7 @@ public class Ballistics:MonoBehaviour
 	public void CastBullet(Transform shooter, Weapon weapon)
 	{
 		RaycastHit hit;
-		if (Physics.Raycast(shooter.position, shooter.forward, out hit, weapon.Range, weapon.WhatToHit, weapon.ShouldHitTriggers))
+		if (Physics.Raycast(shooter.position, shooter.forward, out hit, weapon.Range, weapon.WhatToHit, QueryTriggerInteraction.Ignore))
 		{
 			IDamagable damageable = hit.transform.GetComponent<IDamagable>();
 			if (damageable != null)
@@ -29,7 +29,7 @@ public class Ballistics:MonoBehaviour
 			Debug.DrawRay(shooter.position, hit.point-shooter.position,Color.green,10,false);
 			bulletHole(hit, weapon.BulletHole);
 		}
-		//didnt hit
+		//didnt hit anything 
 	}
 	public void CreateExplosion(int damage, Vector3 origin, float range)
 	{

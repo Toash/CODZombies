@@ -21,8 +21,21 @@ public class ZombieSpawnPoint : MonoBehaviour
     }
 
     private void Update()
-    { 
-        
+    {
+        UpdateSpawnPointState();
+    }
+
+    private void UpdateSpawnPointState()
+    {
+        foreach (Zone zone in connectedZones)
+        {
+            if (zone.PlayerInZone == true)
+            {
+                Active = true;
+                return;
+            }
+        }
+        Active = false;
     }
 
     private void OnDrawGizmos()
