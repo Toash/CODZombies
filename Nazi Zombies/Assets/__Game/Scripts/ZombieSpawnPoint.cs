@@ -6,7 +6,6 @@ using System.Collections.Generic;
 /// </summary>
 public class ZombieSpawnPoint : MonoBehaviour
 {
-    //if zone is activated, zombies can spawn on this
     public Zone[] connectedZones { get; private set; }
 
     public bool Active;

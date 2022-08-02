@@ -6,9 +6,11 @@ namespace AI.Zombie
 {
 	public class ZombieDeadState : ZombieBaseState
 	{
+
 		public override void EnterState(ZombieStateManager manager)
 		{
 			Debug.Log("Zombie is dead");
+			
 		}
 		public override void UpdateState(ZombieStateManager manager)
 		{

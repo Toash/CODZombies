@@ -8,11 +8,13 @@ namespace AI.Zombie
 	{
 		//public Collider col;
 		public Rigidbody rb;
+		public Collider ragdollCollider;
 
 		public void Ragdoll()
 		{
 			rb.isKinematic = false;
 			rb.useGravity = true;
+			ragdollCollider.gameObject.layer = LayerMask.NameToLayer("GroundOnly");
 		}
 	}
 }

@@ -181,4 +181,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxZombies: 26
-  zombieSpawnFrequency: 1
+  zombieSpawnFrequency: 3
