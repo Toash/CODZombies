@@ -5,13 +5,15 @@ namespace AI.Zombie
 {
 	public class ZombieChasingState : ZombieBaseState
 	{
-
+		[SerializeField]
+		private float chaseSpeed;
 		private bool isBreakable(Collider other)
 		{
 			return other.transform.GetComponent<IZombieBreakable>() != null;
 		}
 		public override void EnterState(ZombieStateManager manager)
 		{
+			manager.Agent.speed = chaseSpeed;
 			UnstopZombie(manager);
 			Debug.Log("Entering Chase state");
 		}

@@ -12,7 +12,7 @@ namespace AI.Zombie
 		[SerializeField]
 		private UnityEvent DamagedEvent;
 		[SerializeField]
-		private UnityEvent DeathEvent;
+		private UnityEvent NoHealthEvent;
 
 		private int currentHealth;
 
@@ -34,7 +34,7 @@ namespace AI.Zombie
 		{
 			currentHealth -= amount;
 			DamagedEvent?.Invoke();
-			if (noHealth) DeathEvent?.Invoke();
+			if (noHealth) NoHealthEvent?.Invoke();
 		}
 		public void KillZombie(float time)
 		{

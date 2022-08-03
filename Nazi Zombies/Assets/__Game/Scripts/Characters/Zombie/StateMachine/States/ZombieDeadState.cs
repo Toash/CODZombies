@@ -7,9 +7,11 @@ namespace AI.Zombie
 	public class ZombieDeadState : ZombieBaseState
 	{
 
+		public UnityEvent deathEvent;
 		public override void EnterState(ZombieStateManager manager)
 		{
 			Debug.Log("Zombie is dead");
+			deathEvent?.Invoke();
 			
 		}
 		public override void UpdateState(ZombieStateManager manager)

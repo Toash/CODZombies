@@ -14,6 +14,10 @@ namespace AI.Zombie
 		[ShowInInspector, ReadOnly]
 		private IDamagable thingWeAreAttacking;
 
+		[SerializeField]
+		private float attackSpeed;
+		[SerializeField]
+		private float attackDamage;
 		private bool canAttack(ZombieStateManager manager)
 		{
 			return manager.stats.AttackSpeed <= timer;
