@@ -15,12 +15,12 @@ namespace AI.Zombie
 		private IDamagable thingWeAreAttacking;
 
 		[SerializeField]
-		private float attackSpeed;
+		private float attackSpeed = 1.5f;
 		[SerializeField]
-		private float attackDamage;
+		private int attackDamage = 50;
 		private bool canAttack(ZombieStateManager manager)
 		{
-			return manager.stats.AttackSpeed <= timer;
+			return attackSpeed <= timer;
 		}
 
 		private float timer;
@@ -80,7 +80,7 @@ namespace AI.Zombie
 		}
 		private void Attack(ZombieStateManager manager)
 		{
-			thingWeAreAttacking.Damage(manager.stats.Damage);
+			thingWeAreAttacking.Damage(attackDamage);
 			ResetTimer();
 		}
 

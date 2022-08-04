@@ -12,10 +12,13 @@ namespace AI.Zombie
 		[ShowInInspector, ReadOnly]
 		private IZombieBreakable currentBreakable;
 
+		[SerializeField]
+		private float breakSpeed = 1f;
+
 		private float timer;
 		private bool canBreak(ZombieStateManager manager)
 		{
-			return manager.stats.BarricadeBreakSpeed <= timer;
+			return breakSpeed <= timer;
 		}
 		private bool barricadeBroken(IZombieBreakable barricade)
 		{

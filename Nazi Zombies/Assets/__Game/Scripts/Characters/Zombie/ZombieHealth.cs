@@ -5,10 +5,8 @@ namespace AI.Zombie
 {
 	public class ZombieHealth : MonoBehaviour, IDamagable
 	{
-		[SerializeField]
-		private ZombieStats stats;
+		public int StartingHealth = 100;
 
-		[Header("Unity Events")]
 		[SerializeField]
 		private UnityEvent DamagedEvent;
 		[SerializeField]
@@ -26,10 +24,6 @@ namespace AI.Zombie
         {
 			ServiceLocator.Instance.GameManager.RemoveZombieCount();
         }
-        private void Awake()
-		{
-			currentHealth = stats.Health;
-		}
 		public virtual void Damage(int amount)
 		{
 			currentHealth -= amount;

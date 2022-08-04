@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.AI;
 using Sirenix.OdinInspector;
 
 namespace AI.Zombie
 {
+	[RequireComponent(typeof(NavMeshAgent))]
 	public class ZombieChasingState : ZombieBaseState
 	{
 		[SerializeField]

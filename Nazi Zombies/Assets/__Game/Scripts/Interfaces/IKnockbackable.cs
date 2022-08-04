@@ -2,5 +2,5 @@
 
 public interface IKnockbackable
 {
-    public void Knockback();
+    public void Knockback(float force);
 }

@@ -5,7 +5,6 @@ using Sirenix.OdinInspector;
 
 namespace AI.Zombie
 {
-	[RequireComponent(typeof(NavMeshAgent))]
 	[RequireComponent(typeof(Rigidbody))]
 	public class ZombieStateManager : MonoBehaviour
 	{
@@ -13,20 +12,14 @@ namespace AI.Zombie
 		private ZombieBaseState currentState;
 
 		[Title("Dependencies")]
+		[field: SerializeField]
 		public NavMeshAgent Agent { get; private set; }
-
-		public ZombieStats stats;
 
 		//-----------STATES--------------
 		public ZombieChasingState ChasingState;
 		public ZombieAttackingState AttackingState;
 		public ZombieBreakingState BreakingState;
 
-		private void Awake()
-		{
-			Agent = GetComponent<NavMeshAgent>();
-			Agent.speed = stats.Speed;
-		}
 
 		private void Start()
 		{

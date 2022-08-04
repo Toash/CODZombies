@@ -57,7 +57,8 @@ GameObject:
   - component: {fileID: 5084018778774884751}
   - component: {fileID: 8275398203449487171}
   - component: {fileID: 349445134678294250}
-  m_Layer: 0
+  - component: {fileID: 1386854993603187113}
+  m_Layer: 6
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,11 +139,27 @@ CapsuleCollider:
   m_GameObject: {fileID: 4037123587577458493}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &1386854993603187113
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4037123587577458493}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4129491350543626065
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,6 +179,7 @@ GameObject:
   - component: {fileID: 4129491350543625901}
   - component: {fileID: 4129491350543625895}
   - component: {fileID: 7119999612839944414}
+  - component: {fileID: 7119354543054383018}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -199,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 724d97689be62d547812d8dc74d56701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: f84324dada9471443920e238f5da6704, type: 2}
+  Col: {fileID: 0}
   ChasingState: {fileID: 4109610200724364216}
   AttackingState: {fileID: 3241098464510266129}
   BreakingState: {fileID: 7351452542773874473}
@@ -215,6 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e734300153488b749aa6bb1e3af1dd13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chaseSpeed: 2
 --- !u!114 &3241098464510266129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,6 +246,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c91766fdbfc33f04881fc9b709b1cdd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackSpeed: 1
+  attackDamage: 50
 --- !u!114 &2489521209189794683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,6 +260,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5928acf6274580d48b05b61cb2540907, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7291942087057912275}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6171165489949669500}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7351452542773874473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dcffe6871a99844ca9701741ebf50ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  breakSpeed: 1
 --- !u!114 &6171165489949669500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e90210375ee8ce64b8e056478ad85b61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: f84324dada9471443920e238f5da6704, type: 2}
+  StartingHealth: 100
   DamagedEvent:
     m_PersistentCalls:
       m_Calls:
@@ -291,69 +340,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  DeathEvent:
+  NoHealthEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 1881ae6b6a8e8bc429336b989e10b0cd, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4129491350543625901}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4129491350543625895}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: PlayOneShot
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 1ea01d7dc4da4d94a887947e2f285c23, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 6171165489949669500}
-        m_TargetAssemblyTypeName: AI.Zombie.ZombieHealth, Assembly-CSharp
-        m_MethodName: KillZombie
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 30
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 7291942087057912275}
-        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 6452752414508596804}
         m_TargetAssemblyTypeName: AI.Zombie.ZombieStateManager, Assembly-CSharp
         m_MethodName: SwitchState
@@ -361,30 +350,6 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 2489521209189794683}
           m_ObjectArgumentAssemblyTypeName: AI.Zombie.ZombieBaseState, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 7517817912257737778}
-        m_TargetAssemblyTypeName: AI.Zombie.ZombieRagdoll, Assembly-CSharp
-        m_MethodName: Ragdoll
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 6452752414508596804}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -402,8 +367,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c780365021ec5439f1e6ef669871f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 7119999612839944414}
-  ragdollCollider: {fileID: 349445134678294250}
+  mainRb: {fileID: 7119999612839944414}
+  mainCollider: {fileID: 7119354543054383018}
+  ragdollRoot: {fileID: 3673671707785252223}
 --- !u!195 &4129491350543625901
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -538,6 +504,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &7119354543054383018
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4129491350543626065}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8323046315818396960
 GameObject:
   m_ObjectHideFlags: 0

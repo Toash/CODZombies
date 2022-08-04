@@ -6,13 +6,18 @@ namespace AI.Zombie
 {
 	public class ZombieDeadState : ZombieBaseState
 	{
-
-		public UnityEvent deathEvent;
+		[SerializeField]
+		private UnityEvent deathEvent;
 		public override void EnterState(ZombieStateManager manager)
 		{
-			Debug.Log("Zombie is dead");
+			manager.Agent.enabled = false;
 			deathEvent?.Invoke();
-			
+
+			//stop navmeshagent
+			//disable health component
+
+
+			//ragdoll
 		}
 		public override void UpdateState(ZombieStateManager manager)
 		{
