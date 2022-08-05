@@ -10,9 +10,6 @@ namespace AI.Zombie
 	{
 		[ShowInInspector, ReadOnly]
 		private ZombieBaseState currentState;
-
-		[Title("Dependencies")]
-		[field: SerializeField]
 		public NavMeshAgent Agent { get; private set; }
 
 		//-----------STATES--------------
@@ -20,8 +17,11 @@ namespace AI.Zombie
 		public ZombieAttackingState AttackingState;
 		public ZombieBreakingState BreakingState;
 
-
-		private void Start()
+        private void Awake()
+        {
+			Agent = GetComponent<NavMeshAgent>();
+        }
+        private void Start()
 		{
 			SwitchState(ChasingState);
 		}

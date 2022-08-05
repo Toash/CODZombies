@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dce3fb90a75d22c4786565be1d86db6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxDecals: 15
 --- !u!1 &4834743896179175071
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,3 +183,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxZombies: 26
   zombieSpawnFrequency: 3
+  spawnZombies: 0

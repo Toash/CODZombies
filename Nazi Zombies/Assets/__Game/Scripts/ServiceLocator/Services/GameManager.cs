@@ -1,17 +1,19 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 
 /// <summary>
 /// Handles rounds, spawning zombies, difficulty. 
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-
 	[SerializeField]
 	private int maxZombies;
 	[SerializeField]
 	private float zombieSpawnFrequency;
+	[SerializeField, Title("Debug")]
+	private bool spawnZombies;
 
 	public int CurrentRound { get; private set; }
 	public int CurrentZombies { get; private set; }
@@ -35,6 +37,7 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
+		if (!spawnZombies) return;
 		IncreaseTimer();
         if(!roundChanging)
         {

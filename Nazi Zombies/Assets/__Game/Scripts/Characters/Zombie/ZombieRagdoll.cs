@@ -3,7 +3,7 @@ using UnityEngine;
 namespace AI.Zombie
 {
 
-	public class ZombieRagdoll : MonoBehaviour,IKnockbackable
+	public class ZombieRagdoll : MonoBehaviour
 	{
 		[SerializeField]
 		private Rigidbody mainRb;
