@@ -6,21 +6,14 @@ public class Weapon : ScriptableObject
 {
 	public int Damage;
 	public float Range;
-	public LayerMask WhatToHit;
-	public QueryTriggerInteraction ShouldHitTriggers;
-	public GameObject BulletHole;
 
 	public float FireRate;
 	public bool Automatic;
 	public float ReloadTime;
 	[Title("DISPLAY")]
-	public GameObject model;
+	public GameObject Model;
 	public float VisualRecoil;
 
 	[Header("Audio")]
-	public AudioClip shootSound;
-
-	private GameObject weaponModel;
-	
-
+	public AudioClip ShootSound;
 }

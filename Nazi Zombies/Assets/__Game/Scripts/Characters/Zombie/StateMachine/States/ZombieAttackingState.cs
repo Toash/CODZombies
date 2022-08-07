@@ -3,22 +3,19 @@ using Sirenix.OdinInspector;
 
 namespace AI.Zombie
 {
-
-	//this is self contained?
-	//not really :/
 	/// <summary>
 	/// Damaging player
 	/// </summary>
 	public class ZombieAttackingState : ZombieBaseState
 	{
 		[ShowInInspector, ReadOnly]
-		private IDamagable thingWeAreAttacking;
+		private IDamagable attackent;
 
 		[SerializeField]
 		private float attackSpeed = 1.5f;
 		[SerializeField]
 		private int attackDamage = 50;
-		private bool canAttack(ZombieStateManager manager)
+		private bool canAttack()
 		{
 			return attackSpeed <= timer;
 		}
@@ -33,7 +30,9 @@ namespace AI.Zombie
 		public override void EnterState(ZombieStateManager manager)
 		{
 			StopZombie(manager);
-			Collider[] colliders = Physics.OverlapSphere(transform.position, 1.5f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
+			attackent = PlayerRef.Instance.GetComponent<IDamagable>();
+			/*
+			Collider[] colliders = Physics.OverlapSphere(transform.position, 5, Physics.AllLayers, QueryTriggerInteraction.Ignore);
 
 			foreach (Collider col in colliders)
 			{
@@ -42,16 +41,18 @@ namespace AI.Zombie
 					thingWeAreAttacking = col.GetComponent<IDamagable>();
 				}
 			}
+			*/
 		}
 		public override void UpdateState(ZombieStateManager manager)
 		{
-			if (canAttack(manager))
+			if (canAttack())
 			{
-				Attack(manager);
+				Attack();
 			}
-			if (thingWeAreAttacking == null)
+			if (attackent == null)
 			{
-				manager.SwitchState(manager.ChasingState);
+				//manager.SwitchState(manager.ChasingState);
+				Debug.LogError("No player or damageable found");
 			}
 		}
 		public override void FixedUpdateState(ZombieStateManager manager)
@@ -78,9 +79,9 @@ namespace AI.Zombie
 				manager.SwitchState(manager.ChasingState);
 			}
 		}
-		private void Attack(ZombieStateManager manager)
+		private void Attack()
 		{
-			thingWeAreAttacking.Damage(attackDamage);
+			attackent.Damage(attackDamage);
 			ResetTimer();
 		}
 

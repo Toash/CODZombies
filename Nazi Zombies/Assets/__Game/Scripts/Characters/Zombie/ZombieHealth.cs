@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Sirenix.OdinInspector;
 
 namespace AI.Zombie
 {
@@ -12,11 +13,17 @@ namespace AI.Zombie
 		[SerializeField]
 		private UnityEvent NoHealthEvent;
 
+		[PropertyOrder(-1),ShowInInspector,ReadOnly]
 		private int currentHealth;
 
 		private bool noHealth { get { return currentHealth <= 0; } }
 
-        private void OnEnable()
+        private void Awake()
+        {
+			currentHealth = StartingHealth;
+        }
+
+        private void Start()
         {
 			ServiceLocator.Instance.GameManager.AddZombieCount();
         }

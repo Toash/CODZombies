@@ -13,13 +13,6 @@ public class Zone : MonoBehaviour
     {
         return other.transform.GetComponent<PlayerRef>();
     }
-    private void Update()
-    {
-        if (PlayerInZone == true)
-        {
-            Debug.Log("Player in Zone!!!");
-        }
-    }
 
     private void OnTriggerEnter(Collider other)
     {

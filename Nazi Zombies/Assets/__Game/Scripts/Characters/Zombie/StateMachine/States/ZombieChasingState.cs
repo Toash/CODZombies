@@ -4,15 +4,11 @@ using Sirenix.OdinInspector;
 
 namespace AI.Zombie
 {
-	[RequireComponent(typeof(NavMeshAgent))]
 	public class ZombieChasingState : ZombieBaseState
 	{
 		[SerializeField]
-		private float chaseSpeed;
-		private bool isBreakable(Collider other)
-		{
-			return other.transform.GetComponent<IZombieBreakable>() != null;
-		}
+		private float chaseSpeed = 2f;
+
 		public override void EnterState(ZombieStateManager manager)
 		{
 			manager.Agent.speed = chaseSpeed;

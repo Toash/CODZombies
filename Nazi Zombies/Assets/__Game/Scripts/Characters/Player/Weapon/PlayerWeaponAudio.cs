@@ -27,7 +27,7 @@ namespace Player
 
         private void PlayGunAudio(Weapon weapon)
         {
-            audioSource.PlayOneShot(weapon.shootSound);
+            audioSource.PlayOneShot(weapon.ShootSound);
         }
         // Start is called before the first frame update
         void Start()

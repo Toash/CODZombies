@@ -44,7 +44,7 @@ namespace Player
         private void DisplayWeapon(Weapon weapon)
 		{
 			ClearDisplayWeapon();
-			currentWeaponDisplay = Instantiate(weapon.model, dynamicWeaponHoldPoint.position, dynamicWeaponHoldPoint.rotation, dynamicWeaponHoldPoint);
+			currentWeaponDisplay = Instantiate(weapon.Model, dynamicWeaponHoldPoint.position, dynamicWeaponHoldPoint.rotation, dynamicWeaponHoldPoint);
 			recoil = new Vector3(0, 0, -playerInventory.EquippedWeapon.VisualRecoil);
 			
 		}

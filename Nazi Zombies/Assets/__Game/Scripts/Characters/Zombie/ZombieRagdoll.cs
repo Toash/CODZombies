@@ -6,38 +6,28 @@ namespace AI.Zombie
 	public class ZombieRagdoll : MonoBehaviour
 	{
 		[SerializeField]
-		private Rigidbody mainRb;
-		[SerializeField]
-		private Collider mainCollider;
-		[SerializeField]
 		private Transform ragdollRoot;
-
-		public void Knockback(float force)
-        {
-
-        }
 
 		public void Ragdoll()
 		{
-			SetRagdollIsKinematicAndGravity(ragdollRoot, mainRb, false);
-			SetRagdollColliderEnabled(ragdollRoot, mainCollider, true);
+			SetRagdollIsKinematicAndGravity(ragdollRoot,false);
+			SetRagdollColliderEnabled(ragdollRoot,true);
 		}
 
-		private void SetRagdollIsKinematicAndGravity(Transform ragdollRoot, Rigidbody mainRb, bool state)
+		private void SetRagdollIsKinematicAndGravity(Transform ragdollRoot, bool state)
         {
-			mainRb.isKinematic = !state;
-			mainRb.useGravity = state;
-			
-			foreach(Rigidbody rb in ragdollRoot)
+
+			Rigidbody[] rbs = ragdollRoot.GetComponentsInChildren<Rigidbody>();
+			foreach(Rigidbody rb in rbs)
             {
 				rb.isKinematic = state;
 				rb.useGravity = !state;
             }
         }
-		private void SetRagdollColliderEnabled(Transform ragdollRoot, Collider mainCol, bool state)
+		private void SetRagdollColliderEnabled(Transform ragdollRoot,bool state)
         {
-			mainCol.enabled = !state;
-			foreach(Collider col in ragdollRoot)
+			Collider[] cols = ragdollRoot.GetComponentsInChildren<Collider>();
+			foreach (Collider col in cols)
             {
 				col.enabled = state; 
             }

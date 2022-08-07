@@ -1,23 +1,20 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
+using Sirenix.OdinInspector;
 
 namespace AI.Zombie
 {
+	[InfoBox("By default, disables NavMeshAgent and Root Collider")]
 	public class ZombieDeadState : ZombieBaseState
 	{
 		[SerializeField]
 		private UnityEvent deathEvent;
+
 		public override void EnterState(ZombieStateManager manager)
 		{
 			manager.Agent.enabled = false;
+			manager.Col.enabled = false;
 			deathEvent?.Invoke();
-
-			//stop navmeshagent
-			//disable health component
-
-
-			//ragdoll
 		}
 		public override void UpdateState(ZombieStateManager manager)
 		{

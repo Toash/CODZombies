@@ -5,21 +5,29 @@ using Sirenix.OdinInspector;
 
 namespace AI.Zombie
 {
+	[RequireComponent(typeof(NavMeshAgent))]
+	[RequireComponent(typeof(Collider))]
 	[RequireComponent(typeof(Rigidbody))]
 	public class ZombieStateManager : MonoBehaviour
 	{
 		[ShowInInspector, ReadOnly]
 		private ZombieBaseState currentState;
+
+		[ShowInInspector, ReadOnly]
 		public NavMeshAgent Agent { get; private set; }
+		[ShowInInspector, ReadOnly]
+		public Collider Col { get; private set; }
 
 		//-----------STATES--------------
 		public ZombieChasingState ChasingState;
 		public ZombieAttackingState AttackingState;
 		public ZombieBreakingState BreakingState;
+		public ZombieDeadState DeadState;
 
         private void Awake()
         {
 			Agent = GetComponent<NavMeshAgent>();
+			Col = GetComponent<Collider>();
         }
         private void Start()
 		{
@@ -45,6 +53,11 @@ namespace AI.Zombie
 			currentState = state;
 			currentState.EnterState(this);
 		}
+		public void Dead()
+        {
+			currentState = DeadState;
+			currentState.EnterState(this);
+        }
 
 		//--------------PHYSICS---------------
 

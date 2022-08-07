@@ -18,11 +18,11 @@ namespace AI.Zombie
 
 		protected bool isPlayer(Collider other)
 		{
-			return other.transform.GetComponent<IDamagable>() != null && other.GetComponent<PlayerRef>() != null;
+			return other.GetComponent<PlayerRef>() != null;
 		}
-		protected bool isBarricade(Collider other)
+		protected bool isBreakable(Collider other)
 		{
-			return other.transform.GetComponent<Barricade>() != null;
+			return other.transform.GetComponent<IZombieBreakable>() != null;
 		}
 
 
