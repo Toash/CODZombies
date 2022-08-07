@@ -30,10 +30,9 @@ public class Ballistics : MonoBehaviour
         RaycastHit hit;
         if (HitSomething(shooter, weapon, out hit))
         {
-            ApplyKnockback(hit);
             ApplyDamage(weapon, hit);
             CreateBulletHole(hit);
-
+            ApplyKnockback(hit);
             Debug.DrawRay(shooter.position, hit.point - shooter.position, Color.green, 10, false);
 
         }

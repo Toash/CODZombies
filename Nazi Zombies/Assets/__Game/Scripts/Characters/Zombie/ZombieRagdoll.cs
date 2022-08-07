@@ -1,8 +1,10 @@
 using UnityEngine;
+using Sirenix.OdinInspector;
+
 
 namespace AI.Zombie
 {
-
+	[InfoBox("Uses GetComponentsInChildren to get rigidbodies and colliders")]
 	public class ZombieRagdoll : MonoBehaviour
 	{
 		[SerializeField]
