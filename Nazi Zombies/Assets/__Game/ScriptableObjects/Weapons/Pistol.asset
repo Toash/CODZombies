@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 50
   Range: 100
+  Force: 3
   FireRate: 0.2
   Automatic: 0
   ReloadTime: 1

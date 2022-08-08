@@ -28,11 +28,14 @@ public class Ballistics : MonoBehaviour
 	public void CastBullet(Transform shooter, Weapon weapon)
     {
         RaycastHit hit;
-        if (HitSomething(shooter, weapon, out hit))
+        if (Physics.Raycast(shooter.position, shooter.forward, out hit, weapon.Range, this.gunMask, QueryTriggerInteraction.Ignore))
         {
             ApplyDamage(weapon, hit);
             CreateBulletHole(hit);
-            ApplyKnockback(hit);
+
+            //Call knockback AFTER DAMAGE, so that ragdoll is ready. 
+            ApplyKnockback(hit,weapon.Force);
+
             Debug.DrawRay(shooter.position, hit.point - shooter.position, Color.green, 10, false);
 
         }
@@ -43,7 +46,7 @@ public class Ballistics : MonoBehaviour
         hit.transform.GetComponent<IDamagable>()?.Damage(weapon.Damage);
     }
 
-    private void ApplyKnockback(RaycastHit hit)
+    private void ApplyKnockback(RaycastHit hit, float force)
     {
         Collider[] colliders = Physics.OverlapSphere(hit.point, EXPLOSION_RANGE, Physics.AllLayers, QueryTriggerInteraction.Ignore);
         foreach (Collider col in colliders)
@@ -51,7 +54,7 @@ public class Ballistics : MonoBehaviour
             Rigidbody rb = col.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                rb.AddExplosionForce(100f, hit.point, EXPLOSION_RANGE, 0, ForceMode.Impulse);
+                rb.AddExplosionForce(force, hit.point, EXPLOSION_RANGE, 0, ForceMode.Impulse);
             }
         }
     }
@@ -60,9 +63,5 @@ public class Ballistics : MonoBehaviour
 	{
 		GameObject bullet = Instantiate(bulletHole, hitPoint.point+(hitPoint.normal*.01f), Quaternion.LookRotation(-hitPoint.normal, Vector3.up),hitPoint.transform);
 		decals.Enqueue(bullet);
-	}
-	private bool HitSomething(Transform shooter, Weapon weapon, out RaycastHit hit)
-	{
-		return Physics.Raycast(shooter.position, shooter.forward, out hit, weapon.Range, this.gunMask, QueryTriggerInteraction.Ignore);
 	}
 }
