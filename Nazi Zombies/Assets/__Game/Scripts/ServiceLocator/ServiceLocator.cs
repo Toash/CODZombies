@@ -7,7 +7,6 @@ public class ServiceLocator : MonoBehaviour
 {
 	public static ServiceLocator Instance { get; private set; }
 	public Ballistics Ballistics { get; private set; }
-	public GameManager GameManager { get; private set; }
 	public GameAssets GameAssets { get; private set; }
 
 	private void Awake()

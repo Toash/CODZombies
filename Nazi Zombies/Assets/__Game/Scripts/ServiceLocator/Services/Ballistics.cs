@@ -30,14 +30,14 @@ public class Ballistics : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(shooter.position, shooter.forward, out hit, weapon.Range, this.gunMask, QueryTriggerInteraction.Ignore))
         {
+            //BEFORE ZOMBIE DEATH
             ApplyDamage(weapon, hit);
+
+            //AFTER ZOMBIE DEATH
+            ApplyKnockback(hit,weapon.Force); //Apply knockback AFTER DAMAGE, so that ragdoll is ready. 
+
             CreateBulletHole(hit);
-
-            //Call knockback AFTER DAMAGE, so that ragdoll is ready. 
-            ApplyKnockback(hit,weapon.Force);
-
             Debug.DrawRay(shooter.position, hit.point - shooter.position, Color.green, 10, false);
-
         }
     }
 
