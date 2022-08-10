@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 8732599623117944075}
   - component: {fileID: 3132462415312638262}
   m_Layer: 0
-  m_Name: SpawnManager
+  m_Name: Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c66e4ea83c5d4dba8008ccb81f5e2ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roundManager: {fileID: 2460598029459833014}
   maxZombies: 26
   dontSpawnZombies: 0
 --- !u!1 &6651021178300532297
@@ -155,7 +156,7 @@ GameObject:
   - component: {fileID: 6493939621182122026}
   - component: {fileID: 2460598029459833014}
   m_Layer: 0
-  m_Name: RoundManager
+  m_Name: Rounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -197,8 +198,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1651525052214469565}
+  - component: {fileID: 8316368949650854809}
   m_Layer: 0
-  m_Name: DifficultyManager
+  m_Name: Difficulty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -219,6 +221,18 @@ Transform:
   m_Father: {fileID: 5560740091304399323}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8316368949650854809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7267860588735941310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 720cc7bad0d454bd19fe7d853769b367, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7544504556494966518
 GameObject:
   m_ObjectHideFlags: 0

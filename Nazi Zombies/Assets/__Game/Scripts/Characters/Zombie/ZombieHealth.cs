@@ -25,11 +25,11 @@ namespace AI.Zombie
 
         private void Start()
         {
-			ServiceLocator.Instance.GameManager.AddZombieCount();
+			ServiceLocator.Instance.Spawner.AddZombieCount();
         }
         private void OnDisable()
         {
-			ServiceLocator.Instance.GameManager.RemoveZombieCount();
+			ServiceLocator.Instance.Spawner.RemoveZombieCount();
         }
 		public virtual void Damage(int amount)
 		{

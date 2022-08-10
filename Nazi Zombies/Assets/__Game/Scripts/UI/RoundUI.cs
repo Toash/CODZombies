@@ -9,6 +9,6 @@ public class RoundUI : MonoBehaviour
 
     private void Update()
     {
-        roundText.text = ServiceLocator.Instance.GameManager.CurrentRound.ToString();
+        roundText.text = ServiceLocator.Instance.Rounds.CurrentRound.ToString() ;
     }
 }
