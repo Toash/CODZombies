@@ -10,15 +10,6 @@ public class ZombieSpawnPoint : MonoBehaviour
 
     public bool Active;
 
-    private void Start()
-    {
-        connectedZones = GetZones();
-        if (connectedZones.Length == 0)
-        {
-            Debug.LogError(this.name + ": does not contain a zone!");
-        }
-    }
-
     private void Update()
     {
         UpdateSpawnPointState();
