@@ -1,14 +1,17 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 
 /// <summary>
 /// Spawn point for zombie
 /// </summary>
 public class ZombieSpawnPoint : MonoBehaviour
 {
-    public Zone[] connectedZones { get; private set; }
+    [field: SerializeField, InfoBox("What zones activate this spawnpoint")]
+    public Zone[] ConnectedZones { get; private set; }
 
-    public bool Active;
+    [ShowInInspector,ReadOnly]
+    public bool Active { get; private set; }
 
     private void Update()
     {
@@ -17,7 +20,7 @@ public class ZombieSpawnPoint : MonoBehaviour
 
     private void UpdateSpawnPointState()
     {
-        foreach (Zone zone in connectedZones)
+        foreach (Zone zone in ConnectedZones)
         {
             if (zone.PlayerInZone == true)
             {

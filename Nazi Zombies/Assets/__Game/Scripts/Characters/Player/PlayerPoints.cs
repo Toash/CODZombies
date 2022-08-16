@@ -1,15 +1,18 @@
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace Player
 {
 	public class PlayerPoints : MonoBehaviour
 	{
-		public static int CurrentMoney;
-		[Header("Start")]
-		[SerializeField] private int startingMoney;
+		[ShowInInspector,ReadOnly]
+		public static int Points;
+
+		[SerializeField]
+		private PlayerStats stats;
 		private void Awake()
 		{
-			CurrentMoney = startingMoney;
+			Points = stats.StartingPoints;
 		}
     }
 }

@@ -7,27 +7,36 @@ using Sirenix.OdinInspector;
 /// </summary>
 public class SSpawner : MonoBehaviour
 {
-    // Dependencies
-    [SerializeField]
-    private SRounds roundManager;
+
+    [SerializeField,Required("Dependency")]
+    private SRounds rounds;
 
 
     // Global
     public int CurrentZombies { get; private set; }
+    public int ZombiesToSpawn { get; private set; } //Zombies to spawn in the current round
 
     // Stats
     [SerializeField]
     private int maxZombies = 26; //Maximum zombie that can exist at a time
     [SerializeField]
     private bool dontSpawnZombies;
-    private readonly float SPAWN_RATE = 2;
-    private int zombiesToSpawn; //Zombies to spawn in the current round
 
     [PropertyOrder(-1), ShowInInspector, ReadOnly]
     private ZombieSpawnPoint[] spawnPoints;
 
     private bool underMaxZombies { get { return CurrentZombies <= maxZombies; } }
     private float timer;
+
+    private void OnEnable()
+    {
+        rounds.roundChanged += OnRoundChange;
+    }
+    private void OnDisable()
+    {
+        rounds.roundChanged -= OnRoundChange;
+    }
+
 
     private void Start()
     {
@@ -37,19 +46,8 @@ public class SSpawner : MonoBehaviour
     private void Update()
     {
         if (dontSpawnZombies) return;
-
         IncreaseTimer();
-        if (!roundManager.RoundChanging)
-        {
-            if (underMaxZombies)
-            {
-                if (timer > SPAWN_RATE)
-                {
-                    SpawnZombieAtActiveSpawnPoint();
-                    ResetTimer();
-                }
-            }
-        }
+        SpawnBehaviour();
     }
     public void AddZombieCount()
     {
@@ -59,9 +57,27 @@ public class SSpawner : MonoBehaviour
     {
         CurrentZombies -= 1;
     }
+    private void SpawnBehaviour()
+    {
+        if (!rounds.RoundChanging)
+        {
+            if (underMaxZombies)
+            {
+                if (timer > 2)
+                {
+                    SpawnZombieAtActiveSpawnPoint();
+                    ResetTimer();
+                }
+            }
+        }
+    }
+    private void OnRoundChange()
+    {
+        CalculateZombiesToSpawn();
+    }
     private void CalculateZombiesToSpawn()
     {
-
+        ZombiesToSpawn = 10;
     }
 
     private void SpawnZombieAtActiveSpawnPoint()
@@ -74,6 +90,7 @@ public class SSpawner : MonoBehaviour
             return;
         }
 
+        //Random spawn point
         int index = UnityEngine.Random.Range(0, validSpawnPoints.Length);
 
         Instantiate(zombie, validSpawnPoints[index].transform.position, Quaternion.identity);

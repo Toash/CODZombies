@@ -17,7 +17,7 @@ namespace Player.UI
 
 		public void Update()
 		{
-			pointsText.text = stats.Points.ToString();
+			//pointsText.text = stats.Points.ToString();
 		}
 	}
 }

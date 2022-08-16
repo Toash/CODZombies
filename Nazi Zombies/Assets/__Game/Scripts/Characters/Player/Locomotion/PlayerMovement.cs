@@ -8,25 +8,21 @@ namespace Player
 		public PlayerStats stats;
 		public PlayerSettings settings;
 
-		public enum State
-		{
-			GROUNDED,
-			AIR,
-		}
-
 		private CharacterController charControl;
 		private Vector3 playerGravityVelocity;
+		private float speedMultiplier = 1;
 
 		void Awake()
 		{
-			charControl = this.GetComponent<CharacterController>();
+			charControl = GetComponent<CharacterController>();
 		}
 
 		void Update()
 		{
-			charControl.Move(NormalizedMoveVector() * stats.Speed*Time.deltaTime);
+			HandleSpeedMultiplier();
 			HandleGravity();
-
+			HandleMovement();
+			
 			if (charControl.isGrounded)
 			{
 				if (Input.GetButtonDown("Jump"))
@@ -46,6 +42,10 @@ namespace Player
 			Vector3 horizontal = transform.right * Input.GetAxisRaw("Horizontal");
 			return Vector3.Normalize(vertical + horizontal);
 		}
+		private void HandleMovement()
+        {
+			charControl.Move(NormalizedMoveVector() * stats.Speed * speedMultiplier * Time.deltaTime);
+		}
 		private void HandleGravity()
 		{
 			playerGravityVelocity += (Physics.gravity*stats.GravityMultiplier) * Time.deltaTime;
@@ -58,6 +58,17 @@ namespace Player
 			//Apply gravity to charactercontroller
 			charControl.Move(playerGravityVelocity * Time.deltaTime);
 		}
+		private void HandleSpeedMultiplier()
+        {
+            if (Input.GetKey(settings.Sprint))
+            {
+				speedMultiplier = stats.SprintMultiplier;
+            }
+            else
+            {
+				speedMultiplier = 1;
+            }
+        }
 	}
 }
 
