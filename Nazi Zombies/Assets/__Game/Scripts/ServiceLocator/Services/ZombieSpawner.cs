@@ -5,11 +5,11 @@ using Sirenix.OdinInspector;
 /// <summary>
 /// Spawner service
 /// </summary>
-public class SSpawner : MonoBehaviour
+public class ZombieSpawner : MonoBehaviour
 {
 
     [SerializeField,Required("Dependency")]
-    private SRounds rounds;
+    private Rounds rounds;
 
 
     // Global
@@ -24,6 +24,8 @@ public class SSpawner : MonoBehaviour
 
     [PropertyOrder(-1), ShowInInspector, ReadOnly]
     private ZombieSpawnPoint[] spawnPoints;
+
+    public bool noZombiesLeftToSpawn { get { return this.ZombiesToSpawn <= 0; } }
 
     private bool underMaxZombies { get { return CurrentZombies <= maxZombies; } }
     private float timer;

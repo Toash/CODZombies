@@ -1,7 +1,7 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SGameAssets : MonoBehaviour
+public class GameAssets : MonoBehaviour
 {
     [Title("Zombie")]
     public GameObject zombie;

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class SBallistics : MonoBehaviour
+public class Ballistics : MonoBehaviour
 {
 
 

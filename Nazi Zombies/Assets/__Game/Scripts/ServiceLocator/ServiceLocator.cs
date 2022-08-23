@@ -7,11 +7,11 @@ public class ServiceLocator : MonoBehaviour
 {
 	public static ServiceLocator Instance { get; private set; }
 
-	public SBallistics Ballistics { get; private set; }
-	public SGameAssets GameAssets { get; private set; }
-	public SDifficulty Difficulty { get; private set; }
-	public SSpawner Spawner { get; private set; }
-	public SRounds Rounds { get; private set; }
+	public Ballistics Ballistics { get; private set; }
+	public GameAssets GameAssets { get; private set; }
+	public Difficulty Difficulty { get; private set; }
+	public ZombieSpawner Spawner { get; private set; }
+	public Rounds Rounds { get; private set; }
 
 	private void Awake()
 	{
@@ -28,11 +28,11 @@ public class ServiceLocator : MonoBehaviour
 	}
 	private void References()
 	{
-		Ballistics = GetComponentInChildren<SBallistics>();
-		GameAssets = GetComponentInChildren<SGameAssets>();
-		Difficulty = GetComponentInChildren<SDifficulty>();
-		Spawner = GetComponentInChildren<SSpawner>();
-		Rounds = GetComponentInChildren<SRounds>();
+		Ballistics = GetComponentInChildren<Ballistics>();
+		GameAssets = GetComponentInChildren<GameAssets>();
+		Difficulty = GetComponentInChildren<Difficulty>();
+		Spawner = GetComponentInChildren<ZombieSpawner>();
+		Rounds = GetComponentInChildren<Rounds>();
 	}
 
 }

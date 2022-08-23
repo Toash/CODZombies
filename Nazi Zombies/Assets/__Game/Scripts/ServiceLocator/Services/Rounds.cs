@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SRounds : MonoBehaviour
+public class Rounds : MonoBehaviour
 {
     [SerializeField, Required("Dependency")]
-    private SSpawner spawner;
+    private ZombieSpawner spawner;
     [SerializeField]
     private AudioSource roundChangeSound;
 
