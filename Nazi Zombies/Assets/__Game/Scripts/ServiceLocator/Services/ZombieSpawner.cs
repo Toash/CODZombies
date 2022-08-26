@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
@@ -91,11 +92,11 @@ public class ZombieSpawner : MonoBehaviour
             Debug.LogError("Spawning zombie with no active spawnpoints");
             return;
         }
-
-        //Random spawn point
-        int index = UnityEngine.Random.Range(0, validSpawnPoints.Length);
-
-        Instantiate(zombie, validSpawnPoints[index].transform.position, Quaternion.identity);
+        // ----- Valid spawn point(s) found -----
+        int randomSpawnPoint = UnityEngine.Random.Range(0, validSpawnPoints.Length);
+        ZombieSpawnPoint spawnPoint = validSpawnPoints[randomSpawnPoint];
+        Debug.Log($"Spawning Zombie at {spawnPoint.name} in connected zones {spawnPoint.ActiveZone}");
+        Instantiate(zombie, spawnPoint.transform.position, Quaternion.identity);
     }
     private ZombieSpawnPoint[] GetActiveSpawnPoints()
     {

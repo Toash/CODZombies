@@ -75,6 +75,10 @@ namespace AI.Zombie
 			{
 				manager.SwitchState(manager.ChasingState);
 			}
+			else if (!canBreak(manager))
+            {
+				//Cooldown
+            }
 			else
 			{
 				//barricade is null

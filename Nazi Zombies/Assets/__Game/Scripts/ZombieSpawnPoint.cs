@@ -12,6 +12,8 @@ public class ZombieSpawnPoint : MonoBehaviour
 
     [ShowInInspector,ReadOnly]
     public bool Active { get; private set; }
+    [ShowInInspector,ReadOnly]
+    public Zone ActiveZone { get; private set; }
 
     private void Update()
     {
@@ -24,10 +26,12 @@ public class ZombieSpawnPoint : MonoBehaviour
         {
             if (zone.PlayerInZone == true)
             {
+                ActiveZone = zone;
                 Active = true;
                 return;
             }
         }
+        ActiveZone = null;
         Active = false;
     }
 
