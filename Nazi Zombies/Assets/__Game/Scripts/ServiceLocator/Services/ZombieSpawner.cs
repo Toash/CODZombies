@@ -29,7 +29,10 @@ public class ZombieSpawner : MonoBehaviour
     public bool noZombiesLeftToSpawn { get { return this.ZombiesToSpawn <= 0; } }
 
     private bool underMaxZombies { get { return CurrentZombies <= maxZombies; } }
+
+    private bool ready { get { return timer > 2; } }
     private float timer;
+    private float spawnRate = 2;
 
     private void OnEnable()
     {
@@ -48,9 +51,14 @@ public class ZombieSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (dontSpawnZombies) return;
+        if (dontSpawnZombies || rounds.RoundChanging||!underMaxZombies) return;
+
         IncreaseTimer();
-        SpawnBehaviour();
+        if (timer > spawnRate)
+        {
+            SpawnZombieAtActiveSpawnPoint();
+            ResetTimer();
+        }
     }
     public void AddZombieCount()
     {
@@ -59,20 +67,6 @@ public class ZombieSpawner : MonoBehaviour
     public void RemoveZombieCount()
     {
         CurrentZombies -= 1;
-    }
-    private void SpawnBehaviour()
-    {
-        if (!rounds.RoundChanging)
-        {
-            if (underMaxZombies)
-            {
-                if (timer > 2)
-                {
-                    SpawnZombieAtActiveSpawnPoint();
-                    ResetTimer();
-                }
-            }
-        }
     }
     private void OnRoundChange()
     {

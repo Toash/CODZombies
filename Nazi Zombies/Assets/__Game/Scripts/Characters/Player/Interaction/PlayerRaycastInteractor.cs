@@ -20,7 +20,7 @@ namespace Player
 
         private bool RaycastInteractableExists(PlayerInteractable interactable)
         {
-            return (interactable != null) && interactable.detectionType == PlayerInteractable.DetectionType.Raycast;
+            return (interactable != null) && interactable.DetectType == PlayerInteractable.DetectionType.Raycast;
         }
 
         private void Update()

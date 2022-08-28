@@ -18,7 +18,7 @@ namespace Player
 
 		private bool ColliderInteractableExists(PlayerInteractable interactable)
 		{
-			return (interactable!=null)&&interactable.detectionType==PlayerInteractable.DetectionType.Collider;
+			return (interactable!=null)&&interactable.DetectType==PlayerInteractable.DetectionType.Collider;
 		}
 
 		private void OnTriggerStay(Collider other)

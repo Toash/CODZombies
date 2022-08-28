@@ -2,16 +2,16 @@ using UnityEngine;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
-// should barricades be the same as interactables?
-//
-//- You dont use raycast to select them, only triggers.
-//- The player can hold down e to repair, other interactables are only one time events.
-//- Barricades differ specifically in selecting them and "interacting" with them.
-//
 public class Barricade : PlayerInteractable, IZombieBreakable
 {
     [SerializeField]
     private BarricadeStats stats;
+
+	[SerializeField]
+	private AudioSource RepairSound;
+
+
+
     public int CurrentWood { get; private set; }
     public bool Broken { get; set; }
 
@@ -33,13 +33,15 @@ public class Barricade : PlayerInteractable, IZombieBreakable
 
 	public override string GetInteractString()
 	{
-        return "repair";
+        return base.InteractString;
 	}
 
 	public override void Interact()
 	{
-        Debug.Log("Repairing");
-        CurrentWood += 1;
+		base.Interact();
+		Repair();
+		PlayRepairSound();
+		
 	}
 
 	public void Break()
@@ -51,4 +53,13 @@ public class Barricade : PlayerInteractable, IZombieBreakable
 			NoBarricades?.Invoke();
 		}
 	}
+	private void Repair()
+    {
+		CurrentWood += 1;
+    }
+	private void PlayRepairSound()
+    {
+		if (this.RepairSound == null) return;
+		this.RepairSound.Play();
+    }
 }
