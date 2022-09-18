@@ -7,16 +7,12 @@ namespace Player
 
 	//ONLY FOR WALLBUYS
     //this shoudl take precendent
-	public class PlayerRaycastInteractor : MonoBehaviour
+	public class PlayerRaycastInteractor : BaseInteractor 
 	{
         [SerializeField] private PlayerStats stats;
         [SerializeField] private Camera cam;
         [SerializeField] private LayerMask mask;
 
-        public delegate void Interact(PlayerInteractable interact);
-
-        public event Interact LookingAtInteractor;
-        public event Interact LookingAwayFromInteractor;
 
         private bool RaycastInteractableExists(PlayerInteractable interactable)
         {
@@ -32,11 +28,11 @@ namespace Player
 
                 if (RaycastInteractableExists(interactable))
 				{
-                    LookingAtInteractor(interactable);
+                    base.Active?.Invoke(interactable);
 				}
 				else if(!RaycastInteractableExists(interactable))
 				{
-                    LookingAwayFromInteractor(interactable);
+                    base.Inactive?.Invoke(interactable);
 				}
 			}
         }

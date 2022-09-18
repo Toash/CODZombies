@@ -31,17 +31,10 @@ public class Barricade : PlayerInteractable, IZombieBreakable
 		}
 	}
 
-	public override string GetInteractString()
-	{
-        return base.InteractString;
-	}
-
 	public override void Interact()
 	{
 		base.Interact();
 		Repair();
-		PlayRepairSound();
-		
 	}
 
 	public void Break()
@@ -54,6 +47,11 @@ public class Barricade : PlayerInteractable, IZombieBreakable
 		}
 	}
 	private void Repair()
+    {
+		IncreaseWood();
+		PlayRepairSound();
+    }
+	private void IncreaseWood()
     {
 		CurrentWood += 1;
     }

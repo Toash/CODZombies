@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Player
 {
 	//for everything except gun wallbuys 
-	public class PlayerColliderInteractor : MonoBehaviour
+	public class PlayerColliderInteractor : BaseInteractor
 	{
 		//------------DEPENDENCIES---------------
 		[SerializeField] private Rigidbody rb;
@@ -26,7 +26,7 @@ namespace Player
 			PlayerInteractable interactable = other.transform.GetComponent<PlayerInteractable>();
 			if (ColliderInteractableExists(interactable))
 			{
-				Debug.Log("Collide");
+				//Debug.Log("Collide");
 				InsideInteractor.Invoke(interactable);
 			}
 		}
@@ -36,6 +36,7 @@ namespace Player
 			PlayerInteractable interactable = other.transform.GetComponent<PlayerInteractable>();
 			if (ColliderInteractableExists(interactable))
 			{
+				//Debug.Log("Exiting");
 				OutsideInteractor.Invoke(interactable);
 			}
 		}

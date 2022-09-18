@@ -10,7 +10,15 @@ namespace Player.UI
 
 		private void Update()
 		{
-			interactText.text = PlayerInteractionManager.CurrentInteractText;
+            if (PlayerInteractionManager.CurrentInteractable != null)
+            {
+                interactText.text = PlayerInteractionManager.CurrentInteractable.InteractString;
+            }
+            else
+            {
+				interactText.text = System.String.Empty;
+            }
+			
 		}
 	}
 }

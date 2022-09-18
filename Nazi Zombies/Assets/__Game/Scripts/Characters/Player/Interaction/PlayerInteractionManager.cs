@@ -1,39 +1,44 @@
+using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
 using Sirenix.OdinInspector;
 namespace Player
 {
-	//takes care of interacting, listening to interaction events
-	public class PlayerInteractionManager : MonoBehaviour
+    /// <summary>
+    /// takes care of interacting, listening to interaction events, contains the <see cref="CurrentInteractable"/>
+    /// </summary>
+    public class PlayerInteractionManager : MonoBehaviour
     {
+
 		[SerializeField] private PlayerStats stats;
 		[SerializeField] private PlayerSettings settings;
 
-		[SerializeField] private PlayerColliderInteractor colInteracter;
-		[SerializeField] private PlayerRaycastInteractor rayInteracter;
+		
+		[SerializeField] private List<BaseInteractor> interators;
 
-		public PlayerInteractable CurrentInteractable { get; private set; }
-		public static string CurrentInteractText;
+		public static PlayerInteractable CurrentInteractable { get; private set; }
+
+		private bool InteractableExists { get { return CurrentInteractable != null; } }
 
         private void OnEnable()
         {
-			colInteracter.InsideInteractor += SetInteractable;
-			colInteracter.OutsideInteractor += ClearInteractable;
-
-			rayInteracter.LookingAtInteractor += SetInteractable;
-			rayInteracter.LookingAwayFromInteractor += ClearInteractable;
+			foreach(BaseInteractor interactor in this.interators)
+            {
+				interactor.Active += SetInteractable;
+				interactor.Inactive += SetInteractable;
+            }
         }
         private void OnDisable()
         {
-			colInteracter.InsideInteractor -= SetInteractable;
-			colInteracter.OutsideInteractor -= ClearInteractable;
-
-			rayInteracter.LookingAtInteractor -= SetInteractable;
-			rayInteracter.LookingAwayFromInteractor -= ClearInteractable;
-		}
+            foreach (BaseInteractor interactor in this.interators)
+            {
+                interactor.Active -= SetInteractable;
+                interactor.Inactive -= SetInteractable;
+            }
+        }
         private void Update()
 		{
-			if (CurrentInteractable != null)
+			if (InteractableExists)
 			{
 				if (Input.GetKeyDown(settings.Interact))
 				{
@@ -43,13 +48,11 @@ namespace Player
 		}
 		private void SetInteractable(PlayerInteractable interact)
 		{
-			this.CurrentInteractable = interact;
-			CurrentInteractText = interact.GetInteractString();
+			PlayerInteractionManager.CurrentInteractable = interact;
 		}
 		private void ClearInteractable(PlayerInteractable interact)
 		{
-			this.CurrentInteractable = null;
-			CurrentInteractText = "";
+			PlayerInteractionManager.CurrentInteractable = null;
 		}
 	}
 }

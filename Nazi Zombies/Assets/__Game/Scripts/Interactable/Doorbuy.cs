@@ -12,11 +12,6 @@ public class Doorbuy : PlayerInteractable
 
 	}
 
-	public override string GetInteractString()
-	{
-		return textToDisplay;
-	}
-
 	public override void Interact()
 	{
 		Destroy(gameObject);

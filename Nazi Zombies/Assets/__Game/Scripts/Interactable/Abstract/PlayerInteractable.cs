@@ -36,7 +36,6 @@ public abstract class PlayerInteractable : MonoBehaviour
 
 	private bool ready { get { return timer >= this.Cooldown; } }
 
-	public abstract string GetInteractString();
 	public virtual void Interact()
     {
 		if (!ready) return;
