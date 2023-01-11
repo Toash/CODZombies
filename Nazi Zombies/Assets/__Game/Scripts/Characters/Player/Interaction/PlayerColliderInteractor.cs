@@ -10,24 +10,18 @@ namespace Player
 		[SerializeField] private Rigidbody rb;
 		[SerializeField] private Collider col;
 
-
-		public delegate void Interact(PlayerInteractable interact);
-
-		public event Interact InsideInteractor;
-		public event Interact OutsideInteractor;
-
 		private bool ColliderInteractableExists(PlayerInteractable interactable)
 		{
 			return (interactable!=null)&&interactable.DetectType==PlayerInteractable.DetectionType.Collider;
 		}
 
-		private void OnTriggerStay(Collider other)
+		private void OnTriggerEnter(Collider other)
 		{
 			PlayerInteractable interactable = other.transform.GetComponent<PlayerInteractable>();
 			if (ColliderInteractableExists(interactable))
 			{
 				//Debug.Log("Collide");
-				InsideInteractor.Invoke(interactable);
+				base.FActive(interactable);
 			}
 		}
 
@@ -36,8 +30,10 @@ namespace Player
 			PlayerInteractable interactable = other.transform.GetComponent<PlayerInteractable>();
 			if (ColliderInteractableExists(interactable))
 			{
-				//Debug.Log("Exiting");
-				OutsideInteractor.Invoke(interactable);
+				if(ColliderInteractableExists(PlayerInteractionManager.CurrentInteractable)){
+                    //Debug.Log("Exiting");
+                    base.FInActive(interactable);
+                }
 			}
 		}
 

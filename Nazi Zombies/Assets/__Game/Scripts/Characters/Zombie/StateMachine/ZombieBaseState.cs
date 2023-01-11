@@ -24,8 +24,6 @@ namespace AI.Zombie
 		{
 			return other.transform.GetComponent<IZombieBreakable>() != null;
 		}
-
-
 		protected void StopZombie(ZombieStateManager manager)
 		{
 			manager.Agent.isStopped = true;

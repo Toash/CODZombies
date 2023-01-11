@@ -3,14 +3,9 @@ using System.Collections.Generic;
 
 public class Ballistics : MonoBehaviour
 {
-
-
-	[SerializeField]
-	private int maxDecals = 15;
-    [SerializeField]
-    private LayerMask gunMask;
-    [SerializeField]
-    private GameObject bulletHole;
+	[SerializeField] private int maxDecals = 15;
+    [SerializeField] private LayerMask gunMask;
+    [SerializeField] private GameObject bulletHole;
 
 	private Queue<GameObject> decals = new Queue<GameObject>();
 
@@ -31,7 +26,7 @@ public class Ballistics : MonoBehaviour
         if (Physics.Raycast(shooter.position, shooter.forward, out hit, weapon.Range, this.gunMask, QueryTriggerInteraction.Ignore))
         {
             //BEFORE ZOMBIE DEATH
-            ApplyDamage(weapon, hit);
+            ApplyWeaponDamage(weapon, hit);
 
             //AFTER ZOMBIE DEATH
             ApplyKnockback(hit,weapon.Force); //Apply knockback AFTER DAMAGE, so that ragdoll is ready. 
@@ -41,7 +36,7 @@ public class Ballistics : MonoBehaviour
         }
     }
 
-    private void ApplyDamage(Weapon weapon, RaycastHit hit)
+    private void ApplyWeaponDamage(Weapon weapon, RaycastHit hit)
     {
         hit.transform.GetComponent<IDamagable>()?.Damage(weapon.Damage);
     }

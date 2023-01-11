@@ -4,37 +4,44 @@ using Sirenix.OdinInspector;
 
 public class Barricade : PlayerInteractable, IZombieBreakable
 {
-    [SerializeField]
-    private BarricadeStats stats;
-
-	[SerializeField]
-	private AudioSource RepairSound;
-
-
-
     public int CurrentWood { get; private set; }
     public bool Broken { get; set; }
+
+    [SerializeField]
+	private int maxWood = 7;
+	[SerializeField]
+	private AudioSource repairSound;
+
+
 
 	public UnityEvent AtLeastOneBarricade;
     public UnityEvent NoBarricades;
 
+	private bool HasWood() { return CurrentWood>0; }
+	private bool UnderMaxWood() { return CurrentWood <= maxWood; }
+
 
     private void Awake()
     {
-        CurrentWood = stats.MaxWood;
+        CurrentWood = maxWood;
     }
-	private void Update()
+	public override void Update()
 	{
-		if (CurrentWood > 0)
+		base.Update();
+		if (HasWood())
 		{
             Broken = false;
 		}
 	}
 
-	public override void Interact()
+	public override bool Interact()
 	{
-		base.Interact();
-		Repair();
+		if(base.Interact() && UnderMaxWood()){
+            Repair();
+			return true;
+        }
+		return false;
+
 	}
 
 	public void Break()
@@ -57,7 +64,7 @@ public class Barricade : PlayerInteractable, IZombieBreakable
     }
 	private void PlayRepairSound()
     {
-		if (this.RepairSound == null) return;
-		this.RepairSound.Play();
+		if (this.repairSound == null) return;
+		this.repairSound.Play();
     }
 }

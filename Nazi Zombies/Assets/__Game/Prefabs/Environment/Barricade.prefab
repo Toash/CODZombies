@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6896247962252455611}
   - component: {fileID: 2023278122992317876}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: InteractCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,8 +43,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0504193, y: 1, z: 1}
-  m_Center: {x: -1.0008817, y: 0, z: 0}
+  m_Size: {x: 1.2353752, y: 1.0696774, z: 1}
+  m_Center: {x: -1.0933596, y: 0.034838617, z: 0}
 --- !u!1 &2515187798032333399
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 2930239086945965100}
   - component: {fileID: 4424356861809619131}
   - component: {fileID: 2184896187941422419}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: CurrentWood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 5347014650838590911}
   - component: {fileID: 2187766212089430493}
   - component: {fileID: 6317726819554983120}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Barricade
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -445,7 +445,7 @@ GameObject:
   - component: {fileID: 6121693170405274194}
   - component: {fileID: 6146800887081178692}
   - component: {fileID: 251945541528131453}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

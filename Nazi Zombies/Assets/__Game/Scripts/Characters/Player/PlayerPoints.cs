@@ -10,6 +10,7 @@ namespace Player
 
 		[SerializeField]
 		private PlayerStats stats;
+
 		private void Awake()
 		{
 			Points = stats.StartingPoints;

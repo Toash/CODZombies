@@ -66,7 +66,7 @@ namespace AI.Zombie
 		public override void UpdateState(ZombieStateManager manager)
 		{
 			timer += Time.deltaTime;
-			Debug.Log("In breaking state");
+			//Debug.Log("In breaking state");
 			if (!barricadeBroken(currentBreakable) && canBreak(manager))
 			{
 				Break(currentBreakable);

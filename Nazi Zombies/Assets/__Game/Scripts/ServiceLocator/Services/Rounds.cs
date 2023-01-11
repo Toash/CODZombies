@@ -5,24 +5,19 @@ using Sirenix.OdinInspector;
 
 public class Rounds : MonoBehaviour
 {
-    [SerializeField, Required("Dependency")]
-    private ZombieSpawner spawner;
-    [SerializeField]
-    private AudioSource roundChangeSound;
+    [SerializeField] private AudioSource roundChangeSound;
 
-    [ReadOnly]
     public int CurrentRound { get; private set; }
-    [ReadOnly]
     public bool RoundChanging { get; private set; }
 
     public delegate void Action();
-    public Action roundChanged;
+    public Action RoundChanged;
 
     private readonly float ROUND_CHANGE_TIME = 2;
 
     private void Update()
     {
-        if (spawner.ZombiesToSpawn <= 0)
+        if (ServLoc.I.Spawner.ZombiesToSpawn <= 0)
         {
             ChangeRound();
         }
@@ -37,7 +32,7 @@ public class Rounds : MonoBehaviour
         // Round changing behaviour 
         RoundChanging = true;
         RoundBeginSound();
-        roundChanged?.Invoke();
+        RoundChanged?.Invoke();
         yield return new WaitForSeconds(ROUND_CHANGE_TIME);
         // Exit
         CurrentRound += 1;

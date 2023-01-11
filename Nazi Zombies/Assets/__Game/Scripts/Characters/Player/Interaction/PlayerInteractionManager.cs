@@ -9,23 +9,35 @@ namespace Player
     /// </summary>
     public class PlayerInteractionManager : MonoBehaviour
     {
+        [ShowInInspector, ReadOnly, PropertyOrder(-1)]
+        public static PlayerInteractable CurrentInteractable { get; private set; }
 
-		[SerializeField] private PlayerStats stats;
-		[SerializeField] private PlayerSettings settings;
+        [SerializeField]
+		private PlayerStats stats;
+		[SerializeField]
+		private PlayerSettings settings;
 
 		
-		[SerializeField] private List<BaseInteractor> interators;
+		[SerializeField]
+		private List<BaseInteractor> interators;
 
-		public static PlayerInteractable CurrentInteractable { get; private set; }
 
 		private bool InteractableExists { get { return CurrentInteractable != null; } }
+
+        private void Awake()
+        {
+            foreach(BaseInteractor interactor in GetComponentsInChildren<BaseInteractor>())
+			{
+				interators.Add(interactor);
+			}
+        }
 
         private void OnEnable()
         {
 			foreach(BaseInteractor interactor in this.interators)
             {
 				interactor.Active += SetInteractable;
-				interactor.Inactive += SetInteractable;
+				interactor.Inactive += ClearInteractable;
             }
         }
         private void OnDisable()
@@ -33,14 +45,14 @@ namespace Player
             foreach (BaseInteractor interactor in this.interators)
             {
                 interactor.Active -= SetInteractable;
-                interactor.Inactive -= SetInteractable;
+                interactor.Inactive -= ClearInteractable;
             }
         }
         private void Update()
 		{
 			if (InteractableExists)
 			{
-				if (Input.GetKeyDown(settings.Interact))
+				if (Input.GetKey(settings.Interact))
 				{
 					CurrentInteractable.Interact();
 				}
@@ -49,10 +61,12 @@ namespace Player
 		private void SetInteractable(PlayerInteractable interact)
 		{
 			PlayerInteractionManager.CurrentInteractable = interact;
+			//print("set interactable");
 		}
 		private void ClearInteractable(PlayerInteractable interact)
 		{
 			PlayerInteractionManager.CurrentInteractable = null;
+			//print("clear interactable");
 		}
 	}
 }

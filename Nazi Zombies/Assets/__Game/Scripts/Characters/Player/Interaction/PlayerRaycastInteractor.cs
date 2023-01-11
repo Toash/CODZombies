@@ -4,9 +4,9 @@ using Sirenix.OdinInspector;
 
 namespace Player
 {
-
-	//ONLY FOR WALLBUYS
-    //this shoudl take precendent
+    /// <summary>
+    /// Uses raycast for interactions.
+    /// </summary>
 	public class PlayerRaycastInteractor : BaseInteractor 
 	{
         [SerializeField] private PlayerStats stats;
@@ -28,13 +28,13 @@ namespace Player
 
                 if (RaycastInteractableExists(interactable))
 				{
-                    base.Active?.Invoke(interactable);
-				}
-				else if(!RaycastInteractableExists(interactable))
-				{
-                    base.Inactive?.Invoke(interactable);
+                    base.FActive(interactable);
 				}
 			}
+            if (RaycastInteractableExists(PlayerInteractionManager.CurrentInteractable))
+            {
+                base.FInActive(null);
+            }
         }
     }
 }

@@ -8,25 +8,22 @@ using Sirenix.OdinInspector;
 /// </summary>
 public class ZombieSpawner : MonoBehaviour
 {
-
-    [SerializeField,Required("Dependency")]
-    private Rounds rounds;
-
+    [SerializeField] private GameObject zombie;
 
     // Global
     public int CurrentZombies { get; private set; }
-    public int ZombiesToSpawn { get; private set; } //Zombies to spawn in the current round
+    public int ZombiesToSpawn { get; private set; } 
 
     // Stats
     [SerializeField]
-    private int maxZombies = 26; //Maximum zombie that can exist at a time
+    private int maxZombies = 26; 
     [SerializeField]
     private bool dontSpawnZombies;
 
     [PropertyOrder(-1), ShowInInspector, ReadOnly]
     private ZombieSpawnPoint[] spawnPoints;
 
-    public bool noZombiesLeftToSpawn { get { return this.ZombiesToSpawn <= 0; } }
+    public bool noZombiesLeftToSpawn { get { return ZombiesToSpawn <= 0; } }
 
     private bool underMaxZombies { get { return CurrentZombies <= maxZombies; } }
 
@@ -36,14 +33,12 @@ public class ZombieSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        rounds.roundChanged += OnRoundChange;
+        ServLoc.I.Rounds.RoundChanged += OnRoundChange;
     }
     private void OnDisable()
     {
-        rounds.roundChanged -= OnRoundChange;
+        ServLoc.I.Rounds.RoundChanged -= OnRoundChange;
     }
-
-
     private void Start()
     {
         spawnPoints = FindObjectsOfType<ZombieSpawnPoint>();
@@ -51,12 +46,12 @@ public class ZombieSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (dontSpawnZombies || rounds.RoundChanging||!underMaxZombies) return;
+        if (dontSpawnZombies || ServLoc.I.Rounds.RoundChanging||!underMaxZombies) return;
 
         IncreaseTimer();
         if (timer > spawnRate)
         {
-            SpawnZombieAtActiveSpawnPoint();
+            SpawnZombie(GetRandomZombieSpawnPoint().transform.position);
             ResetTimer();
         }
     }
@@ -74,24 +69,25 @@ public class ZombieSpawner : MonoBehaviour
     }
     private void CalculateZombiesToSpawn()
     {
+        var currentRound = ServLoc.I.Rounds.CurrentRound;
+        switch (currentRound)
+        {
+            case 1:
+                ZombiesToSpawn = 10; 
+                break;
+            case > 1:
+                ZombiesToSpawn = 15;
+                break;
+
+            default:
+                Debug.LogError("Round out of bounds!");
+                break;
+        }
         ZombiesToSpawn = 10;
     }
-
-    private void SpawnZombieAtActiveSpawnPoint()
-    {
-        var zombie = ServiceLocator.Instance.GameAssets.zombie;
-        ZombieSpawnPoint[] validSpawnPoints = GetActiveSpawnPoints();
-        if (validSpawnPoints.Length == 0)
-        {
-            Debug.LogError("Spawning zombie with no active spawnpoints");
-            return;
-        }
-        // ----- Valid spawn point(s) found -----
-        int randomSpawnPoint = UnityEngine.Random.Range(0, validSpawnPoints.Length);
-        ZombieSpawnPoint spawnPoint = validSpawnPoints[randomSpawnPoint];
-        Debug.Log($"Spawning Zombie at {spawnPoint.name} in connected zones {spawnPoint.ActiveZone}");
-        Instantiate(zombie, spawnPoint.transform.position, Quaternion.identity);
-    }
+    /// <summary>
+    /// Gets actived <see cref="ZombieSpawnPoint"/>s
+    /// </summary>
     private ZombieSpawnPoint[] GetActiveSpawnPoints()
     {
         List<ZombieSpawnPoint> activeSpawnPoints = new List<ZombieSpawnPoint>();
@@ -104,6 +100,26 @@ public class ZombieSpawner : MonoBehaviour
         }
         return activeSpawnPoints.ToArray();
     }
+    private ZombieSpawnPoint GetRandomZombieSpawnPoint()
+    {
+        ZombieSpawnPoint[] validSpawnPoints = GetActiveSpawnPoints();
+        if (validSpawnPoints.Length == 0)
+        {
+            Debug.LogError("Trying to spawn zombie with no active spawnpoints");
+            return null;
+        }
+        int randomIndex = UnityEngine.Random.Range(0, validSpawnPoints.Length);
+        return validSpawnPoints[randomIndex];
+    }
+
+    /// <summary>
+    /// Spawns zombie at <see cref="Vector3"/>
+    /// </summary>
+    private void SpawnZombie(Vector3 pos)
+    {
+        Instantiate(zombie, pos, Quaternion.identity);
+    }
+
     private void IncreaseTimer()
     {
         timer += Time.deltaTime;

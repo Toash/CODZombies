@@ -1,7 +1,10 @@
 using UnityEngine;
 
-//Gives references to player to other scripts
-//When any other scripts need reference to player, they should do so by interfacing through here. 
+/// <summary>
+/// When any other scripts need reference to player,
+/// they should do so by interfacing through here. 
+/// </summary>
+
 public class PlayerRef : MonoBehaviour
 {
 	public static PlayerRef Instance { get; private set; }

@@ -1,28 +1,24 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 /// <summary>
-/// Can be interacted by player
+/// Defines what can be interacted by player
 /// </summary>
 public abstract class PlayerInteractable : MonoBehaviour
 {
+
 	public enum InteractionType
 	{
 		OneClick,
 		Hold
 	}
-	/// <summary>
-    /// What lets the PlayerInteractable be interacted with. 
-    /// </summary>
 	public enum DetectionType
 	{
 		Raycast,
 		Collider
 	}
 
-	/// <summary>
-    /// Time before another interaction can occur on this object
-    /// </summary>
     [field: SerializeField]
 	public float Cooldown { get; private set; }
 	[field: SerializeField]
@@ -32,17 +28,19 @@ public abstract class PlayerInteractable : MonoBehaviour
 	[field:SerializeField]
 	public string InteractString { get; private set; }
 
+	[ShowInInspector,ReadOnly,PropertyOrder(-1)]
 	private float timer = 0;
 
 	private bool ready { get { return timer >= this.Cooldown; } }
 
-	public virtual void Interact()
+	public virtual bool Interact()
     {
-		if (!ready) return;
+		if (!ready) return false;
 		ResetTimers();
+		return true;
     }
 
-    private void Update()
+    public virtual void Update()
     {
 		UpdateTimers();
     }

@@ -18,6 +18,14 @@ namespace Player
         public event Activation Active;
         public event Activation Inactive;
 
+        public void FActive(PlayerInteractable interact)
+        {
+            Active?.Invoke(interact);
+        }
+        public void FInActive(PlayerInteractable interact)
+        {
+            Inactive?.Invoke(interact);
+        }
 
     }
 

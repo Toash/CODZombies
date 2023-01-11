@@ -13,8 +13,8 @@ TagManager:
   - UI
   - GroundOnly
   - Ground
-  - 
-  - 
+  - PlayerInteractable
+  - PlayerCollider
   - 
   - 
   - 

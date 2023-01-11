@@ -13,7 +13,7 @@ namespace AI.Zombie
 		{
 			manager.Agent.speed = chaseSpeed;
 			UnstopZombie(manager);
-			Debug.Log("Entering Chase state");
+			//Debug.Log("Entering Chase state");
 		}
 		public override void UpdateState(ZombieStateManager manager)
 		{
