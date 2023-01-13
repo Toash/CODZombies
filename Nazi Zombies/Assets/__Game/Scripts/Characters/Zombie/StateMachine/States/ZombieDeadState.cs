@@ -4,41 +4,44 @@ using Sirenix.OdinInspector;
 
 namespace AI.Zombie
 {
+	/// <summary>
+	/// State for when zombie dies
+	/// </summary>
 	[InfoBox("By default, disables NavMeshAgent and Root Collider")]
 	public class ZombieDeadState : ZombieBaseState
 	{
 		[SerializeField]
 		private UnityEvent deathEvent;
 
-		public override void EnterState(ZombieStateManager manager)
+		public override void EnterState(Zombie manager)
 		{
-			manager.Agent.enabled = false;
-			manager.Col.enabled = false;
+			manager.agent.enabled = false;
+			manager.col.enabled = false;
 			deathEvent?.Invoke();
 		}
-		public override void UpdateState(ZombieStateManager manager)
+		public override void UpdateState(Zombie manager)
 		{
 			
 		}
-		public override void TriggerEnter(ZombieStateManager zombie, Collider other)
+		public override void TriggerEnter(Zombie zombie, Collider other)
 		{
 			
 		}
-		public override void TriggerStay(ZombieStateManager zombie, Collider other)
+		public override void TriggerStay(Zombie zombie, Collider other)
 		{
 			
 		}
-		public override void TriggerExit(ZombieStateManager zombie, Collider other)
-		{
-			
-		}
-
-		public override void FixedUpdateState(ZombieStateManager manager)
+		public override void TriggerExit(Zombie zombie, Collider other)
 		{
 			
 		}
 
-		public override void LateUpdateState(ZombieStateManager manager)
+		public override void FixedUpdateState(Zombie manager)
+		{
+			
+		}
+
+		public override void LateUpdateState(Zombie manager)
 		{
 			
 		}

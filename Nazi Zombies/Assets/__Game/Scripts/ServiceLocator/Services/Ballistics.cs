@@ -1,13 +1,20 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 
 public class Ballistics : MonoBehaviour
 {
-	[SerializeField] private int maxDecals = 15;
-    [SerializeField] private LayerMask gunMask;
-    [SerializeField] private GameObject bulletHole;
 
-	private Queue<GameObject> decals = new Queue<GameObject>();
+
+    [SerializeField,InfoBox("What layers the bullet can collide with")]
+    private LayerMask gunMask;
+
+    [SerializeField]
+    private GameObject bulletHole;
+    [SerializeField]
+    private int maxDecals = 15;
+
+    private Queue<GameObject> decals = new Queue<GameObject>();
 
 	private readonly float EXPLOSION_RANGE = .1f;
 

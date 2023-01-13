@@ -4,24 +4,27 @@ using Sirenix.OdinInspector;
 
 namespace AI.Zombie
 {
+	/// <summary>
+	/// State for chasing the player
+	/// </summary>
 	public class ZombieChasingState : ZombieBaseState
 	{
 		[SerializeField]
 		private float chaseSpeed = 2f;
 
-		public override void EnterState(ZombieStateManager manager)
+		public override void EnterState(Zombie manager)
 		{
-			manager.Agent.speed = chaseSpeed;
+			manager.agent.speed = chaseSpeed;
 			UnstopZombie(manager);
 			//Debug.Log("Entering Chase state");
 		}
-		public override void UpdateState(ZombieStateManager manager)
+		public override void UpdateState(Zombie manager)
 		{
-			manager.Agent.SetDestination(PlayerRef.Instance.PlayerPosition());
+			manager.agent.SetDestination(PlayerRef.Instance.PlayerPosition());
 			Debug.DrawLine(transform.position+Vector3.up, PlayerRef.Instance.PlayerPosition() + Vector3.up, Color.green);
 		}
 
-		public override void TriggerEnter(ZombieStateManager manager, Collider other)
+		public override void TriggerEnter(Zombie manager, Collider other)
 		{
 			if (isPlayer(other))
 			{
@@ -33,23 +36,23 @@ namespace AI.Zombie
 			}
 		}
 
-		public override void TriggerStay(ZombieStateManager manager, Collider other)
+		public override void TriggerStay(Zombie manager, Collider other)
 		{
 
 		}
 
 
-		public override void TriggerExit(ZombieStateManager manager, Collider other)
+		public override void TriggerExit(Zombie manager, Collider other)
 		{
 
 		}
 
-		public override void FixedUpdateState(ZombieStateManager manager)
+		public override void FixedUpdateState(Zombie manager)
 		{
 			
 		}
 
-		public override void LateUpdateState(ZombieStateManager manager)
+		public override void LateUpdateState(Zombie manager)
 		{
 			
 		}

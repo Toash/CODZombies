@@ -66,7 +66,7 @@ namespace Player
 		{
 			//Ballistics.CreateBullet(playerCamera.getCameraRef().transform,equippedWeapon);
 			GunFireEvent?.Invoke(playerInventory.EquippedWeapon);
-			ServLoc.I.Ballistics.CastBullet(playerCamera.getCameraRef().transform, playerInventory.EquippedWeapon);
+			ServLoc.Inst.Ballistics.CastBullet(playerCamera.getCameraRef().transform, playerInventory.EquippedWeapon);
 			ResetTimer();
 		}
 

@@ -7,7 +7,7 @@ public class ZombieCountUI : MonoBehaviour
 
     private void Update()
     {
-        int zombieCount = ServLoc.I.Spawner.CurrentZombies;
+        int zombieCount = ServLoc.Inst.GameManager.CurrentZombies;
         zombieCountText.text = "Zombie count: " + zombieCount.ToString();
     }
 }

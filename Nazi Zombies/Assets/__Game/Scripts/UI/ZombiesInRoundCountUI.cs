@@ -10,6 +10,6 @@ public class ZombiesInRoundCountUI : MonoBehaviour
 
     private void Update()
     {
-        ZombiesInRoundCountText.text = ServLoc.I.Spawner.CurrentZombies.ToString();
+        ZombiesInRoundCountText.text = ServLoc.Inst.GameManager.CurrentZombies.ToString();
     }
 }

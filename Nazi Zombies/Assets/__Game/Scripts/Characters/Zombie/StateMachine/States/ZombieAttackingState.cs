@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 namespace AI.Zombie
 {
 	/// <summary>
-	/// Damaging player
+	/// State for attacking the player
 	/// </summary>
 	public class ZombieAttackingState : ZombieBaseState
 	{
@@ -15,6 +15,7 @@ namespace AI.Zombie
 		private float attackSpeed = 1.5f;
 		[SerializeField]
 		private int attackDamage = 50;
+
 		private bool canAttack()
 		{
 			return attackSpeed <= timer;
@@ -27,7 +28,7 @@ namespace AI.Zombie
 			IncreaseTimer();
 		}
 
-		public override void EnterState(ZombieStateManager manager)
+		public override void EnterState(Zombie manager)
 		{
 			StopZombie(manager);
 			attackent = PlayerRef.Instance.GetComponent<IDamagable>();
@@ -43,7 +44,7 @@ namespace AI.Zombie
 			}
 			*/
 		}
-		public override void UpdateState(ZombieStateManager manager)
+		public override void UpdateState(Zombie manager)
 		{
 			if (canAttack())
 			{
@@ -55,24 +56,24 @@ namespace AI.Zombie
 				Debug.LogError("No player or damageable found");
 			}
 		}
-		public override void FixedUpdateState(ZombieStateManager manager)
+		public override void FixedUpdateState(Zombie manager)
 		{
 
 		}
 
-		public override void LateUpdateState(ZombieStateManager manager)
+		public override void LateUpdateState(Zombie manager)
 		{
 
 		}
-		public override void TriggerEnter(ZombieStateManager zombie, Collider other)
+		public override void TriggerEnter(Zombie zombie, Collider other)
 		{
 		}
-		public override void TriggerStay(ZombieStateManager manager, Collider other)
+		public override void TriggerStay(Zombie manager, Collider other)
 		{
 
 		}
 
-		public override void TriggerExit(ZombieStateManager manager, Collider other)
+		public override void TriggerExit(Zombie manager, Collider other)
 		{
 			if (isPlayer(other))
 			{

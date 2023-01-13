@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
+/// <summary>
+/// Changing rounds
+/// </summary>
 public class Rounds : MonoBehaviour
 {
     [SerializeField] private AudioSource roundChangeSound;
@@ -15,27 +18,38 @@ public class Rounds : MonoBehaviour
 
     private readonly float ROUND_CHANGE_TIME = 2;
 
+    //Game Starts
+    private void Start()
+    {
+        ChangeRound(1);
+    }
     private void Update()
     {
-        if (ServLoc.I.Spawner.ZombiesToSpawn <= 0)
+        if (ServLoc.Inst.ZombieSpawner.ZombiesLeftToSpawnInCurrentRound <= 0)
         {
-            ChangeRound();
+            ChangeRound(CurrentRound + 1);
         }
     }
 
-    private void ChangeRound()
+    private void ChangeRound(int round)
     {
-        StartCoroutine(ChangeRoundRoutine());
+        if (!RoundChanging)
+        {
+            StartCoroutine(ChangeRoundRoutine(round));
+        }
     }
-    private IEnumerator ChangeRoundRoutine()
+    private IEnumerator ChangeRoundRoutine(int round)
     {
-        // Round changing behaviour 
+        // Round changing behaviour
+
         RoundChanging = true;
         RoundBeginSound();
         RoundChanged?.Invoke();
+
         yield return new WaitForSeconds(ROUND_CHANGE_TIME);
+
         // Exit
-        CurrentRound += 1;
+        CurrentRound = round;
         RoundChanging = false;
     }
     private void RoundBeginSound()

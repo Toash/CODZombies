@@ -5,90 +5,102 @@ using Sirenix.OdinInspector;
 namespace AI.Zombie
 {
 	/// <summary>
-	/// State for Breaking windows
+	/// State for Breaking barricades 
 	/// </summary>
 	public class ZombieBreakingState : ZombieBaseState
 	{
 		[ShowInInspector, ReadOnly]
 		private IZombieBreakable currentBreakable;
 
-		[SerializeField]
-		private float breakSpeed = 1f;
-
+		[SerializeField] private float breakSpeed = 1f;
 		private float timer;
-		private bool canBreak(ZombieStateManager manager)
+
+		private bool breakingCooldownUp(Zombie manager)
 		{
 			return breakSpeed <= timer;
 		}
-		private bool barricadeBroken(IZombieBreakable barricade)
+		private bool isBarricadeBroken(IZombieBreakable barricade)
 		{
 			return barricade.Broken;
 		}
-		public override void EnterState(ZombieStateManager manager)
-		{
-			Collider[] colliders = Physics.OverlapSphere(transform.position, 1.5f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
-
-			foreach (Collider col in colliders)
+		 
+		public override void EnterState(Zombie manager) {
+			if (GetNearestBarricade(manager))
 			{
-				if (col.GetComponent<IZombieBreakable>() != null)
-				{
-					currentBreakable = col.GetComponent<IZombieBreakable>();
-					StopZombie(manager);
-				}
-			}
-		}
-
-		public override void FixedUpdateState(ZombieStateManager manager)
-		{
-
-		}
-
-		public override void LateUpdateState(ZombieStateManager manager)
-		{
-
-		}
-
-		public override void TriggerEnter(ZombieStateManager manager, Collider other)
-		{
-
-		}
-
-		public override void TriggerExit(ZombieStateManager manager, Collider other)
-		{
-
-		}
-
-		public override void TriggerStay(ZombieStateManager manager, Collider other)
-		{
-
-		}
-
-		public override void UpdateState(ZombieStateManager manager)
-		{
-			timer += Time.deltaTime;
-			//Debug.Log("In breaking state");
-			if (!barricadeBroken(currentBreakable) && canBreak(manager))
-			{
-				Break(currentBreakable);
-			}
-			else if (barricadeBroken(currentBreakable))
-			{
-				manager.SwitchState(manager.ChasingState);
-			}
-			else if (!canBreak(manager))
-            {
-				//Cooldown
+                base.StopZombie(manager);
             }
 			else
 			{
-				//barricade is null
-				Debug.LogError("BARRICADE IS NULLLLLLLLLLL");
+				Debug.LogError("Barricade magically disapeared?");
+				manager.SwitchState(manager.ChasingState);
 			}
+        }
+
+        private bool GetNearestBarricade(Zombie manager) {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 1.5f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
+
+            foreach (Collider col in colliders) {
+				// Just get the first one
+                if (col.GetComponent<IZombieBreakable>() != null) {
+					currentBreakable = col.GetComponent<IZombieBreakable>();
+					return true;
+                }
+            }
+			return false;
+        }
+
+        public override void FixedUpdateState(Zombie manager)
+		{
+
 		}
 
-		private void Break(IZombieBreakable thingToBreak)
+		public override void LateUpdateState(Zombie manager)
+		{
+
+		}
+
+		public override void TriggerEnter(Zombie manager, Collider other)
+		{
+
+		}
+
+		public override void TriggerExit(Zombie manager, Collider other)
+		{
+
+		}
+
+		public override void TriggerStay(Zombie manager, Collider other)
+		{
+
+		}
+
+		public override void UpdateState(Zombie manager)
+		{
+			timer += Time.deltaTime;
+			if (breakingCooldownUp(manager))
+			{
+				if (!isBarricadeBroken(currentBreakable) && breakingCooldownUp(manager))
+				{
+					Break(currentBreakable);
+					ResetTimer();
+				}
+				//Barricade broke, go into chase state
+				else if (isBarricadeBroken(currentBreakable))
+				{
+					manager.SwitchState(manager.ChasingState);
+				}
+				else
+				{
+					Debug.LogError("Barricade is null");
+				}
+			}
+		}
+		private void Break (IZombieBreakable thingToBreak)
 		{
 			thingToBreak.Break();
+		}
+		private void ResetTimer()
+		{
 			timer = 0;
 		}
 	}

@@ -79,10 +79,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8234545586377853455}
-  - {fileID: 9087795866220551007}
   - {fileID: 8732599623117944075}
   - {fileID: 6493939621182122026}
-  - {fileID: 1651525052214469565}
+  - {fileID: 7694526397619560418}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -109,7 +108,7 @@ GameObject:
   - component: {fileID: 8732599623117944075}
   - component: {fileID: 3132462415312638262}
   m_Layer: 0
-  m_Name: Spawn
+  m_Name: ZombieSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,7 +127,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5560740091304399323}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3132462415312638262
 MonoBehaviour:
@@ -142,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c66e4ea83c5d4dba8008ccb81f5e2ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rounds: {fileID: 2460598029459833014}
+  zombie: {fileID: 4129491350543626065, guid: ec3d24cbe0291463a84d8ab0fdc0d133, type: 3}
   maxZombies: 30
   dontSpawnZombies: 0
 --- !u!1 &6651021178300532297
@@ -176,7 +175,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5560740091304399323}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2460598029459833014
 MonoBehaviour:
@@ -190,7 +189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c071e29088ea1436a8ad44a22981cbba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawner: {fileID: 3132462415312638262}
   roundChangeSound: {fileID: 7651038899058812992}
 --- !u!82 &7651038899058812992
 AudioSource:
@@ -288,7 +286,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &7267860588735941310
+--- !u!1 &7438608725933304515
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -296,84 +294,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1651525052214469565}
-  - component: {fileID: 8316368949650854809}
+  - component: {fileID: 7694526397619560418}
+  - component: {fileID: 8792982175109474562}
   m_Layer: 0
-  m_Name: Difficulty
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1651525052214469565
+--- !u!4 &7694526397619560418
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7267860588735941310}
+  m_GameObject: {fileID: 7438608725933304515}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5560740091304399323}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8316368949650854809
+--- !u!114 &8792982175109474562
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7267860588735941310}
+  m_GameObject: {fileID: 7438608725933304515}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 720cc7bad0d454bd19fe7d853769b367, type: 3}
+  m_Script: {fileID: 11500000, guid: 8dc7a220dff484af5904c1d498f83957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &7544504556494966518
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9087795866220551007}
-  - component: {fileID: 9210643346181054177}
-  m_Layer: 0
-  m_Name: GameAssets
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9087795866220551007
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7544504556494966518}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5560740091304399323}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9210643346181054177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7544504556494966518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f38b27359ddff426cb4c337c28f254b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zombie: {fileID: 4129491350543626065, guid: ec3d24cbe0291463a84d8ab0fdc0d133, type: 3}

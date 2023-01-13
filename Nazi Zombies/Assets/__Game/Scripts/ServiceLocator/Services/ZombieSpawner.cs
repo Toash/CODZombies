@@ -10,80 +10,123 @@ public class ZombieSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject zombie;
 
-    // Global
-    public int CurrentZombies { get; private set; }
-    public int ZombiesToSpawn { get; private set; } 
 
-    // Stats
-    [SerializeField]
-    private int maxZombies = 26; 
-    [SerializeField]
-    private bool dontSpawnZombies;
+    public int ZombiesLeftToSpawnInCurrentRound { get; private set; }
+
+    //stats of zombies to spawn
+    private int zombieSpawnHealth = 100;
+    private bool zombieIsRunning = false;
+
+    [SerializeField] private int maxZombies = 26; 
+    [SerializeField] private bool dontSpawnZombies;
 
     [PropertyOrder(-1), ShowInInspector, ReadOnly]
     private ZombieSpawnPoint[] spawnPoints;
 
-    public bool noZombiesLeftToSpawn { get { return ZombiesToSpawn <= 0; } }
+    public bool noZombiesLeftToSpawn { get { return ZombiesLeftToSpawnInCurrentRound <= 0; } }
 
-    private bool underMaxZombies { get { return CurrentZombies <= maxZombies; } }
+    private bool underMaxZombies { get { return ServLoc.Inst.GameManager.CurrentZombies <= maxZombies; } }
 
-    private bool ready { get { return timer > 2; } }
-    private float timer;
+    private bool readyToSpawn { get { return spawnTimer > 2; } }
+    private float spawnTimer;
     private float spawnRate = 2;
 
-    private void OnEnable()
-    {
-        ServLoc.I.Rounds.RoundChanged += OnRoundChange;
-    }
-    private void OnDisable()
-    {
-        ServLoc.I.Rounds.RoundChanged -= OnRoundChange;
-    }
     private void Start()
     {
         spawnPoints = FindObjectsOfType<ZombieSpawnPoint>();
+        ServLoc.Inst.Rounds.RoundChanged += OnRoundChange;
+    }
+
+    private void OnDisable()
+    {
+        ServLoc.Inst.Rounds.RoundChanged -= OnRoundChange;
     }
 
     private void Update()
     {
-        if (dontSpawnZombies || ServLoc.I.Rounds.RoundChanging||!underMaxZombies) return;
+        if (dontSpawnZombies) return;
+        if (ServLoc.Inst.Rounds.RoundChanging) return;
+        if (!underMaxZombies) return;
 
         IncreaseTimer();
-        if (timer > spawnRate)
+        if (spawnTimer > spawnRate)
         {
             SpawnZombie(GetRandomZombieSpawnPoint().transform.position);
             ResetTimer();
         }
     }
-    public void AddZombieCount()
-    {
-        CurrentZombies += 1;
-    }
-    public void RemoveZombieCount()
-    {
-        CurrentZombies -= 1;
-    }
+
     private void OnRoundChange()
     {
-        CalculateZombiesToSpawn();
+        CalculateSpawnedZombieStats();
     }
-    private void CalculateZombiesToSpawn()
+    private void CalculateSpawnedZombieStats()
     {
-        var currentRound = ServLoc.I.Rounds.CurrentRound;
-        switch (currentRound)
+        // depends on the round
+        switch (ServLoc.Inst.Rounds.CurrentRound)
         {
             case 1:
-                ZombiesToSpawn = 10; 
+                ZombiesLeftToSpawnInCurrentRound = 10;
+                
+                zombieSpawnHealth = 100;
+                zombieIsRunning = false;
                 break;
-            case > 1:
-                ZombiesToSpawn = 15;
-                break;
+            case 2:
+                ZombiesLeftToSpawnInCurrentRound = 10;
 
+                zombieSpawnHealth = 120;
+                zombieIsRunning = false;
+                break;
+            case 3:
+                ZombiesLeftToSpawnInCurrentRound = 10;
+
+                zombieSpawnHealth = 150;
+                zombieIsRunning = false;
+                break;
+            case 4:
+                ZombiesLeftToSpawnInCurrentRound = 10;
+
+                zombieSpawnHealth = 180;
+                zombieIsRunning = false;
+                break;
+            case 5:
+                ZombiesLeftToSpawnInCurrentRound = 10;
+
+                zombieSpawnHealth = 220;
+                zombieIsRunning = false;
+                break;
+            case 6:
+                ZombiesLeftToSpawnInCurrentRound = 10;
+
+                zombieSpawnHealth = 350;
+                zombieIsRunning = false;
+                break;
+            case 7:
+                ZombiesLeftToSpawnInCurrentRound = 10;
+
+                zombieSpawnHealth = 420;
+                zombieIsRunning = false;
+                break;
+            case 8:
+                ZombiesLeftToSpawnInCurrentRound = 10;
+
+                zombieSpawnHealth = 520;
+                zombieIsRunning = false;
+                break;
+            case >= 9:
+                ZombiesLeftToSpawnInCurrentRound = 10;
+
+                zombieSpawnHealth = 700;
+                zombieIsRunning = true;
+                break;
             default:
                 Debug.LogError("Round out of bounds!");
                 break;
         }
-        ZombiesToSpawn = 10;
+        Debug.Log("New Round, ");
+        Debug.Log($"Zombies to spawn: {ZombiesLeftToSpawnInCurrentRound}");
+        Debug.Log($"Spawned Zombie health: {zombieSpawnHealth}");
+        Debug.Log($"Spawned Zombie running: {zombieIsRunning}");
     }
     /// <summary>
     /// Gets actived <see cref="ZombieSpawnPoint"/>s
@@ -112,21 +155,18 @@ public class ZombieSpawner : MonoBehaviour
         return validSpawnPoints[randomIndex];
     }
 
-    /// <summary>
-    /// Spawns zombie at <see cref="Vector3"/>
-    /// </summary>
     private void SpawnZombie(Vector3 pos)
     {
-        Instantiate(zombie, pos, Quaternion.identity);
+        var spawnedZombie = Instantiate(zombie, pos, Quaternion.identity);
     }
 
     private void IncreaseTimer()
     {
-        timer += Time.deltaTime;
+        spawnTimer += Time.deltaTime;
     }
     private void ResetTimer()
     {
-        timer = 0;
+        spawnTimer = 0;
     }
 
 }

@@ -8,10 +8,8 @@ namespace AI.Zombie
 	{
 		public int StartingHealth = 100;
 
-		[SerializeField]
-		private UnityEvent DamagedEvent;
-		[SerializeField]
-		private UnityEvent NoHealthEvent;
+		[SerializeField] private UnityEvent DamagedEvent;
+		[SerializeField] private UnityEvent NoHealthEvent;
 
 		[PropertyOrder(-1),ShowInInspector,ReadOnly]
 		private int currentHealth;
@@ -22,15 +20,7 @@ namespace AI.Zombie
         {
 			currentHealth = StartingHealth;
         }
-
-        private void Start()
-        {
-			ServLoc.I.Spawner.AddZombieCount();
-        }
-        private void OnDisable()
-        {
-			ServLoc.I.Spawner.RemoveZombieCount();
-        }
+		
 		public virtual void Damage(int amount)
 		{
 			currentHealth -= amount;
