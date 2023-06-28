@@ -8,7 +8,9 @@ using Sirenix.OdinInspector;
 /// </summary>
 public class ZombieSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject zombie;
+
+    [SerializeField, Tooltip("Zombie to spawn")] 
+    private GameObject zombie;
 
 
     public int ZombiesLeftToSpawnInCurrentRound { get; private set; }
@@ -17,10 +19,12 @@ public class ZombieSpawner : MonoBehaviour
     private int zombieSpawnHealth = 100;
     private bool zombieIsRunning = false;
 
-    [SerializeField] private int maxZombies = 26; 
-    [SerializeField] private bool dontSpawnZombies;
+    [SerializeField, Tooltip("max zombies that can exist at a time.")] 
+    private int maxZombies = 26; 
+    [SerializeField] 
+    private bool dontSpawnZombies;
 
-    [PropertyOrder(-1), ShowInInspector, ReadOnly]
+    [PropertyOrder(-1), ShowInInspector, ReadOnly, Tooltip("all possible zombie spawn points,  automatically added")]
     private ZombieSpawnPoint[] spawnPoints;
 
     public bool noZombiesLeftToSpawn { get { return ZombiesLeftToSpawnInCurrentRound <= 0; } }
@@ -45,17 +49,19 @@ public class ZombieSpawner : MonoBehaviour
     private void Update()
     {
         if (dontSpawnZombies) return;
-        if (ServLoc.Inst.Rounds.RoundChanging) return;
-        if (!underMaxZombies) return;
-
+        if (ServLoc.Inst.Rounds.RoundChanging) return; //dont spawn zombies in between rounds
+        if (!underMaxZombies) return; // dont spawn zombmies when reach a certain limit
+        SpawningZombies();
+    }
+    private void SpawningZombies()
+    {
         IncreaseTimer();
         if (spawnTimer > spawnRate)
         {
-            SpawnZombie(GetRandomZombieSpawnPoint().transform.position);
-            ResetTimer();
+            SpawnZombie(GetRandomActiveZombieSpawnPoint().transform.position);
+            spawnTimer = 0;
         }
     }
-
     private void OnRoundChange()
     {
         CalculateSpawnedZombieStats();
@@ -143,7 +149,12 @@ public class ZombieSpawner : MonoBehaviour
         }
         return activeSpawnPoints.ToArray();
     }
-    private ZombieSpawnPoint GetRandomZombieSpawnPoint()
+
+    /// <summary>
+    /// Gets random zombie spawn point in an active zone
+    /// </summary>
+    /// <returns></returns>
+    private ZombieSpawnPoint GetRandomActiveZombieSpawnPoint()
     {
         ZombieSpawnPoint[] validSpawnPoints = GetActiveSpawnPoints();
         if (validSpawnPoints.Length == 0)
@@ -160,13 +171,11 @@ public class ZombieSpawner : MonoBehaviour
         var spawnedZombie = Instantiate(zombie, pos, Quaternion.identity);
     }
 
+
+
     private void IncreaseTimer()
     {
         spawnTimer += Time.deltaTime;
-    }
-    private void ResetTimer()
-    {
-        spawnTimer = 0;
     }
 
 }

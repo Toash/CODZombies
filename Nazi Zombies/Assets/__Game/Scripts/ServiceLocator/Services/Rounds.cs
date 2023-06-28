@@ -36,6 +36,7 @@ public class Rounds : MonoBehaviour
         if (!RoundChanging)
         {
             StartCoroutine(ChangeRoundRoutine(round));
+            Debug.Log("Round changed");
         }
     }
     private IEnumerator ChangeRoundRoutine(int round)
@@ -43,7 +44,7 @@ public class Rounds : MonoBehaviour
         // Round changing behaviour
 
         RoundChanging = true;
-        RoundBeginSound();
+        //RoundBeginSound();
         RoundChanged?.Invoke();
 
         yield return new WaitForSeconds(ROUND_CHANGE_TIME);

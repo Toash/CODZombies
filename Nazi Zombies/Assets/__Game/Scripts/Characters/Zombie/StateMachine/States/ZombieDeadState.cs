@@ -10,14 +10,10 @@ namespace AI.Zombie
 	[InfoBox("By default, disables NavMeshAgent and Root Collider")]
 	public class ZombieDeadState : ZombieBaseState
 	{
-		[SerializeField]
-		private UnityEvent deathEvent;
 
 		public override void EnterState(Zombie manager)
 		{
 			manager.agent.enabled = false;
-			manager.col.enabled = false;
-			deathEvent?.Invoke();
 		}
 		public override void UpdateState(Zombie manager)
 		{

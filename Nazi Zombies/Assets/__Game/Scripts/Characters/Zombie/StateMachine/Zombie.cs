@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
 namespace AI.Zombie
@@ -9,17 +10,18 @@ namespace AI.Zombie
 	/// Base zombie class
 	/// </summary>
 	[RequireComponent(typeof(NavMeshAgent))]
-	[RequireComponent(typeof(Collider))]
 	[RequireComponent(typeof(Rigidbody))]
 	public class Zombie : MonoBehaviour
 	{
+		[HideInInspector]
         public NavMeshAgent agent;
-        public Collider col;
 
         //----------STARTING STATS---------
         public int StartingHealth = 100;
         public float StartingSpeed = 2f; // nav agent speed
-        public bool StartsRunning = false;
+
+		// Depracted: Past a certain speed the zombie will automatically run. 
+        //public bool StartsRunning = false; //later rounds the zombie will run.
 
         //-----------STATES--------------
         [ShowInInspector, ReadOnly]
@@ -30,11 +32,20 @@ namespace AI.Zombie
 		public ZombieBreakingState BreakingState;
 		public ZombieDeadState DeadState;
 
+		[Title("Events")]
+		public UnityEvent Chase;
+		public UnityEvent Attacking;
+		public UnityEvent Breaking;
+		public UnityEvent Dead;
 
+		private void Awake()
+        {
+			agent = GetComponent<NavMeshAgent>();
+        }
 
         private void Start()
 		{
-			SwitchState(ChasingState);
+			SwitchState(ChasingState); //When zombie spawns, chase the player
             ServLoc.Inst.GameManager.AddZombieCount();
         }
         private void OnDisable() {
@@ -61,10 +72,11 @@ namespace AI.Zombie
 			currentState = state;
 			currentState.EnterState(this);
 		}
-		public void Dead()
+		public void Kill()
         {
 			currentState = DeadState;
 			currentState.EnterState(this);
+			Dead?.Invoke();
         }
 
 		//--------------PHYSICS---------------

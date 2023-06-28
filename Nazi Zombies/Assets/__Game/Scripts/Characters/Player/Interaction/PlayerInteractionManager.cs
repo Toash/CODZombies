@@ -18,8 +18,9 @@ namespace Player
 		private PlayerSettings settings;
 
 		
+		//The players interactors
 		[SerializeField]
-		private List<BaseInteractor> interators;
+		private List<BaseInteractor> playersInteractors;
 
 
 		private bool InteractableExists { get { return CurrentInteractable != null; } }
@@ -28,13 +29,13 @@ namespace Player
         {
             foreach(BaseInteractor interactor in GetComponentsInChildren<BaseInteractor>())
 			{
-				interators.Add(interactor);
+				playersInteractors.Add(interactor);
 			}
         }
 
         private void OnEnable()
         {
-			foreach(BaseInteractor interactor in this.interators)
+			foreach(BaseInteractor interactor in this.playersInteractors)
             {
 				interactor.Active += SetInteractable;
 				interactor.Inactive += ClearInteractable;
@@ -42,7 +43,7 @@ namespace Player
         }
         private void OnDisable()
         {
-            foreach (BaseInteractor interactor in this.interators)
+            foreach (BaseInteractor interactor in this.playersInteractors)
             {
                 interactor.Active -= SetInteractable;
                 interactor.Inactive -= ClearInteractable;

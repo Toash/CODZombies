@@ -8,6 +8,11 @@ namespace Player
 		public PlayerStats stats;
 		public PlayerSettings settings;
 
+		[SerializeField]
+		private Collider groundCheck;
+		[SerializeField]
+		private LayerMask groundMask;
+
 		private CharacterController charControl;
 		private Vector3 playerGravityVelocity;
 		private float speedMultiplier = 1;

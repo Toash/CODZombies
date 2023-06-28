@@ -30,6 +30,7 @@ public class Ballistics : MonoBehaviour
 	public void CastBullet(Transform shooter, Weapon weapon)
     {
         RaycastHit hit;
+        //Bullet hit something in the mask
         if (Physics.Raycast(shooter.position, shooter.forward, out hit, weapon.Range, this.gunMask, QueryTriggerInteraction.Ignore))
         {
             //BEFORE ZOMBIE DEATH
@@ -46,6 +47,7 @@ public class Ballistics : MonoBehaviour
     private void ApplyWeaponDamage(Weapon weapon, RaycastHit hit)
     {
         hit.transform.GetComponent<IDamagable>()?.Damage(weapon.Damage);
+        hit.transform.GetComponentInParent<IDamagable>()?.Damage(weapon.Damage);
     }
 
     private void ApplyKnockback(RaycastHit hit, float force)
