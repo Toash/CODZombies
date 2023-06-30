@@ -278,8 +278,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5751093423524208637}
-  - component: {fileID: 8559609601208364120}
-  - component: {fileID: 2156632946717652788}
   m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
@@ -295,34 +293,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4924187650033856035}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.11, z: 0}
+  m_LocalPosition: {x: 0, y: 0.054, z: 0}
   m_LocalScale: {x: 0.55806, y: 0.55806, z: 0.55806}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6014639378041683087}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8559609601208364120
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4924187650033856035}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!135 &2156632946717652788
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4924187650033856035}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5969916476812881196
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,11 +589,10 @@ GameObject:
   - component: {fileID: 6575138482266716585}
   - component: {fileID: 7826772024797301509}
   - component: {fileID: 6014639378041683083}
-  - component: {fileID: 9115704429244700017}
   - component: {fileID: 9038557918074140843}
   - component: {fileID: 3300596764835736057}
   - component: {fileID: 8552211540162282791}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -659,7 +635,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: de09e2e838d38674385a51003cf9fbc9, type: 2}
   settings: {fileID: 11400000, guid: 48c2dd4474cfbdc478af0d793c534507, type: 2}
-  groundCheck: {fileID: 2156632946717652788}
+  groundCheck: {fileID: 5751093423524208637}
+  groundCheckRadius: 0.15
   groundMask:
     serializedVersion: 2
     m_Bits: 1
@@ -728,19 +705,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!135 &9115704429244700017
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6014639378041683075}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &9038557918074140843
 MonoBehaviour:
   m_ObjectHideFlags: 0

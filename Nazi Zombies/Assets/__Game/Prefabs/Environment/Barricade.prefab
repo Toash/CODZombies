@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 2930239086945965100}
   - component: {fileID: 4424356861809619131}
   - component: {fileID: 2184896187941422419}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: CurrentWood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,8 +313,8 @@ MonoBehaviour:
   <InteractType>k__BackingField: 1
   <DetectType>k__BackingField: 1
   <InteractString>k__BackingField: 'Press E to repair '
-  stats: {fileID: 11400000, guid: ee95c2c376c6358458ec8f29700e3284, type: 2}
-  RepairSound: {fileID: 6317726819554983120}
+  maxWood: 7
+  repairSound: {fileID: 0}
   AtLeastOneBarricade:
     m_PersistentCalls:
       m_Calls: []
@@ -445,7 +445,7 @@ GameObject:
   - component: {fileID: 6121693170405274194}
   - component: {fileID: 6146800887081178692}
   - component: {fileID: 251945541528131453}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

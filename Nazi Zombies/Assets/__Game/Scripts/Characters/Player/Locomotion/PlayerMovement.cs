@@ -9,7 +9,9 @@ namespace Player
 		public PlayerSettings settings;
 
 		[SerializeField]
-		private Collider groundCheck;
+		private Transform groundCheck;
+		[SerializeField]
+		private float groundCheckRadius = .4f;
 		[SerializeField]
 		private LayerMask groundMask;
 
@@ -24,11 +26,12 @@ namespace Player
 
 		void Update()
 		{
+
 			HandleSpeedMultiplier();
 			HandleGravity();
 			HandleMovement();
 			
-			if (charControl.isGrounded)
+			if (isGrounded())
 			{
 				if (Input.GetButtonDown("Jump"))
 				{
@@ -36,6 +39,20 @@ namespace Player
 				}
 			}
 		}
+        private void OnDrawGizmos()
+        {
+			Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        }
+
+        private bool isGrounded()
+        {
+			if (Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundMask, QueryTriggerInteraction.Ignore))
+			{
+				// hit ground
+				return true;
+			}
+			return false;
+        }
 		public void Jump()
 		{
 			playerGravityVelocity.y = Mathf.Sqrt(stats.JumpHeight * -2f * Physics.gravity.y);

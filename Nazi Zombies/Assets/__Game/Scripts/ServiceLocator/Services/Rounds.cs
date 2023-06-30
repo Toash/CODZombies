@@ -4,30 +4,29 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 /// <summary>
-/// Changing rounds
+/// Contains methods for changing rounds
 /// </summary>
 public class Rounds : MonoBehaviour
 {
-    [SerializeField] private AudioSource roundChangeSound;
+    public int CurrentRound { get; private set; } = 0;
+    public bool RoundChanging { get; private set; } = false;
 
-    public int CurrentRound { get; private set; }
-    public bool RoundChanging { get; private set; }
+    public delegate void RoundChange(int round);
+    public RoundChange RoundChanged;
 
-    public delegate void Action();
-    public Action RoundChanged;
+    [SerializeField]
+    private  float roundChangeTime = 2f;
 
-    private readonly float ROUND_CHANGE_TIME = 2;
-
-    //Game Starts
-    private void Start()
-    {
-        ChangeRound(1);
-    }
+    // As soon as round changes this should be false. Because need to spawn zombies
+    private bool allZombiesInRoundSpawned { get { return ServLoc.Inst.ZombieSpawner.ZombiesLeftToSpawnInCurrentRound <= 0; } }
+    private bool noZombiesActive { get { return ServLoc.Inst.GameManager.ZombieCount <= 0; } }
+    
     private void Update()
     {
-        if (ServLoc.Inst.ZombieSpawner.ZombiesLeftToSpawnInCurrentRound <= 0)
+        if (allZombiesInRoundSpawned && noZombiesActive)
         {
             ChangeRound(CurrentRound + 1);
+            Debug.Log("test");
         }
     }
 
@@ -36,26 +35,20 @@ public class Rounds : MonoBehaviour
         if (!RoundChanging)
         {
             StartCoroutine(ChangeRoundRoutine(round));
-            Debug.Log("Round changed");
+            Debug.Log("Starting coroutine to change round to " + round);
         }
     }
     private IEnumerator ChangeRoundRoutine(int round)
     {
         // Round changing behaviour
-
         RoundChanging = true;
-        //RoundBeginSound();
-        RoundChanged?.Invoke();
+        RoundChanged.Invoke(round); // passing the new round to delegate
 
-        yield return new WaitForSeconds(ROUND_CHANGE_TIME);
+        yield return new WaitForSeconds(roundChangeTime); // pause a bit before new round
 
-        // Exit
+        // Exit, new round begins
+        Debug.Log("Round changed");
         CurrentRound = round;
         RoundChanging = false;
-    }
-    private void RoundBeginSound()
-    {
-        if (roundChangeSound == null) return;
-        roundChangeSound.Play();
     }
 }

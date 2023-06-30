@@ -15,7 +15,7 @@ namespace AI.Zombie
 		[SerializeField] private float breakSpeed = 1f;
 		private float timer;
 
-		private bool breakingCooldownUp(Zombie manager)
+		private bool breakingCooldownUp(ZombieStateMachine manager)
 		{
 			return breakSpeed <= timer;
 		}
@@ -24,7 +24,7 @@ namespace AI.Zombie
 			return barricade.Broken;
 		}
 		 
-		public override void EnterState(Zombie manager) {
+		public override void EnterState(ZombieStateMachine manager) {
 			if (GetNearestBarricade(manager))
 			{
                 base.StopZombie(manager);
@@ -36,7 +36,7 @@ namespace AI.Zombie
 			}
         }
 
-        private bool GetNearestBarricade(Zombie manager) {
+        private bool GetNearestBarricade(ZombieStateMachine manager) {
             Collider[] colliders = Physics.OverlapSphere(transform.position, 1.5f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
 
             foreach (Collider col in colliders) {
@@ -49,32 +49,32 @@ namespace AI.Zombie
 			return false;
         }
 
-        public override void FixedUpdateState(Zombie manager)
+        public override void FixedUpdateState(ZombieStateMachine manager)
 		{
 
 		}
 
-		public override void LateUpdateState(Zombie manager)
+		public override void LateUpdateState(ZombieStateMachine manager)
 		{
 
 		}
 
-		public override void TriggerEnter(Zombie manager, Collider other)
+		public override void TriggerEnter(ZombieStateMachine manager, Collider other)
 		{
 
 		}
 
-		public override void TriggerExit(Zombie manager, Collider other)
+		public override void TriggerExit(ZombieStateMachine manager, Collider other)
 		{
 
 		}
 
-		public override void TriggerStay(Zombie manager, Collider other)
+		public override void TriggerStay(ZombieStateMachine manager, Collider other)
 		{
 
 		}
 
-		public override void UpdateState(Zombie manager)
+		public override void UpdateState(ZombieStateMachine manager)
 		{
 			timer += Time.deltaTime;
 			if (breakingCooldownUp(manager))

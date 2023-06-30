@@ -28,7 +28,7 @@ namespace AI.Zombie
 			IncreaseTimer();
 		}
 
-		public override void EnterState(Zombie manager)
+		public override void EnterState(ZombieStateMachine manager)
 		{
 			StopZombie(manager);
 			attackent = PlayerRef.Instance.GetComponent<IDamagable>();
@@ -44,7 +44,7 @@ namespace AI.Zombie
 			}
 			*/
 		}
-		public override void UpdateState(Zombie manager)
+		public override void UpdateState(ZombieStateMachine manager)
 		{
 			if (canAttack())
 			{
@@ -56,24 +56,24 @@ namespace AI.Zombie
 				Debug.LogError("No player or damageable found");
 			}
 		}
-		public override void FixedUpdateState(Zombie manager)
+		public override void FixedUpdateState(ZombieStateMachine manager)
 		{
 
 		}
 
-		public override void LateUpdateState(Zombie manager)
+		public override void LateUpdateState(ZombieStateMachine manager)
 		{
 
 		}
-		public override void TriggerEnter(Zombie zombie, Collider other)
+		public override void TriggerEnter(ZombieStateMachine zombie, Collider other)
 		{
 		}
-		public override void TriggerStay(Zombie manager, Collider other)
+		public override void TriggerStay(ZombieStateMachine manager, Collider other)
 		{
 
 		}
 
-		public override void TriggerExit(Zombie manager, Collider other)
+		public override void TriggerExit(ZombieStateMachine manager, Collider other)
 		{
 			if (isPlayer(other))
 			{

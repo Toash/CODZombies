@@ -16,5 +16,5 @@ MonoBehaviour:
   Interact: 101
   Crouch: 306
   Jump: 32
-  Sensitivity: 3
-  FOV: 80
+  Sensitivity: 2
+  FOV: 90

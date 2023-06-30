@@ -11,13 +11,12 @@ namespace AI.Zombie
 	/// </summary>
 	[RequireComponent(typeof(NavMeshAgent))]
 	[RequireComponent(typeof(Rigidbody))]
-	public class Zombie : MonoBehaviour
+	public class ZombieStateMachine : MonoBehaviour
 	{
 		[HideInInspector]
         public NavMeshAgent agent;
 
         //----------STARTING STATS---------
-        public int StartingHealth = 100;
         public float StartingSpeed = 2f; // nav agent speed
 
 		// Depracted: Past a certain speed the zombie will automatically run. 
@@ -27,19 +26,28 @@ namespace AI.Zombie
         [ShowInInspector, ReadOnly]
 		private ZombieBaseState currentState;
 
-        public ZombieChasingState ChasingState;
+		[Tooltip("Gameobject that contains states")]
+		public GameObject statesObject;
+
+
+		[HideInInspector] 
+		public ZombieChasingState ChasingState;
+		[HideInInspector] 
 		public ZombieAttackingState AttackingState;
+		[HideInInspector] 
 		public ZombieBreakingState BreakingState;
-		public ZombieDeadState DeadState;
+		
 
 		[Title("Events")]
 		public UnityEvent Chase;
 		public UnityEvent Attacking;
 		public UnityEvent Breaking;
-		public UnityEvent Dead;
 
 		private void Awake()
         {
+			ChasingState = statesObject.GetComponent<ZombieChasingState>();
+			AttackingState = statesObject.GetComponent<ZombieAttackingState>();
+			BreakingState = statesObject.GetComponent<ZombieBreakingState>();
 			agent = GetComponent<NavMeshAgent>();
         }
 
@@ -47,9 +55,6 @@ namespace AI.Zombie
 		{
 			SwitchState(ChasingState); //When zombie spawns, chase the player
             ServLoc.Inst.GameManager.AddZombieCount();
-        }
-        private void OnDisable() {
-            ServLoc.Inst.GameManager.RemoveZombieCount();
         }
 
         private void Update()
@@ -74,9 +79,7 @@ namespace AI.Zombie
 		}
 		public void Kill()
         {
-			currentState = DeadState;
-			currentState.EnterState(this);
-			Dead?.Invoke();
+			ServLoc.Inst.GameManager.RemoveZombieCount();
         }
 
 		//--------------PHYSICS---------------

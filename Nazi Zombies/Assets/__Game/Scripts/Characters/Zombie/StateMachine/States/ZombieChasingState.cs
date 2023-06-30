@@ -12,19 +12,20 @@ namespace AI.Zombie
 		[SerializeField]
 		private float chaseSpeed = 2f;
 
-		public override void EnterState(Zombie manager)
+		public override void EnterState(ZombieStateMachine manager)
 		{
 			manager.agent.speed = chaseSpeed;
 			UnstopZombie(manager);
 			//Debug.Log("Entering Chase state");
 		}
-		public override void UpdateState(Zombie manager)
+		public override void UpdateState(ZombieStateMachine manager)
 		{
-			manager.agent.SetDestination(PlayerRef.Instance.PlayerPosition());
+			if (manager.agent.isActiveAndEnabled)
+				manager.agent.SetDestination(PlayerRef.Instance.PlayerPosition());
 			Debug.DrawLine(transform.position+Vector3.up, PlayerRef.Instance.PlayerPosition() + Vector3.up, Color.green);
 		}
 
-		public override void TriggerEnter(Zombie manager, Collider other)
+		public override void TriggerEnter(ZombieStateMachine manager, Collider other)
 		{
 			if (isPlayer(other))
 			{
@@ -36,23 +37,23 @@ namespace AI.Zombie
 			}
 		}
 
-		public override void TriggerStay(Zombie manager, Collider other)
+		public override void TriggerStay(ZombieStateMachine manager, Collider other)
 		{
 
 		}
 
 
-		public override void TriggerExit(Zombie manager, Collider other)
+		public override void TriggerExit(ZombieStateMachine manager, Collider other)
 		{
 
 		}
 
-		public override void FixedUpdateState(Zombie manager)
+		public override void FixedUpdateState(ZombieStateMachine manager)
 		{
 			
 		}
 
-		public override void LateUpdateState(Zombie manager)
+		public override void LateUpdateState(ZombieStateMachine manager)
 		{
 			
 		}

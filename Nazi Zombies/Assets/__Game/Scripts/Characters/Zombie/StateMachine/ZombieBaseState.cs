@@ -7,14 +7,14 @@ namespace AI.Zombie
 	// Zombie is paramater in fucntions  to pass data to parent (the zombie)
 	public abstract class ZombieBaseState : MonoBehaviour
 	{
-		public abstract void EnterState(Zombie manager);
-		public abstract void FixedUpdateState(Zombie manager);
+		public abstract void EnterState(ZombieStateMachine manager);
+		public abstract void FixedUpdateState(ZombieStateMachine manager);
 
-		public abstract void UpdateState(Zombie manager);
-		public abstract void LateUpdateState(Zombie manager);
-		public abstract void TriggerEnter(Zombie manager, Collider other);
-		public abstract void TriggerStay(Zombie manager, Collider other); //Called every Fixed Update
-		public abstract void TriggerExit(Zombie manager, Collider other);
+		public abstract void UpdateState(ZombieStateMachine manager);
+		public abstract void LateUpdateState(ZombieStateMachine manager);
+		public abstract void TriggerEnter(ZombieStateMachine manager, Collider other);
+		public abstract void TriggerStay(ZombieStateMachine manager, Collider other); //Called every Fixed Update
+		public abstract void TriggerExit(ZombieStateMachine manager, Collider other);
 
 		protected bool isPlayer(Collider other)
 		{
@@ -24,13 +24,15 @@ namespace AI.Zombie
 		{
 			return other.transform.GetComponent<IZombieBreakable>() != null;
 		}
-		protected void StopZombie(Zombie manager)
+		protected void StopZombie(ZombieStateMachine manager)
 		{
-			manager.agent.isStopped = true;
+			if (manager.agent.isActiveAndEnabled)
+				manager.agent.isStopped = true;
 		}
-		protected void UnstopZombie(Zombie manager)
+		protected void UnstopZombie(ZombieStateMachine manager)
 		{
-			manager.agent.isStopped = false;
+			if (manager.agent.isActiveAndEnabled)
+				manager.agent.isStopped = false;
 		}
 	}
 }

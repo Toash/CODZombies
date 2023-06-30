@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Sirenix.OdinInspector;
 
 
 /// <summary>
@@ -7,7 +8,8 @@ using System.Collections;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-    public int CurrentZombies { get; private set; }
+    [ShowInInspector, ReadOnly]
+    public int ZombieCount { get; private set; }
     private bool roundOngoing = false;
 
     private void Start() {
@@ -17,16 +19,16 @@ public class GameManager : MonoBehaviour
        
     }
     public void AddZombieCount() {
-        CurrentZombies += 1;
+        ZombieCount += 1;
     }
     public void RemoveZombieCount() {
-        CurrentZombies -= 1;
+        ZombieCount -= 1;
     }
 
     /// <summary>
     /// Handles round starting behaviour
     /// </summary>
-    private void RoundStarted()
+    private void RoundStarted(int round)
     {
         roundOngoing = true;
     }
