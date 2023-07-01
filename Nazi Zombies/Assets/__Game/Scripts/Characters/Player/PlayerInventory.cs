@@ -18,25 +18,21 @@ namespace Player
 		public List<Weapon> weaponsList;
 
 
-		public delegate void WeaponChange(Weapon weapon); //delegate
-		public event WeaponChange weaponChanged; //delegate instance
+		public delegate void WeaponChange(Weapon weapon); 
+		public event WeaponChange weaponChanged; 
 
 
 		private void Awake()
 		{
 			if (weaponsList.Count > stats.MaxInventorySlots) Debug.LogError("Too much weapons");
-			IncreaseInventorySize(stats.MaxInventorySlots);
 
+			IncreaseInventorySize(stats.MaxInventorySlots);
 		}
 		private void Start()
 		{
 			if (this.EquippedWeapon == null) { EquipWeapon(0); }
 		}
 		private void Update()
-		{
-			GetInput();
-		}
-		private void GetInput()
 		{
 			if (Input.GetKeyDown(KeyCode.Alpha1))
 			{

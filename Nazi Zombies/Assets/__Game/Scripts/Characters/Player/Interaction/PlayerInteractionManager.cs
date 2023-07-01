@@ -61,13 +61,13 @@ namespace Player
 		}
 		private void SetInteractable(PlayerInteractable interact)
 		{
-			PlayerInteractionManager.CurrentInteractable = interact;
+			CurrentInteractable = interact;
 			//print("set interactable");
 		}
-		private void ClearInteractable(PlayerInteractable interact)
+		private void ClearInteractable()
 		{
-			PlayerInteractionManager.CurrentInteractable = null;
-			//print("clear interactable");
+			CurrentInteractable = null;
+			print("clear interactable");
 		}
 	}
 }

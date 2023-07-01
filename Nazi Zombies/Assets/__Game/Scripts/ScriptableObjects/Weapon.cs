@@ -6,8 +6,10 @@ public class Weapon : ScriptableObject
 {
 	public int Damage;
 	public float Range;
+	public float VerticalRecoil;
+	public float HorizontalRecoil;
 	[InfoBox("Force used when colliding with Rigidbodies")]
-	public float Force;
+	public float DamageForce;
 
 	public float FireRate;
 	public bool Automatic;

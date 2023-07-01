@@ -21,7 +21,7 @@ namespace Player
 			if (ColliderInteractableExists(interactable))
 			{
 				//Debug.Log("Collide");
-				base.FActive(interactable);
+				base.ActivateInteractable(interactable);
 			}
 		}
 
@@ -32,7 +32,7 @@ namespace Player
 			{
 				if(ColliderInteractableExists(PlayerInteractionManager.CurrentInteractable)){
                     //Debug.Log("Exiting");
-                    base.FInActive(interactable);
+                    base.ClearInteractable();
                 }
 			}
 		}

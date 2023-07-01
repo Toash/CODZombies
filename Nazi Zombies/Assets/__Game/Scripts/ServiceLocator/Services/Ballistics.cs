@@ -22,8 +22,8 @@ public class Ballistics : MonoBehaviour
 	{
 		if (decals.Count >= maxDecals)
 		{
-			GameObject bullet = decals.Dequeue();
-			Destroy(bullet);
+			GameObject earliestBullet = decals.Dequeue();
+			Destroy(earliestBullet);
 		}
 	}
 
@@ -37,7 +37,7 @@ public class Ballistics : MonoBehaviour
             ApplyWeaponDamage(weapon, hit);
 
             //AFTER ZOMBIE DEATH
-            ApplyKnockback(hit,weapon.Force); //Apply knockback AFTER DAMAGE, so that ragdoll is ready. 
+            ApplyKnockback(hit,weapon.DamageForce); //Apply knockback AFTER DAMAGE, so that ragdoll is ready. 
 
             CreateBulletHole(hit);
             Debug.DrawRay(shooter.position, hit.point - shooter.position, Color.green, 10, false);
@@ -65,7 +65,8 @@ public class Ballistics : MonoBehaviour
 
     private void CreateBulletHole(RaycastHit hitPoint)
 	{
-		GameObject bullet = Instantiate(bulletHole, hitPoint.point+(hitPoint.normal*.01f), Quaternion.LookRotation(-hitPoint.normal, Vector3.up),hitPoint.transform);
-		decals.Enqueue(bullet);
+        GameObject bulletHole = Instantiate(this.bulletHole, hitPoint.point+(hitPoint.normal*.01f), Quaternion.LookRotation(-hitPoint.normal, Vector3.up));
+        bulletHole.transform.Rotate(Vector3.forward, Random.Range(0, 360));
+		decals.Enqueue(bulletHole);
 	}
 }

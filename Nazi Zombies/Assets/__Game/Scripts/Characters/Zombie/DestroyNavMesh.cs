@@ -11,5 +11,4 @@ public class DestroyNavMesh : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
-
 }

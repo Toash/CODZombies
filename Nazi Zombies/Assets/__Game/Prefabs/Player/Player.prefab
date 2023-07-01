@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 5857309827058556228}
   - component: {fileID: 200801105935105573}
   m_Layer: 0
-  m_Name: Interact
+  m_Name: Interaction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -279,7 +279,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5751093423524208637}
   m_Layer: 0
-  m_Name: GroundCheck
+  m_Name: GroundCheckMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -802,6 +802,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6014639378041683087}
     m_Modifications:
+    - target: {fileID: 1558163529152430863, guid: 72d64e4dffbfe6745a712a7eb39130f5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1558163529152430863, guid: 72d64e4dffbfe6745a712a7eb39130f5, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

@@ -11,7 +11,7 @@ namespace Player
 	{
         [SerializeField] private PlayerStats stats;
         [SerializeField] private Camera cam;
-        [SerializeField] private LayerMask mask;
+        [SerializeField,Tooltip("What the interactor can check for")] private LayerMask mask;
 
 
         private bool RaycastInteractableExists(PlayerInteractable interactable)
@@ -28,12 +28,13 @@ namespace Player
 
                 if (RaycastInteractableExists(interactable))
 				{
-                    base.FActive(interactable);
+                    //Debug.Log("Looking at it");
+                    base.ActivateInteractable(interactable);
 				}
 			}
-            if (RaycastInteractableExists(PlayerInteractionManager.CurrentInteractable))
+            else if (RaycastInteractableExists(PlayerInteractionManager.CurrentInteractable))
             {
-                base.FInActive(null);
+                base.ClearInteractable();
             }
         }
     }

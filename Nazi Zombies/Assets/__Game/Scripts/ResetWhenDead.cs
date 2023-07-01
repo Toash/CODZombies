@@ -7,6 +7,10 @@ public class ResetWhenDead : MonoBehaviour
 { 
     public void ResetScene()
     {
-        SceneManager.SetActiveScene(SceneManager.GetActiveScene());
+        // Get the current active scene
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        // Reload the current scene
+        SceneManager.LoadScene(currentScene.buildIndex);
     }
 }

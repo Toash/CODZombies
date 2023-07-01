@@ -143,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombieObject: {fileID: 4129491350543626065, guid: ec3d24cbe0291463a84d8ab0fdc0d133, type: 3}
   maxZombies: 30
-  dontSpawnZombies: 0
+  dontSpawnZombies: 1
 --- !u!1 &6651021178300532297
 GameObject:
   m_ObjectHideFlags: 0

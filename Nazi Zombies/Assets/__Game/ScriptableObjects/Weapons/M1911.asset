@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc808a31f56f1074f87f5d55b742b7fc, type: 3}
+  m_Name: M1911
+  m_EditorClassIdentifier: 
+  Damage: 50
+  Range: 100
+  Force: 3
+  FireRate: 0.2
+  Automatic: 0
+  ReloadTime: 1
+  Model: {fileID: 4821245378892133357, guid: 12d36c6822778ec4d97a60f829ea1bd4, type: 3}
+  VisualRecoil: 10
+  ShootSound: {fileID: 8300000, guid: 5316f03efdbb59b49a5c01cf39d525f6, type: 3}

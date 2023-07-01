@@ -14,17 +14,26 @@ namespace Player
         /// </summary>
         /// <param name="interact"></param>
         public delegate void Activation(PlayerInteractable interact);
+        public delegate void InActivation();
 
         public event Activation Active;
-        public event Activation Inactive;
+        public event InActivation Inactive;
 
-        public void FActive(PlayerInteractable interact)
+        /// <summary>
+        /// Function for whenever a certain interactable is looked at / near by player.
+        /// </summary>
+        /// <param name="interact"></param>
+        public void ActivateInteractable(PlayerInteractable interact)
         {
             Active?.Invoke(interact);
         }
-        public void FInActive(PlayerInteractable interact)
+        /// <summary>
+        /// No more active interactable.
+        /// </summary>
+        /// <param name="interact"></param>
+        public void ClearInteractable()
         {
-            Inactive?.Invoke(interact);
+            Inactive?.Invoke();
         }
 
     }
