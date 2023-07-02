@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 50
   Range: 100
-  Force: 3
+  VCamRecoil: 3
+  HCamRecoil: 0
+  DamageForce: 0
   FireRate: 0.2
   Automatic: 0
   ReloadTime: 1

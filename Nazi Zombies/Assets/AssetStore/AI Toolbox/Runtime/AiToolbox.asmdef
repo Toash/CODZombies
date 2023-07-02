@@ -1,0 +1,24 @@
+{
+    "name": "AiToolbox",
+    "rootNamespace": "",
+    "references": [
+        "GUID:fe25561d224ed4743af4c60938a59d0b",
+        "GUID:5540e30183c82e84b954c033c388e06c",
+        "GUID:9d6c7830d9ab746a7a12f144bdeeee7c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.remote-config",
+            "expression": "",
+            "define": "REMOTE_CONFIG_IMPORTED"
+        }
+    ],
+    "noEngineReferences": false
+}

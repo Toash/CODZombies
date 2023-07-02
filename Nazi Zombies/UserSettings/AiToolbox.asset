@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 61
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 828768645, guid: 70dbf0a4022d249fd8f4a011272fc178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openAiApiKey: "|tAtO`qb{TSM\\x7}gOK\x81Hzj\\3IyctRXx_[a|aq3GqbIe7<UtZfZ"
+  openAiProxyApiKey: 
+  openAiEndpoint: https://api.openai.com
+  chatGptModel: 0
+  useModelVariant16KTokens: 0
+  chatGpt35ModelVersion: 1
+  chatGpt4ModelVersion: 1
+  gcloudProjectId: 
+  gcloudAccessToken: 
+  gcloudEndpoint: us-central1-aiplatform.googleapis.com
+  gcloudModel: 0
+  gcloudSdkPath: 
+  temperature: 0
+  useTimeout: 1
+  timeout: 90
+  guidingPromptsComponents:
+  - The script is a component of a GameObject.
+  - Include all necessary "using" declarations.
+  - Use require attribute for components used in the code.
+  - Do not use any custom MonoBehaviour components.
+  - Expose all properties in the inspector.
+  - Explain code using comments.
+  - Generate tooltips for all properties.
+  guidingPromptsComponentsDisabled: 00000000000101
+  guidingPromptsUiDocuments:
+  - The file is in UXML format.
+  - Do not use any C# code.
+  guidingPromptsUiDocumentsDisabled: 0000
+  guidingPromptsShaders:
+  - Add explanatory comments to the shader.
+  guidingPromptsShadersDisabled: 01
+  guidingPromptsTextures:
+  - Unity3D
+  - high resolution
+  - 4K
+  - game art
+  guidingPromptsTexturesDisabled: 00000000
+  path: Assets/Generated
+  showInspectorButton: 1
+  autoAcceptNewScripts: 0
+  autoAcceptEdits: 0
+  showWarningWhenOverwriting: 1
+  showWarningWhenDeleting: 1

@@ -3,10 +3,9 @@ using System.Collections;
 
 namespace Player
 {
-    /// <summary>
-    /// When the Player needs to interact with the a
-    /// <see cref="PlayerInteractable"/> in some way, that way inherits from this class
-    /// </summary>
+	/// <summary>
+	/// Activates interactables
+	/// </summary>
     public abstract class BaseInteractor : MonoBehaviour
     { 
         /// <summary>

@@ -1,0 +1,58 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement name="root-element" style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="sidebar" style="flex-grow: 1; width: 300px; border-right-color: rgb(25, 25, 25); border-right-width: 1px; display: none;">
+            <ui:VisualElement name="sidebar-top" style="height: 40px; margin-top: 5px;">
+                <ui:Button text="+ New chat" display-tooltip-when-elided="true" name="new-chat-button" style="flex-grow: 1;" />
+            </ui:VisualElement>
+            <ui:ScrollView name="sidebar-scroll-view" style="flex-grow: 1;" />
+            <ui:VisualElement name="sidebar-bottom" style="background-color: rgba(0, 0, 0, 0); margin-bottom: 5px; height: 30px;">
+                <ui:Button text="Clear conversations" display-tooltip-when-elided="true" name="clear-chats-button" style="flex-grow: 1;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="current-chat" style="flex-grow: 1;">
+            <ui:DropdownField label="Model" name="model-dropdown" choices="Default (GPT-3.5), GPT-4" index="0" style="height: 40px; -unity-text-align: middle-right; align-items: center; max-width: 300px; align-self: center; display: none;" />
+            <ui:ScrollView name="chat-scroll-view" style="flex-grow: 1;" />
+            <ui:IMGUIContainer name="regenerate-response-button-imgui" style="height: 40px; flex-shrink: 0; margin-top: 3px; margin-bottom: 1px;">
+                <ui:Button text="Button" display-tooltip-when-elided="true" name="regenerate-response-button-placeholder" style="flex-grow: 1; width: 180px; align-self: center;" />
+            </ui:IMGUIContainer>
+            <ui:Foldout text="Submit Script" name="file-foldout" value="false" style="flex-shrink: 0;">
+                <uie:ObjectField label="File" allow-scene-objects="false" name="file-object-field" type="UnityEditor.MonoScript, UnityEditor.CoreModule" style="-unity-font-style: bold;" />
+                <ui:VisualElement name="file-buttons-container" style="background-color: rgba(0, 0, 0, 0); flex-direction: row; margin-top: 3px; flex-wrap: wrap; overflow: hidden; flex-shrink: 0;">
+                    <ui:VisualElement name="learn-buttons" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; justify-content: flex-end; flex-wrap: wrap; border-left-color: rgba(177, 177, 177, 0.2); border-right-color: rgba(177, 177, 177, 0.2); border-top-color: rgba(177, 177, 177, 0.2); border-bottom-color: rgba(177, 177, 177, 0.2); border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-top-left-radius: 3px; border-bottom-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; margin-right: 5px;">
+                        <ui:Label tabindex="-1" text="Learn" display-tooltip-when-elided="true" style="margin-left: 3px; -unity-font-style: bold;" />
+                        <ui:Button text="Explain code" display-tooltip-when-elided="true" name="explain-code-button" />
+                        <ui:Button text="Add comments" display-tooltip-when-elided="true" name="add-comments-button" />
+                        <ui:Button text="Recommend resources" display-tooltip-when-elided="true" name="recommend-resources-button" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="improve-buttons" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); border-left-color: rgba(177, 177, 177, 0.2); border-right-color: rgba(177, 177, 177, 0.2); border-top-color: rgba(177, 177, 177, 0.2); border-bottom-color: rgba(177, 177, 177, 0.2); border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-top-left-radius: 3px; border-bottom-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; margin-right: 5px;">
+                        <ui:Label tabindex="-1" text="Improve" display-tooltip-when-elided="true" style="margin-left: 3px; -unity-font-style: bold;" />
+                        <ui:Button text="Improve readability" display-tooltip-when-elided="true" name="improve-readability-button" />
+                        <ui:Button text="Improve names" display-tooltip-when-elided="true" name="improve-names-button" />
+                        <ui:Button text="Add Inspector tooltips" display-tooltip-when-elided="true" name="add-tooltips-button" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="fix-buttons" style="flex-grow: 1; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgba(177, 177, 177, 0.2); border-right-color: rgba(177, 177, 177, 0.2); border-top-color: rgba(177, 177, 177, 0.2); border-bottom-color: rgba(177, 177, 177, 0.2); border-top-left-radius: 3px; border-bottom-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; margin-right: 3px;">
+                        <ui:Label tabindex="-1" text="Fix" display-tooltip-when-elided="true" style="margin-left: 3px; -unity-font-style: bold;" />
+                        <ui:Button text="Check for bugs" display-tooltip-when-elided="true" name="check-bugs-button" />
+                        <ui:Button text="Fix compiler errors" display-tooltip-when-elided="true" name="fix-compilation-button" />
+                        <ui:Button text="Check performance" display-tooltip-when-elided="true" name="check-performance-button" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:Label tabindex="-1" text="You can type any other request below" display-tooltip-when-elided="true" style="margin-top: 2px; -unity-text-align: upper-center; color: rgba(210, 210, 210, 0.5); font-size: 10px; -unity-font-style: italic;" />
+            </ui:Foldout>
+            <ui:TextField picking-mode="Ignore" value="Send a message." name="send-message-textfield" multiline="true" style="height: 40px; margin-top: 5px; margin-bottom: 5px;">
+                <ui:VisualElement name="send-message-button" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: none; position: absolute; right: 8px; transform-origin: center; width: 22px; height: 22px; align-self: center; transition-duration: 0.2s; transition-timing-function: ease-in-out;" />
+            </ui:TextField>
+            <ui:VisualElement name="settings" style="background-color: rgba(0, 0, 0, 0); border-left-color: rgb(25, 25, 25); border-right-color: rgb(25, 25, 25); border-top-color: rgb(25, 25, 25); border-bottom-color: rgb(25, 25, 25); border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-top-left-radius: 3px; border-bottom-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; margin-left: 3px; margin-right: 6px; margin-top: 5px; margin-bottom: 8px; transition-duration: 0.2s; transition-timing-function: ease-in-out; flex-shrink: 0;">
+                <ui:Toggle label="Unity developer" name="ai-role-toggle" value="true" tooltip="AI assumes the role of a Unity developer. If disabled, AI has no specific role." style="margin-top: 3px; margin-bottom: 3px; margin-left: 3px; margin-right: 3px;" />
+                <ui:Slider picking-mode="Ignore" label="Temperature" value="1" high-value="1" name="temperature-slider" tooltip="Temperature controls randomness: Lower values result in less random results." style="margin-top: 3px; margin-bottom: 3px; margin-right: 5px;" />
+                <ui:DropdownField label="Chatbot" index="0" choices="ChatGPT,Google Bard" name="ai-provider-dropdown" style="margin-left: 3px; margin-right: 3px; margin-top: 3px; margin-bottom: 3px;" />
+                <ui:DropdownField label="Model" choices="Default (GPT-3.5), GPT-4" name="model-dropdown" style="display: none;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="footer-container" style="background-color: rgba(0, 0, 0, 0); flex-direction: row; flex-shrink: 0;">
+                <ui:Label display-tooltip-when-elided="true" name="footer-label" enable-rich-text="true" style="-unity-text-align: middle-center; font-size: 10px; align-items: center; position: absolute; left: 0; right: 0; top: 4px; padding-left: 0; padding-right: 0; align-self: center; width: 100%; justify-content: space-between; flex-direction: row;" />
+                <ui:Button text="Settings" display-tooltip-when-elided="true" name="settings-button" style="margin-bottom: 5px; transition-duration: 0.3s;" />
+                <ui:Button text="Clear" display-tooltip-when-elided="true" name="clear-button" style="margin-bottom: 5px; transition-duration: 0.3s;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -12,9 +12,9 @@ public class Doorbuy : PlayerInteractable
 
 	}
 
-	public override bool Interact()
+	public override void Interact()
 	{
+		base.Interact();
 		Destroy(gameObject);
-		return true;
 	}
 }

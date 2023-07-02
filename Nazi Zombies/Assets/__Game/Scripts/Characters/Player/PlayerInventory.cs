@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 
@@ -25,7 +25,6 @@ namespace Player
 		private void Awake()
 		{
 			if (weaponsList.Count > stats.MaxInventorySlots) Debug.LogError("Too much weapons");
-
 			IncreaseInventorySize(stats.MaxInventorySlots);
 		}
 		private void Start()
@@ -44,22 +43,50 @@ namespace Player
 			}
 		}
 
+		/// <summary>
+		/// Adds weapon to players inventory, if the inventory is full, overwrites equipped weapon.
+		/// </summary>
+		/// <param name="weapon"></param>
 		public void AddWeaponToList(Weapon weapon)
 		{
-			switch (weaponsList.Count)
+			bool playerHasMaxWeaponCapacity = WeaponCount() >= stats.MaxInventorySlots;
+
+			if(playerHasMaxWeaponCapacity){
+				Debug.Log("Inventory: Overwriting equipped weapon");
+				AssignWeaponToIndex(weaponsList.IndexOf(EquippedWeapon), weapon);
+			}
+			switch (WeaponCount())
 			{
-				case 0:
+				//No weapons
+				case 0: 
 					AssignWeaponToIndex(0, weapon);
 					break;
+				// Have one weapon, add to secondary slot
 				case 1:
 					AssignWeaponToIndex(1, weapon);
 					break;
-				default:
-					//overwrite equipped weapon
-					AssignWeaponToIndex(weaponsList.IndexOf(EquippedWeapon), weapon);
-					break;
 			}
+			
+			// have the player equip the new weapon after
+			EquipWeapon(weaponsList.IndexOf(weapon));
 		}
+
+		/// <summary>
+		/// Returns count of inventory
+		/// </summary>
+		/// <returns></returns>
+		public int WeaponCount()
+        {
+			int count = 0;
+			for(int i = 0; i < weaponsList.Count; i++)
+            {
+                if (weaponsList[i] != null)
+                {
+					count++;
+                }
+            }
+			return count;
+        }
 
 		private void EquipWeapon(int index)
 		{
@@ -74,14 +101,17 @@ namespace Player
 
 		//assign weapon to index of weapons list
 		private void AssignWeaponToIndex(int index, Weapon weapon)
-        {
-			if (this.weaponsList[index] == null) return;
+		{
 			this.weaponsList[index] = weapon;
         }
 
+		/// <summary>
+		/// Adds empty slots to match max inventory space.
+		/// </summary>
+		/// <param name="size"></param>
 		private void IncreaseInventorySize(int size)
         {
-            int slotsLeft = size - weaponsList.Count;
+			int slotsLeft = size - weaponsList.Count;
 			if (slotsLeft < 0) return;
             for (int i = 0; i < slotsLeft; i++)
             {
@@ -90,7 +120,7 @@ namespace Player
 		}
 		private bool ValidSize()
         {
-			return weaponsList.Count <= stats.MaxInventorySlots;
+			return WeaponCount() <= stats.MaxInventorySlots;
         }
 	}
 }

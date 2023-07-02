@@ -9,8 +9,8 @@ namespace Player
 		[SerializeField] private Camera cameraRef;
 		[SerializeField] private Transform playerTransform;
 
-
 		private float verticalRotation = 0f;
+		private float horizontalRotation = 0f;
 
 		public Camera getCameraRef()
 		{
@@ -19,24 +19,32 @@ namespace Player
 
 		void Awake()
 		{
-			if (cameraRef == null) { Debug.LogError("No camera attached!!!"); }
-			cameraRef.fieldOfView = settings.FOV;
+			//cameraRef.fieldOfView = settings.FOV;
 			Cursor.lockState = CursorLockMode.Locked;
 		}
 		public void Update()
 		{
 			cameraMovement();
 		}
+
+		/// <summary>
+		/// Move the camera, can be used to implement recoil.
+		/// </summary>
+		/// <param name="move"></param>
+		public void ApplyCameraMovement(Vector2 move)
+        {
+			horizontalRotation += move.x;
+			verticalRotation -= move.y;
+        }
 		private void cameraMovement()
 		{
-			//rotate transform on the y axis. (left to right)
-			playerTransform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * settings.Sensitivity);
+			// Horizontal player rotation
+			horizontalRotation += (Input.GetAxis("Mouse X") * settings.Sensitivity);
+			playerTransform.rotation = Quaternion.Euler(0, horizontalRotation, 0);
 
+			// Vertical camera rotation
 			verticalRotation -= (Input.GetAxis("Mouse Y") * settings.Sensitivity);
-
-			//clamp
 			verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
-			//rotate cameras right axis (up and down)
 			cameraRef.transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
 		}
 	}

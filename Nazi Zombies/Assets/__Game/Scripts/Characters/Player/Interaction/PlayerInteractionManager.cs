@@ -1,11 +1,11 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
 using Sirenix.OdinInspector;
 namespace Player
 {
     /// <summary>
-    /// takes care of interacting, listening to interaction events, contains the <see cref="CurrentInteractable"/>
+	/// Takes care of interacting, listening to interaction events, contains the <see cref="CurrentInteractable"/>
     /// </summary>
     public class PlayerInteractionManager : MonoBehaviour
     {
@@ -55,6 +55,7 @@ namespace Player
 			{
 				if (Input.GetKey(settings.Interact))
 				{
+					//Debug.Log("Player: Pressing Interact key");
 					CurrentInteractable.Interact();
 				}
 			}
@@ -62,12 +63,12 @@ namespace Player
 		private void SetInteractable(PlayerInteractable interact)
 		{
 			CurrentInteractable = interact;
-			//print("set interactable");
+			print("Interact: Set interactable");
 		}
 		private void ClearInteractable()
 		{
 			CurrentInteractable = null;
-			print("clear interactable");
+			print("Interact: Clear");
 		}
 	}
 }

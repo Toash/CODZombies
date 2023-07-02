@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 8800589210629599807}
   - component: {fileID: 7074047436513034080}
   - component: {fileID: 2556622963793707420}
+  - component: {fileID: 5221820553567522751}
   m_Layer: 0
   m_Name: WeaponFunctionality
   m_TagString: Untagged
@@ -255,6 +256,9 @@ MonoBehaviour:
   playerInventory: {fileID: 6400288312307306092}
   playerWeapon: {fileID: 8800589210629599807}
   dynamicWeaponHoldPoint: {fileID: 6014639377112993086}
+  smoothing: 5
+  swayAmount: 0.01
+  maxSwayAmount: 0.004
 --- !u!114 &2556622963793707420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,6 +273,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponShooter: {fileID: 8800589210629599807}
   audioSource: {fileID: 3238842498895130583}
+--- !u!114 &5221820553567522751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4095966097450672837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc3e86e50de07bb4aa2a5af3828fb9b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCam: {fileID: 5389495012524757765}
+  shooter: {fileID: 8800589210629599807}
 --- !u!1 &4924187650033856035
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +365,6 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: de09e2e838d38674385a51003cf9fbc9, type: 2}
   weaponsList:
   - {fileID: 11400000, guid: 3cd22dcc0927a2244aebb163f48fa7c9, type: 2}
-  - {fileID: 11400000, guid: 10e368c31fd15a14c929c6036a40da4f, type: 2}
 --- !u!1 &6014639377112993087
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,7 +553,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 60
+  field of view: 100
   orthographic: 0
   orthographic size: 5
   m_Depth: -1

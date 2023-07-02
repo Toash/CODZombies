@@ -1,0 +1,16 @@
+{
+    "name": "AiToolbox.Samples",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7ff94dfa1c60345ee9be16a49f42a4ec"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

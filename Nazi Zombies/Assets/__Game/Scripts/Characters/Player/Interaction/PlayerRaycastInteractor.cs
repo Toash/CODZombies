@@ -7,11 +7,11 @@ namespace Player
     /// <summary>
     /// Uses raycast for interactions.
     /// </summary>
-	public class PlayerRaycastInteractor : BaseInteractor 
-	{
+	public class PlayerRaycastInteractor : BaseInteractor
+    {
         [SerializeField] private PlayerStats stats;
         [SerializeField] private Camera cam;
-        [SerializeField,Tooltip("What the interactor can check for")] private LayerMask mask;
+        [SerializeField, Tooltip("What the interactor can check for")] private LayerMask mask;
 
 
         private bool RaycastInteractableExists(PlayerInteractable interactable)
@@ -22,16 +22,21 @@ namespace Player
         private void Update()
         {
             RaycastHit hit;
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit,stats.RaycastInteractRange, mask, QueryTriggerInteraction.Collide))
-			{
-                PlayerInteractable interactable = hit.transform.GetComponent<PlayerInteractable>();
+            bool raycastLookingAtInteractable = Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, stats.RaycastInteractRange, mask, QueryTriggerInteraction.Collide);
 
-                if (RaycastInteractableExists(interactable))
-				{
-                    //Debug.Log("Looking at it");
-                    base.ActivateInteractable(interactable);
-				}
-			}
+            if (raycastLookingAtInteractable)
+            {
+                if (PlayerInteractionManager.CurrentInteractable == null)
+                {
+                    PlayerInteractable interactable = hit.transform.GetComponent<PlayerInteractable>();
+
+                    if (RaycastInteractableExists(interactable))
+                    {
+                        base.ActivateInteractable(interactable);
+                    }
+                }
+
+            }
             else if (RaycastInteractableExists(PlayerInteractionManager.CurrentInteractable))
             {
                 base.ClearInteractable();

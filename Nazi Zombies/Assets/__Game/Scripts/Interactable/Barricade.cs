@@ -34,14 +34,12 @@ public class Barricade : PlayerInteractable, IZombieBreakable
 		}
 	}
 
-	public override bool Interact()
+	public override void Interact()
 	{
-		if(base.Interact() && UnderMaxWood()){
+		base.Interact();
+		if(UnderMaxWood()){
             Repair();
-			return true;
         }
-		return false;
-
 	}
 
 	public void Break()

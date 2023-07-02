@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
 [CreateAssetMenu]
@@ -6,8 +6,10 @@ public class Weapon : ScriptableObject
 {
 	public int Damage;
 	public float Range;
-	public float VerticalRecoil;
-	public float HorizontalRecoil;
+	[InfoBox("Vertical Camera Recoil")]
+	public float VCamRecoil;
+	[InfoBox("Horizontal Camera Recoil")]
+	public float HCamRecoil;
 	[InfoBox("Force used when colliding with Rigidbodies")]
 	public float DamageForce;
 

@@ -26,7 +26,7 @@ public class Rounds : MonoBehaviour
         if (allZombiesInRoundSpawned && noZombiesActive)
         {
             ChangeRound(CurrentRound + 1);
-            Debug.Log("test");
+            
         }
     }
 
@@ -35,7 +35,7 @@ public class Rounds : MonoBehaviour
         if (!RoundChanging)
         {
             StartCoroutine(ChangeRoundRoutine(round));
-            Debug.Log("Starting coroutine to change round to " + round);
+            Debug.Log("Round: Starting coroutine to change round to " + round);
         }
     }
     private IEnumerator ChangeRoundRoutine(int round)
@@ -47,7 +47,7 @@ public class Rounds : MonoBehaviour
         yield return new WaitForSeconds(roundChangeTime); // pause a bit before new round
 
         // Exit, new round begins
-        Debug.Log("Round changed");
+        Debug.Log("Round: round changed");
         CurrentRound = round;
         RoundChanging = false;
     }

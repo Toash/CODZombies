@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement name="chat-message-container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); transition-duration: 0.5s; transition-timing-function: ease-in-out; flex-direction: row; flex-shrink: 0; justify-content: space-around; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;">
+        <ui:IMGUIContainer name="message-icon-imgui" style="flex-grow: 0; max-width: 40px; min-width: 40px;" />
+        <ui:Label text="Label" name="message-label" style="flex-grow: 1; white-space: normal; text-overflow: ellipsis; -unity-text-align: upper-left; flex-shrink: 1; min-height: 30px;" />
+    </ui:VisualElement>
+</ui:UXML>

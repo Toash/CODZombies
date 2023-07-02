@@ -18,7 +18,7 @@ MonoBehaviour:
   SprintMultiplier: 2.5
   JumpHeight: 5
   GravityMultiplier: 2
-  StartingPoints: 0
+  StartingPoints: 1000
   MaxInventorySlots: 2
-  RaycastInteractRange: 100
+  RaycastInteractRange: 1.6
   InteractSpeed: 0

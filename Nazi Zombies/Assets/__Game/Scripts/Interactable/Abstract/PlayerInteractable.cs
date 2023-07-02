@@ -19,12 +19,15 @@ public abstract class PlayerInteractable : MonoBehaviour
 		Collider
 	}
 
-    [field: SerializeField]
+	[field: SerializeField, Tooltip("In seconds")]
 	public float Cooldown { get; private set; }
+	
 	[field: SerializeField]
 	public InteractionType InteractType { get; private set; }
+	
 	[field: SerializeField]
 	public DetectionType DetectType { get; private set; }
+	
 	[field:SerializeField]
 	public string InteractString { get; private set; }
 
@@ -33,12 +36,22 @@ public abstract class PlayerInteractable : MonoBehaviour
 
 	private bool ready { get { return timer >= this.Cooldown; } }
 
-	public virtual bool Interact()
-    {
-		if (!ready) return false;
-		ResetTimers();
-		return true;
-    }
+
+	protected bool CanInteract(){
+		return ready;
+	}
+
+	protected void ResetTimer(){
+		this.timer = 0;
+	}
+
+	/// <summary>
+	/// Cooldown built in
+	/// </summary>
+	public virtual void Interact(){
+	    if (!ready) return; //End the interaction early
+		ResetTimer();
+	}
 
     public virtual void Update()
     {
@@ -47,9 +60,5 @@ public abstract class PlayerInteractable : MonoBehaviour
 	private void UpdateTimers()
     {
 		this.timer += Time.deltaTime;
-    }
-	private void ResetTimers()
-    {
-		this.timer = 0;
     }
 }

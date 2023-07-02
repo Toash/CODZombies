@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 namespace Player.UI
@@ -9,15 +9,24 @@ namespace Player.UI
 		private PlayerStats stats;
 
 		private TMP_Text pointsText;
+		
+		private PlayerRef playerRef;
+		private PlayerPoints playerPoints;
 
 		void Awake()
 		{
 			pointsText = this.GetComponent<TMP_Text>();
 		}
+		
+		void Start()
+		{
+			playerRef = PlayerRef.Instance.GetComponent<PlayerRef>();
+			playerPoints = playerRef.GetComponent<PlayerPoints>();
+		}
 
 		public void Update()
 		{
-			//pointsText.text = stats.Points.ToString();
+			pointsText.text = playerPoints.Points.ToString();
 		}
 	}
 }
