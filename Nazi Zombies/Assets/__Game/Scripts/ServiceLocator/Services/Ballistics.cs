@@ -27,7 +27,7 @@ public class Ballistics : MonoBehaviour
 		}
 	}
 
-	public void CastBullet(Transform shooter, Weapon weapon)
+	public void CastBullet(Transform shooter, WeaponStats weapon)
     {
         RaycastHit hit;
         //Bullet hit something in the mask
@@ -37,14 +37,14 @@ public class Ballistics : MonoBehaviour
             ApplyWeaponDamage(weapon, hit);
 
             //AFTER ZOMBIE DEATH
-            ApplyKnockback(hit,weapon.DamageForce); //Apply knockback AFTER DAMAGE, so that ragdoll is ready. 
+            ApplyKnockback(hit,weapon.PhysicsForce); //Apply knockback AFTER DAMAGE, so that ragdoll is ready. 
 
             CreateBulletHole(hit);
             Debug.DrawRay(shooter.position, hit.point - shooter.position, Color.green, 10, false);
         }
     }
 
-    private void ApplyWeaponDamage(Weapon weapon, RaycastHit hit)
+    private void ApplyWeaponDamage(WeaponStats weapon, RaycastHit hit)
     {
         hit.transform.GetComponent<IDamagable>()?.Damage(weapon.Damage);
         hit.transform.GetComponentInParent<IDamagable>()?.Damage(weapon.Damage);

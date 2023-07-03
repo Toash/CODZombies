@@ -63,7 +63,7 @@ namespace Player
 			dynamicWeaponHoldPoint.localPosition += swayVec;
 		}
 
-        private void DisplayWeapon(Weapon weapon)
+        private void DisplayWeapon(WeaponStats weapon)
 		{
 			ClearDisplayWeapon();
 			currentWeaponDisplay = Instantiate(weapon.Model, dynamicWeaponHoldPoint.position, dynamicWeaponHoldPoint.rotation, dynamicWeaponHoldPoint);
@@ -74,7 +74,7 @@ namespace Player
         {
 			Destroy(currentWeaponDisplay);
         }
-		private void DisplayRecoil(Weapon weapon)
+		private void DisplayRecoil(WeaponStats weapon)
 		{
 			
 			dynamicWeaponHoldPoint.localPosition = Vector3.Lerp(dynamicWeaponHoldPoint.localPosition, dynamicWeaponHoldPoint.localPosition + recoil, Time.deltaTime * smoothing);

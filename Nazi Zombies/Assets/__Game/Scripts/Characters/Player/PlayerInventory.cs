@@ -8,17 +8,17 @@ namespace Player
 	public class PlayerInventory : MonoBehaviour
 	{
 		[ShowInInspector,ReadOnly,PropertyOrder(-1)]
-		public Weapon EquippedWeapon { get; private set; }
+		public WeaponStats EquippedWeapon { get; private set; }
 
 		[SerializeField]
 		private PlayerStats stats;
 
 		[ValidateInput("ValidSize","Inventory must be valid size")]
 		[Header("Inventory")]
-		public List<Weapon> weaponsList;
+		public List<WeaponStats> weaponsList;
 
 
-		public delegate void WeaponChange(Weapon weapon); 
+		public delegate void WeaponChange(WeaponStats weapon); 
 		public event WeaponChange weaponChanged; 
 
 
@@ -26,10 +26,12 @@ namespace Player
 		{
 			if (weaponsList.Count > stats.MaxInventorySlots) Debug.LogError("Too much weapons");
 			IncreaseInventorySize(stats.MaxInventorySlots);
+			if (this.EquippedWeapon == null) { EquipWeapon(0); }
+
 		}
 		private void Start()
 		{
-			if (this.EquippedWeapon == null) { EquipWeapon(0); }
+			
 		}
 		private void Update()
 		{
@@ -47,7 +49,7 @@ namespace Player
 		/// Adds weapon to players inventory, if the inventory is full, overwrites equipped weapon.
 		/// </summary>
 		/// <param name="weapon"></param>
-		public void AddWeaponToList(Weapon weapon)
+		public void AddWeaponToList(WeaponStats weapon)
 		{
 			bool playerHasMaxWeaponCapacity = WeaponCount() >= stats.MaxInventorySlots;
 
@@ -90,17 +92,18 @@ namespace Player
 
 		private void EquipWeapon(int index)
 		{
-			Weapon weapon = weaponsList[index];
+			WeaponStats weapon = weaponsList[index];
 			if (weapon != null)
 			{
 				EquippedWeapon = weapon;
-				weaponChanged?.Invoke(weapon);
+				weaponChanged.Invoke(weapon);
+				Debug.Log("Player: Equipping weapon");
 
 			}
 		}
 
 		//assign weapon to index of weapons list
-		private void AssignWeaponToIndex(int index, Weapon weapon)
+		private void AssignWeaponToIndex(int index, WeaponStats weapon)
 		{
 			this.weaponsList[index] = weapon;
         }

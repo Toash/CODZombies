@@ -21,12 +21,14 @@ namespace Player
         {
             shooter.GunFireEvent -= WeaponFired;
         }
-        private void WeaponFired(Weapon weapon)
+        private void WeaponFired(WeaponStats weapon)
         {
             ApplyRecoil(weapon.HCamRecoil, weapon.VCamRecoil);
         }
         public void ApplyRecoil(float horizRecoil, float vertRecoil)
         {
+            float vertActual = Random.Range(vertRecoil / 2, vertRecoil);
+            float horizActual = Random.Range(-horizRecoil, -vertRecoil);
             playerCam.ApplyCameraMovement(new Vector2(horizRecoil, vertRecoil));
         }
     }

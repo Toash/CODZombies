@@ -205,6 +205,7 @@ GameObject:
   - component: {fileID: 7074047436513034080}
   - component: {fileID: 2556622963793707420}
   - component: {fileID: 5221820553567522751}
+  - component: {fileID: 2806730178415640831}
   m_Layer: 0
   m_Name: WeaponFunctionality
   m_TagString: Untagged
@@ -241,6 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 5389495012524757765}
   playerInventory: {fileID: 6400288312307306092}
+  playerAmmo: {fileID: 2806730178415640831}
 --- !u!114 &7074047436513034080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,6 +289,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCam: {fileID: 5389495012524757765}
   shooter: {fileID: 8800589210629599807}
+--- !u!114 &2806730178415640831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4095966097450672837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 324ae0a48c1dede4b9db06d2e58591a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerShooter: {fileID: 8800589210629599807}
+  playerInventory: {fileID: 6400288312307306092}
 --- !u!1 &4924187650033856035
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,7 +380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: de09e2e838d38674385a51003cf9fbc9, type: 2}
   weaponsList:
-  - {fileID: 11400000, guid: 3cd22dcc0927a2244aebb163f48fa7c9, type: 2}
+  - {fileID: 11400000, guid: 10e368c31fd15a14c929c6036a40da4f, type: 2}
 --- !u!1 &6014639377112993087
 GameObject:
   m_ObjectHideFlags: 0

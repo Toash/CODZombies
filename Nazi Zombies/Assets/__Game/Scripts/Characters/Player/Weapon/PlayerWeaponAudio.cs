@@ -25,7 +25,7 @@ namespace Player
             weaponShooter.GunFireEvent -= PlayGunAudio;
         }
 
-        private void PlayGunAudio(Weapon weapon)
+        private void PlayGunAudio(WeaponStats weapon)
         {
             audioSource.PlayOneShot(weapon.ShootSound);
         }

@@ -12,6 +12,7 @@ public class PlayerRef : MonoBehaviour
 	{
 		if (Instance == null)
 		{
+			Debug.Log("Player: Setting player instance");
 			Instance = this;
 		}
 		else

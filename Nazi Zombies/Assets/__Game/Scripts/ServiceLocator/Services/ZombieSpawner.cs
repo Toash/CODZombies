@@ -75,7 +75,7 @@ public class ZombieSpawner : MonoBehaviour
         switch (round)
         {
             case 1:
-                ZombiesLeftToSpawnInCurrentRound = 3;
+                ZombiesLeftToSpawnInCurrentRound = 10;
                 zombieSpawnHealth = 100;
                 break;
             case 2:

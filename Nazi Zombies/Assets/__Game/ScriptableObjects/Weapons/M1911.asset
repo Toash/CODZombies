@@ -14,12 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 50
   Range: 100
-  VCamRecoil: 3
-  HCamRecoil: 0
-  DamageForce: 0
   FireRate: 0.2
   Automatic: 0
   ReloadTime: 1
+  MaxMagCount: 0
+  MaxReserveCount: 0
+  VCamRecoil: 3
+  HCamRecoil: 0
+  PhysicsForce: 0
   Model: {fileID: 4821245378892133357, guid: 12d36c6822778ec4d97a60f829ea1bd4, type: 3}
   VisualRecoil: 10
   ShootSound: {fileID: 8300000, guid: 5316f03efdbb59b49a5c01cf39d525f6, type: 3}
+  InGameMagCount: 0
+  IngameReserveCount: 0

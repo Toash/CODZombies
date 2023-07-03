@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 namespace Player
 {
 	/// <summary>
-    /// Handles shooting the gun (input, raycast, shoot event, etc) 
+    /// Handles shooting the gun 
     /// </summary>
 	public class PlayerWeaponShooter : MonoBehaviour
 	{
@@ -14,8 +14,10 @@ namespace Player
 		private PlayerCamera playerCamera;
 		[SerializeField]
 		private PlayerInventory playerInventory;
+		[SerializeField]
+		private PlayerWeaponAmmo playerAmmo;
 
-		public delegate void WeaponFire(Weapon weapon);
+		public delegate void WeaponFire(WeaponStats weapon);
 		/// <summary>
         /// Passes the weapon that was fired
         /// </summary>
@@ -28,9 +30,13 @@ namespace Player
 
 		private bool canFire()
 		{
-			return playerInventory.EquippedWeapon.FireRate <= timer ? true : false;
+			return cooldownUp() && playerAmmo.WeaponHasAmmoInMag(playerInventory.EquippedWeapon);
 		}
 
+		private bool cooldownUp()
+        {
+			return playerInventory.EquippedWeapon.FireRate <= timer ? true : false;
+		}
 		
 
 		private void Update()

@@ -7,7 +7,7 @@ using Player; // to give weapon to player
 public class Wallbuy : PlayerInteractable
 {
     [SerializeField]
-    private Weapon weaponToBuy;
+    private WeaponStats weaponToBuy;
     [SerializeField]
     private int cost;
 
