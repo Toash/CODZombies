@@ -26,6 +26,8 @@ namespace AI.Zombie
 		
 		public virtual void Damage(int amount)
 		{
+			Debug.Log("Zombie: zombie damaged");
+
 			if(currentHealth > 0)
             {
 				currentHealth -= amount;

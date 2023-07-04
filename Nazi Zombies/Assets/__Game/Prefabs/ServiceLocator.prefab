@@ -46,7 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunMask:
     serializedVersion: 2
-    m_Bits: 4343
+    m_Bits: 4339
+  bulletHoleMask:
+    serializedVersion: 2
+    m_Bits: 1
   bulletHole: {fileID: 1496569750137959856, guid: 35518a76453c61343a1f6459286dcee8, type: 3}
   maxDecals: 15
 --- !u!1 &4834743896179175071
@@ -143,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombieObject: {fileID: 4129491350543626065, guid: ec3d24cbe0291463a84d8ab0fdc0d133, type: 3}
   maxZombies: 30
-  dontSpawnZombies: 1
+  dontSpawnZombies: 0
 --- !u!1 &6651021178300532297
 GameObject:
   m_ObjectHideFlags: 0

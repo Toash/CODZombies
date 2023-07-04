@@ -10,7 +10,16 @@ namespace AI.Zombie
 		[SerializeField]
 		private Transform ragdollRoot;
 
-		public void Ragdoll()
+        public void Awake()
+        {
+			UnRagdoll();
+        }
+		public void UnRagdoll()
+        {
+			SetRagdollIsKinematicAndGravity(ragdollRoot, true);
+			//SetRagdollColliderEnabled(ragdollRoot, true);
+		}
+        public void Ragdoll()
 		{
 			SetRagdollIsKinematicAndGravity(ragdollRoot,false);
 			SetRagdollColliderEnabled(ragdollRoot,true);

@@ -8,6 +8,8 @@ public class Ballistics : MonoBehaviour
 
     [SerializeField,InfoBox("What layers the bullet can collide with")]
     private LayerMask gunMask;
+    [SerializeField,InfoBox("What layers bulletholes can spawn with")]
+    private LayerMask bulletHoleMask;
 
     [SerializeField]
     private GameObject bulletHole;
@@ -39,13 +41,19 @@ public class Ballistics : MonoBehaviour
             //AFTER ZOMBIE DEATH
             ApplyKnockback(hit,weapon.PhysicsForce); //Apply knockback AFTER DAMAGE, so that ragdoll is ready. 
 
-            CreateBulletHole(hit);
+            // the RaycastHit hit is inside the bulletHoleMask
+            if(((1 << hit.collider.gameObject.layer) & bulletHoleMask) != 0)
+            {
+                CreateBulletHole(hit);
+            }
+
             Debug.DrawRay(shooter.position, hit.point - shooter.position, Color.green, 10, false);
         }
     }
 
     private void ApplyWeaponDamage(WeaponStats weapon, RaycastHit hit)
     {
+        Debug.Log("Ballistics: Trying to apply damage");
         hit.transform.GetComponent<IDamagable>()?.Damage(weapon.Damage);
         hit.transform.GetComponentInParent<IDamagable>()?.Damage(weapon.Damage);
     }

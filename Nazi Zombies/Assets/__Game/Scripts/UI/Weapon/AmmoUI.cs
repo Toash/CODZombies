@@ -40,8 +40,8 @@ public class AmmoUI : MonoBehaviour
 
     private void LateUpdate()
     {
-        int currMag = ammo.FindAmmoDataFromWeapon(inventory.EquippedWeapon).magCount;
-        int currRes = ammo.FindAmmoDataFromWeapon(inventory.EquippedWeapon).reserveCount;
+        int currMag = ammo.FindAmmoDataFromWStats(inventory.EquippedWeapon).magCount;
+        int currRes = ammo.FindAmmoDataFromWStats(inventory.EquippedWeapon).reserveCount;
         SetAmmoText(currMag, currRes);
     }
 

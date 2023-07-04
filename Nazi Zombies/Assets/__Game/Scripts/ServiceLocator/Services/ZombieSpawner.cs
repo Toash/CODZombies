@@ -15,8 +15,8 @@ public class ZombieSpawner : MonoBehaviour
     public int ZombiesLeftToSpawnInCurrentRound { get; private set; } = 0;
 
     //stats of zombies to spawn
-    private int zombieSpawnHealth = 100;
-    private float zombieSpawnSpeed = 2f;
+    public int zombieSpawnHealth { get; private set; } = 100;
+    public float zombieSpawnSpeed { get; private set; } = 2f;
 
     [SerializeField, Tooltip("max zombies that can exist at a time.")]
     private int maxZombies = 30;
@@ -68,52 +68,12 @@ public class ZombieSpawner : MonoBehaviour
         CalculateZombieStats(round);
     }
     /// <summary>
-    /// Calculate zombie stats based on the round 
+    /// Calculate zombie stats with round and formula
     /// </summary>
     private void CalculateZombieStats(int round)
     {
-        switch (round)
-        {
-            case 1:
-                ZombiesLeftToSpawnInCurrentRound = 10;
-                zombieSpawnHealth = 100;
-                break;
-            case 2:
-                ZombiesLeftToSpawnInCurrentRound = 10;
-                zombieSpawnHealth = 120;
-                break;
-            case 3:
-                ZombiesLeftToSpawnInCurrentRound = 10;
-                zombieSpawnHealth = 150;
-                break;
-            case 4:
-                ZombiesLeftToSpawnInCurrentRound = 10;
-                zombieSpawnHealth = 180;
-                break;
-            case 5:
-                ZombiesLeftToSpawnInCurrentRound = 10;
-                zombieSpawnHealth = 220;
-                break;
-            case 6:
-                ZombiesLeftToSpawnInCurrentRound = 10;
-                zombieSpawnHealth = 350;
-                break;
-            case 7:
-                ZombiesLeftToSpawnInCurrentRound = 10;
-                zombieSpawnHealth = 420;
-                break;
-            case 8:
-                ZombiesLeftToSpawnInCurrentRound = 10;
-                zombieSpawnHealth = 520;
-                break;
-            case >= 9:
-                ZombiesLeftToSpawnInCurrentRound = 10;
-                zombieSpawnHealth = 700;
-                break;
-            default:
-                Debug.LogError("Round out of bounds!");
-                break;
-        }
+        ZombiesLeftToSpawnInCurrentRound = 10 + round;
+        zombieSpawnHealth = 100 + (round * 50);
     }
     /// <summary>
     /// Gets active <see cref="ZombieSpawnPoint"/>s

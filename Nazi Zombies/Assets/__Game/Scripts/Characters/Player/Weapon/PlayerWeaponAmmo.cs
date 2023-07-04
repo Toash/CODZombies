@@ -49,12 +49,12 @@ namespace Player
             //every time weapon is added, should check if we have ammo data
             
             playerShooter.GunFireEvent += DecreaseAmmo;
-            playerInventory.weaponChanged += AddWeaponToAmmoList;
-            playerInventory.weaponChanged += UpdateCount; // need to do in start, first equip is in awake.
+
         }
         private void Start()
         {
-
+            playerInventory.weaponChanged += AddWeaponToAmmoList;
+            playerInventory.weaponChanged += UpdateCount; // need to do in start, first equip is in awake.
         }
         private void OnDisable()
         {
@@ -77,21 +77,35 @@ namespace Player
         /// <returns></returns>
         public bool WeaponHasAmmoInMag(WeaponStats weapon)
         {
-            if (FindAmmoDataFromWeapon(weapon).magCount > 0) return true;
+            if (FindAmmoDataFromWStats(weapon).magCount > 0) return true;
             return false;
         }
 
         public void ReloadWeapon(WeaponStats weapon)
         {
-            if(FindAmmoDataFromWeapon(weapon).magCount < weapon.MaxMagCount)
+            if(FindAmmoDataFromWStats(weapon).magCount < weapon.MaxMagCount)
             {
                 Debug.Log("Weapon: Reloading");
-                int ammoToRemoveInReserve = weapon.MaxMagCount - FindAmmoDataFromWeapon(weapon).magCount;
-                FindAmmoDataFromWeapon(weapon).magCount = currentMaxMagCount; // change the scriptable objects ammo
-                FindAmmoDataFromWeapon(weapon).reserveCount -= ammoToRemoveInReserve; // change the scriptable objects ammo
+                int ammoToRemoveInReserve = weapon.MaxMagCount - FindAmmoDataFromWStats(weapon).magCount;
+                FindAmmoDataFromWStats(weapon).magCount = currentMaxMagCount; // change the scriptable objects ammo
+                FindAmmoDataFromWStats(weapon).reserveCount -= ammoToRemoveInReserve; // change the scriptable objects ammo
                 return;
             }
             Debug.Log("Weapon: Already has max magazine size");
+        }
+
+        public void FillReserves(WeaponStats stats)
+        {
+            try
+            {
+                WeaponAmmoData data = FindAmmoDataFromWStats(stats);
+                data.reserveCount = stats.MaxReserveCount;
+            }
+            catch(ArgumentNullException e)
+            {
+                Debug.LogError("Player: cannot fill reserve bceause player does not have weapon");
+            }
+
         }
 
         /// <summary>
@@ -99,14 +113,14 @@ namespace Player
         /// </summary>
         public void DecreaseAmmo(WeaponStats weapon)
         {
-            if (FindAmmoDataFromWeapon(weapon).magCount <= 0) Debug.LogError("Player: mag ammo below zero");
-            FindAmmoDataFromWeapon(weapon).magCount--; // change the scriptable objects ammo
+            if (FindAmmoDataFromWStats(weapon).magCount <= 0) Debug.LogError("Player: mag ammo below zero");
+            FindAmmoDataFromWStats(weapon).magCount--; // change the scriptable objects ammo
         }
 
         private void UpdateCount(WeaponStats weapon)
         {
             currentMaxMagCount = weapon.MaxMagCount;
-            currentReserveCount = FindAmmoDataFromWeapon(weapon).reserveCount;
+            currentReserveCount = FindAmmoDataFromWStats(weapon).reserveCount;
             currentMaxReserveCount = weapon.MaxReserveCount;
         }
 
@@ -129,17 +143,17 @@ namespace Player
             weaponAmmoList.Add(new WeaponAmmoData(weapon, weapon.MaxMagCount,weapon.MaxReserveCount));
         }
 
-        public WeaponAmmoData FindAmmoDataFromWeapon(WeaponStats weapon)
+        public WeaponAmmoData FindAmmoDataFromWStats(WeaponStats weapon)
         {
             try
             {
                 WeaponAmmoData ammoData = weaponAmmoList.FirstOrDefault(WeaponAmmoData => WeaponAmmoData.weapon == weapon);
-                Debug.Log($"Weapon: Weapon ammo data found for {ammoData.weapon}");
+                //Debug.Log($"Weapon: Weapon ammo data found for {ammoData.weapon}");
                 return ammoData;
             }
             catch(ArgumentNullException e)
             {
-                Debug.Log("Weapon Ammo list not found!");
+                //Debug.Log("Weapon Ammo list not found!");
                 return null;
             }
         }

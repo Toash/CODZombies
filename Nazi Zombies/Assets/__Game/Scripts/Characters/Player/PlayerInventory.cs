@@ -26,12 +26,13 @@ namespace Player
 		{
 			if (weaponsList.Count > stats.MaxInventorySlots) Debug.LogError("Too much weapons");
 			IncreaseInventorySize(stats.MaxInventorySlots);
-			if (this.EquippedWeapon == null) { EquipWeapon(0); }
+
 
 		}
 		private void Start()
 		{
-			
+			// Has to be in start because display subscription called in onenable
+			if (this.EquippedWeapon == null) { EquipWeapon(0); }
 		}
 		private void Update()
 		{
@@ -44,6 +45,24 @@ namespace Player
 				EquipWeapon(1);
 			}
 		}
+
+		/// <summary>
+		/// Checks if weapon is in the list.
+		/// </summary>
+		/// <param name="weapon"></param>
+		/// <returns></returns>
+		public bool HasWeapon(WeaponStats weapon)
+        {
+            if (weaponsList.Contains(weapon))
+            {
+				return true;
+            }
+            else
+            {
+				return false;
+            }
+        }
+
 
 		/// <summary>
 		/// Adds weapon to players inventory, if the inventory is full, overwrites equipped weapon.

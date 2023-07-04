@@ -625,6 +625,8 @@ GameObject:
   - component: {fileID: 9038557918074140843}
   - component: {fileID: 3300596764835736057}
   - component: {fileID: 8552211540162282791}
+  - component: {fileID: 2662016535113066084}
+  - component: {fileID: 6558005374137629688}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -779,6 +781,62 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: de09e2e838d38674385a51003cf9fbc9, type: 2}
+--- !u!114 &2662016535113066084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014639378041683075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0b97cd9f97e7cd4c82056990daf3298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 1881ae6b6a8e8bc429336b989e10b0cd, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8552211540162282791}
+        m_TargetAssemblyTypeName: Player.PlayerPoints, Assembly-CSharp
+        m_MethodName: Receive
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 100
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6558005374137629688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014639378041683075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0b97cd9f97e7cd4c82056990daf3298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: aac02452459ae57498c061684c163c44, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8552211540162282791}
+        m_TargetAssemblyTypeName: Player.PlayerPoints, Assembly-CSharp
+        m_MethodName: Receive
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7267342879669296958
 GameObject:
   m_ObjectHideFlags: 0
@@ -894,6 +952,18 @@ PrefabInstance:
     - target: {fileID: 5814904937847636447, guid: 72d64e4dffbfe6745a712a7eb39130f5, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524513448001077569, guid: 72d64e4dffbfe6745a712a7eb39130f5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -200.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6626437390614758468, guid: 72d64e4dffbfe6745a712a7eb39130f5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -65.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8650133649163252986, guid: 72d64e4dffbfe6745a712a7eb39130f5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -24.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72d64e4dffbfe6745a712a7eb39130f5, type: 3}

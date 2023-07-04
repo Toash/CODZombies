@@ -8,6 +8,10 @@ using Sirenix.OdinInspector;
 /// </summary>
 public class Rounds : MonoBehaviour
 {
+    public class RoundData
+    {
+
+    }
     public int CurrentRound { get; private set; } = 0;
     public bool RoundChanging { get; private set; } = false;
 
