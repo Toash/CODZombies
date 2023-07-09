@@ -14,17 +14,17 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0, g: 0, b: 0, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.22
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44905752, g: 0.49912775, b: 0.57571286, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &151062666
 Transform:
   m_ObjectHideFlags: 0
@@ -10367,7 +10367,8 @@ MonoBehaviour:
   <DetectType>k__BackingField: 0
   <InteractString>k__BackingField: 'Press E to buy '
   weaponToBuy: {fileID: 11400000, guid: 10e368c31fd15a14c929c6036a40da4f, type: 2}
-  cost: 100
+  weaponCost: 0
+  reserveCost: 400
 --- !u!4 &1321161442
 Transform:
   m_ObjectHideFlags: 0
@@ -10568,7 +10569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2843217641626863317, guid: 81a1f2f8b4229434c9c52e4e239fc409, type: 3}
       propertyPath: m_Size.y
-      value: 4.4652433
+      value: 14.216789
       objectReference: {fileID: 0}
     - target: {fileID: 2843217641626863317, guid: 81a1f2f8b4229434c9c52e4e239fc409, type: 3}
       propertyPath: m_Size.z
@@ -10576,11 +10577,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2843217641626863317, guid: 81a1f2f8b4229434c9c52e4e239fc409, type: 3}
       propertyPath: m_Center.x
-      value: -10.342513
+      value: -10.342514
       objectReference: {fileID: 0}
     - target: {fileID: 2843217641626863317, guid: 81a1f2f8b4229434c9c52e4e239fc409, type: 3}
       propertyPath: m_Center.y
-      value: -0.8375206
+      value: 4.038252
       objectReference: {fileID: 0}
     - target: {fileID: 2843217641626863317, guid: 81a1f2f8b4229434c9c52e4e239fc409, type: 3}
       propertyPath: m_Center.z
